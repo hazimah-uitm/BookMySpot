@@ -55,7 +55,7 @@
                                                         class='bx bx-hide'></i></a>
                                             </div>
                                         </div>
-                                        <div class="col-md-6">
+                                        {{-- <div class="col-md-6">
                                             <div class="form-check form-switch">
                                                 <input class="form-check-input" type="checkbox" name="remember"
                                                     id="flexSwitchCheckChecked" {{ old('remember') ? 'checked' : '' }}>
@@ -65,7 +65,7 @@
                                         </div>
                                         <div class="col-md-6 text-end">
                                             <a href="{{ route('password.request') }}">Lupa kata laluan?</a>
-                                        </div>
+                                        </div> --}}
                                         <div class="col-12">
                                             <div class="d-grid">
                                                 <button type="submit" class="btn btn-primary"><i
