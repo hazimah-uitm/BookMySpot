@@ -34,18 +34,25 @@ class TableController extends Controller
             'total_seat' => 'required|integer',
             'available_seat' => 'required|integer',
             'status' => 'required|in:Available,Booked',
+        ], [
+            'table_no.required' => 'Sila isi No. Meja',
+            'table_no.unique' => 'No. Meja telah wujud',
+            'total_seat.required' => 'Sila isi Jumlah Tempat Duduk',
+            'available_seat.required' => 'Sila isi Jumlah Tempat Duduk Kosong',
+            'status.required' => 'Sila pilih Status Meja',
         ]);
+    
 
         $table = new Table();
 
         // Normalize the table_no
-        $table->table_no = strtoupper(str_replace(' ', '', $request->input('table_no')));
+        $table_no = strtoupper(str_replace(' ', '', $request->input('table_no')));
 
         // Check if table_no already exists
-        if (Table::where('table_no',  $table->table_no)->exists()) {
+        if (Table::where('table_no',  $table_no)->exists()) {
             return redirect()->back()->withErrors(['table_no' => 'No. Meja telah wujud'])->withInput();
         }
-
+        $table->table_no = $table_no;
         $table->total_seat = $request->input('total_seat');
         $table->available_seat = $request->input('available_seat');
         $table->status = $request->input('status');
@@ -90,7 +97,7 @@ class TableController extends Controller
         ]);
     
         $table = Table::findOrFail($id);
-        
+
         // Normalize the table_no
         $table_no = strtoupper(str_replace(' ', '', $request->input('table_no')));
 
@@ -112,9 +119,6 @@ class TableController extends Controller
     
         return redirect()->route('table')->with('success', 'Maklumat berjaya dikemaskini');
     }
-    
-      
-    
 
     public function search(Request $request)
     {

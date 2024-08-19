@@ -30,11 +30,10 @@
                 <input type="text" class="form-control {{ $errors->has('table_no') ? 'is-invalid' : '' }}" id="table_no"
                     name="table_no" value="{{ old('table_no') }}">
                 @if ($errors->has('table_no'))
-                @php
-                $errorMessage = $errors->first('table_no');
-                @endphp
                 <div class="invalid-feedback">
-                    {{ $errorMessage === 'No. Meja telah wujud' ? 'No. meja telah wujud' : 'Sila isi No. Meja' }}
+                    @foreach ($errors->get('table_no') as $error)
+                    {{ $error }}
+                    @endforeach
                 </div>
                 @endif
             </div>
@@ -45,7 +44,11 @@
                 <input type="number" class="form-control {{ $errors->has('total_seat') ? 'is-invalid' : '' }}" id="total_seat"
                     name="total_seat" value="{{ old('total_seat') }}">
                 @if ($errors->has('total_seat'))
-                <div class="invalid-feedback">Sila isi Jumlah Tempat Duduk</div>
+                <div class="invalid-feedback">
+                    @foreach ($errors->get('total_seat') as $error)
+                    {{ $error }}
+                    @endforeach
+                </div>
                 @endif
             </div>
 
@@ -54,7 +57,11 @@
                 <input type="number" class="form-control {{ $errors->has('available_seat') ? 'is-invalid' : '' }}" id="available_seat"
                     name="available_seat" value="{{ old('available_seat') }}">
                 @if ($errors->has('available_seat'))
-                <div class="invalid-feedback">Sila isi Jumlah Tempat Duduk Kosong</div>
+                <div class="invalid-feedback">
+                    @foreach ($errors->get('available_seat') as $error)
+                    {{ $error }}
+                    @endforeach
+                </div>
                 @endif
             </div>
 
@@ -73,7 +80,11 @@
                     <label class="form-check-label" for="booked">Booked</label>
                 </div>
                 @if ($errors->has('status'))
-                <div class="invalid-feedback d-block">Sila pilih Status Meja</div>
+                <div class="invalid-feedback">
+                    @foreach ($errors->get('status') as $error)
+                    {{ $error }}
+                    @endforeach
+                </div>
                 @endif
             </div>
 
