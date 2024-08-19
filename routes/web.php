@@ -70,7 +70,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/user-role/{id}/force-delete', 'UserRoleController@forceDelete')->name('user-role.forceDelete');
 
     
-    // User Management
+    // Staff Management
     Route::get('staff', 'StaffController@index')->name('staff');
     Route::get('staff/create', 'StaffController@create')->name('staff.create');
     Route::post('staff/store', 'StaffController@store')->name('staff.store');
@@ -82,6 +82,19 @@ Route::middleware('auth')->group(function () {
     Route::get('/staff/trash', 'StaffController@trashList')->name('staff.trash');
     Route::get('/staff/{id}/restore', 'StaffController@restore')->name('staff.restore');
     Route::delete('/staff/{id}/force-delete', 'StaffController@forceDelete')->name('staff.forceDelete');
+    
+    // Table Management
+    Route::get('table', 'TableController@index')->name('table');
+    Route::get('table/create', 'TableController@create')->name('table.create');
+    Route::post('table/store', 'TableController@store')->name('table.store');
+    Route::get('table/{id}/edit', 'TableController@edit')->name('table.edit');
+    Route::post('table/{id}', 'TableController@update')->name('table.update');
+    Route::get('table/view/{id}', 'TableController@show')->name('table.show');
+    Route::get('/table/search', 'TableController@search')->name('table.search');
+    Route::delete('table/{id}', 'TableController@destroy')->name('table.destroy');
+    Route::get('/table/trash', 'TableController@trashList')->name('table.trash');
+    Route::get('/table/{id}/restore', 'TableController@restore')->name('table.restore');
+    Route::delete('/table/{id}/force-delete', 'TableController@forceDelete')->name('table.forceDelete');
 
     // Campus
     Route::get('campus', 'CampusController@index')->name('campus');

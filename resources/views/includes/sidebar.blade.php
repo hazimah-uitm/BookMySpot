@@ -62,7 +62,7 @@
 
     <li class="menu-label">Tetapan</li>
     <li>
-        <a href="{{ route('logs.debug') }}">
+        <a href="{{ route('table') }}">
             <div class="parent-icon"><i class='bx bx-table'></i> </div>
             <div class="menu-title">Meja</div>
         </a>
