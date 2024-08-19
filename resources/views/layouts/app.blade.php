@@ -33,8 +33,10 @@
             top: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(0, 0, 0, 0.5) !important; /* Semi-transparent dark background */
-            z-index: 1050; /* Lower z-index for navbar */
+            background-color: rgba(0, 0, 0, 0.5) !important;
+            /* Semi-transparent dark background */
+            z-index: 1050;
+            /* Lower z-index for navbar */
             padding: 0.3rem;
         }
 
@@ -56,7 +58,8 @@
             top: 0;
             left: 50%;
             transform: translateX(-50%);
-            z-index: 1100; /* Higher z-index to ensure it's on top */
+            z-index: 1100;
+            /* Higher z-index to ensure it's on top */
             display: none;
             animation: fadeInUp 0.5s ease-out;
         }
@@ -66,10 +69,21 @@
                 opacity: 0;
                 transform: translateY(-10px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        .logo-icon-navbar {
+            width: 6em;
+            margin-top: 5px;
+        }
+
+        .logo-icon-main-navbar {
+            width: 4em;
+            margin-top: 5px;
         }
     </style>
 </head>
@@ -79,6 +93,8 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top custom-navbar">
         <div class="container">
+            <img src="{{ asset('assets/images/25tahun.png') }}" class="logo-icon-main-navbar" alt="logo icon">
+            <img src="{{ asset('assets/images/putih.png') }}" class="logo-icon-navbar" alt="logo icon">
             <a class="navbar-brand" href="{{ url('/') }}">Book My Spot</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -97,23 +113,23 @@
 
     <!--wrapper-->
     @if (session('success'))
-        <div id="floating-success-message" class="position-fixed top-0 start-50 translate-middle-x p-3">
-            <div class="alert alert-success alert-dismissible fade show bg-light bg-opacity-75" role="alert">
-                {{ session('success') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+    <div id="floating-success-message" class="position-fixed top-0 start-50 translate-middle-x p-3">
+        <div class="alert alert-success alert-dismissible fade show bg-light bg-opacity-75" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
+    </div>
 
-        <!-- JavaScript to show the message after the page is loaded -->
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                var floatingMessage = document.getElementById('floating-success-message');
-                floatingMessage.style.display = 'block';
-                setTimeout(function() {
-                    floatingMessage.style.display = 'none';
-                }, 4500); // Adjust the timeout (in milliseconds) based on how long you want the message to be visible
-            });
-        </script>
+    <!-- JavaScript to show the message after the page is loaded -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var floatingMessage = document.getElementById('floating-success-message');
+            floatingMessage.style.display = 'block';
+            setTimeout(function() {
+                floatingMessage.style.display = 'none';
+            }, 4500); // Adjust the timeout (in milliseconds) based on how long you want the message to be visible
+        });
+    </script>
     @endif
 
     @yield('content')
