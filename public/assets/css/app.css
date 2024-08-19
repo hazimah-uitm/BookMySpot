@@ -36,6 +36,7 @@ a {
 	position: relative
 }
 
+
 .wrapper-main {
 	padding-top: 5rem;
 	/* Adjust this value based on the height of your navbar */
@@ -44,7 +45,7 @@ a {
 /* Media query to adjust padding for smaller screens if needed */
 @media (max-width: 768px) {
 	.wrapper-main {
-		padding-top: 80px;
+		padding-top: 1rem;
 		/* You may need more padding on smaller screens */
 	}
 }
