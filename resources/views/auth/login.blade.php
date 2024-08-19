@@ -9,8 +9,8 @@
                 <div class="d-flex align-items-center justify-content-center flex-column flex-md-row mb-4">
                     <img src="{{ asset('assets/images/putih.png') }}" class="logo-icon-login" alt="logo icon">
                     <div class="ms-3">
-                        <h4 class="logo-text-login mb-0">BMS</h4>
-                        <h6 class="logo-subtitle-login mb-0">Book My Spot System</h6>
+                        <h4 class="logo-text-login mb-0">SEATPASS</h4>
+                        <h6 class="logo-subtitle-login mb-0">Seat Pass System</h6>
                     </div>
                 </div>
             </div>

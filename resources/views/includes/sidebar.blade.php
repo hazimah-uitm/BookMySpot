@@ -4,7 +4,7 @@
     </div>
     <div>
         <h4 class="logo-text">BMS</h4>
-        <h6 class="logo-subtitle">Book My Spot System</h6>
+        <h6 class="logo-subtitle">Seat Pass System</h6>
     </div>
     <div class="toggle-icon ms-auto" id="toggle-icon"><i class='bx bx-arrow-to-left'></i></div>
 

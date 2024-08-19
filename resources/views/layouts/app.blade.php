@@ -21,71 +21,6 @@
     <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet">
     <title>{{ config('app.name') }}</title>
-    <style>
-        html,
-        body {
-            height: 100%;
-            margin: 0;
-        }
-
-        .custom-navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.5) !important;
-            /* Semi-transparent dark background */
-            z-index: 1050;
-            /* Lower z-index for navbar */
-            padding: 0.3rem;
-        }
-
-        .navbar-nav .nav-link {
-            color: #ffffff;
-            padding: 0 0.5rem;
-            font-size: 0.875rem;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .navbar-nav .nav-link:hover {
-            color: #b7b9bf;
-            text-decoration: none;
-        }
-
-        #floating-success-message {
-            position: fixed;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 1100;
-            /* Higher z-index to ensure it's on top */
-            display: none;
-            animation: fadeInUp 0.5s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .logo-icon-navbar {
-            width: 6em;
-            margin-top: 5px;
-        }
-
-        .logo-icon-main-navbar {
-            width: 4em;
-            margin-top: 5px;
-        }
-    </style>
 </head>
 
 <body class="bg-login">
@@ -93,9 +28,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top custom-navbar">
         <div class="container">
-            <img src="{{ asset('assets/images/25tahun.png') }}" class="logo-icon-main-navbar" alt="logo icon">
-            <img src="{{ asset('assets/images/putih.png') }}" class="logo-icon-navbar" alt="logo icon">
-            <a class="navbar-brand" href="{{ url('/') }}">Book My Spot</a>
+            <a class="navbar-brand" href="{{ url('/') }}">SeatPass</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
