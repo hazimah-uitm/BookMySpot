@@ -69,6 +69,20 @@ Route::middleware('auth')->group(function () {
     Route::get('/user-role/{id}/restore', 'UserRoleController@restore')->name('user-role.restore');
     Route::delete('/user-role/{id}/force-delete', 'UserRoleController@forceDelete')->name('user-role.forceDelete');
 
+    
+    // User Management
+    Route::get('staff', 'StaffController@index')->name('staff');
+    Route::get('staff/create', 'StaffController@create')->name('staff.create');
+    Route::post('staff/store', 'StaffController@store')->name('staff.store');
+    Route::get('staff/{id}/edit', 'StaffController@edit')->name('staff.edit');
+    Route::post('staff/{id}', 'StaffController@update')->name('staff.update');
+    Route::get('staff/view/{id}', 'StaffController@show')->name('staff.show');
+    Route::get('/staff/search', 'StaffController@search')->name('staff.search');
+    Route::delete('staff/{id}', 'StaffController@destroy')->name('staff.destroy');
+    Route::get('/staff/trash', 'StaffController@trashList')->name('staff.trash');
+    Route::get('/staff/{id}/restore', 'StaffController@restore')->name('staff.restore');
+    Route::delete('/staff/{id}/force-delete', 'StaffController@forceDelete')->name('staff.forceDelete');
+
     // Campus
     Route::get('campus', 'CampusController@index')->name('campus');
     Route::get('campus/view/{id}', 'CampusController@show')->name('campus.show');

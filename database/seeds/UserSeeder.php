@@ -15,10 +15,10 @@ class UserSeeder extends Seeder
     {
         User::insert([
             [
-                'name' => 'Hazimah',
+                'name' => 'Admin',
                 'staff_id' => '111111',
-                'email' => 'hazimahpethie@gmail.com',
-                'password' => Hash::make('hazimah123'),
+                'email' => 'admin@gmail.com',
+                'password' => Hash::make('admin123'),
                 'position_id' => 1,
                 'campus_id' => 2,
                 'office_phone_no' => '082111111',

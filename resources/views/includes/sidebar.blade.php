@@ -19,6 +19,7 @@
         </a>
     </li>
 
+    @role('Superadmin')
     <li>
         <a href="{{ route('activity-log') }}">
             <div class="parent-icon"><i class='bx bx-history'></i></div>
@@ -40,8 +41,39 @@
             <div class="menu-title">Peranan Pengguna</div>
         </a>
     </li>
+    @endrole
+
+    <li class="menu-label">Pengurusan Tempahan</li>
+    <li>
+        <a href="{{ route('staff') }}">
+            <div class="parent-icon"><i class='bx bx-user-circle'></i>
+            </div>
+            <div class="menu-title">Senarai Staf</div>
+        </a>
+    </li>
+
+    <li>
+        <a href="{{ route('user') }}">
+            <div class="parent-icon"><i class='bx bx-calendar-check'></i>
+            </div>
+            <div class="menu-title">Senarai Tempahan</div>
+        </a>
+    </li>
 
     <li class="menu-label">Tetapan</li>
+    <li>
+        <a href="{{ route('logs.debug') }}">
+            <div class="parent-icon"><i class='bx bx-table'></i> </div>
+            <div class="menu-title">Meja</div>
+        </a>
+    </li>
+    <li>
+        <a href="{{ route('logs.debug') }}">
+            <div class="parent-icon"><i class='bx bx-chair'></i></div>
+            <div class="menu-title">Tempat Duduk</div>
+        </a>
+    </li>
+    @role('Superadmin')
     <li>
         <a class="has-arrow">
             <div class="parent-icon"><i class='bx bx-location-plus'></i>
@@ -72,5 +104,6 @@
             <div class="menu-title">Debug Log</div>
         </a>
     </li>
+    @endrole
 </ul>
 <!--end navigation-->
