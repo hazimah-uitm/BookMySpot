@@ -6,6 +6,17 @@ File: app.css
 */
 
 
+.pagination-wrapper .pagination {
+    margin-bottom: 0;
+    justify-content: flex-end;
+}
+
+.pagination-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+
 /* Hide number input arrows in webkit browsers (Chrome, Safari) */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {

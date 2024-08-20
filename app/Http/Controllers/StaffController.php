@@ -35,7 +35,7 @@ class StaffController extends Controller
             return redirect()->back()->with('error', 'Error importing data: ' . $e->getMessage());
         }
     }
-    
+
 
     public function create()
     {
@@ -111,18 +111,20 @@ class StaffController extends Controller
     public function search(Request $request)
     {
         $search = $request->input('search');
+        $perPage = $request->input('perPage', 10); // Default to 10 if not provided
 
         if ($search) {
             $staffList = Staff::where('name', 'LIKE', "%$search%")
                 ->orWhere('no_pekerja', 'LIKE', "%$search%")
                 ->latest()
-                ->paginate(10);
+                ->paginate($perPage);
         } else {
-            $staffList = Staff::latest()->paginate(10);
+            $staffList = Staff::latest()->paginate($perPage);
         }
 
         return view('pages.staff.index', [
             'staffList' => $staffList,
+            'perPage' => $perPage, // Pass perPage to the view
         ]);
     }
 

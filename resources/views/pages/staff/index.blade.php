@@ -22,48 +22,48 @@
 <h6 class="mb-0 text-uppercase">Senarai Staf</h6>
 <hr />
 @if (session('success'))
-    <div class="alert alert-success mt-2">
-        {{ session('success') }}
-    </div>
+<div class="alert alert-success mt-2">
+    {{ session('success') }}
+</div>
 @endif
 
 @if (session('error'))
-    <div class="alert alert-danger mt-2">
-        {{ session('error') }}
-    </div>
+<div class="alert alert-danger mt-2">
+    {{ session('error') }}
+</div>
 @endif
 <div class="card">
     <div class="card-body">
-    <div class="d-lg-flex align-items-center mb-4 gap-3">
-    <div class="position-relative">
-        <form action="{{ route('staff.search') }}" method="GET">
-            <div class="input-group">
-                <input type="text" class="form-control search-input" placeholder="Carian..." name="search">
-                <span class="input-group-btn">
-                    <button type="submit" class="btn btn-primary search-button">
-                        <i class="bx bx-search"></i>
-                    </button>
-                </span>
+        <div class="d-lg-flex align-items-center mb-4 gap-3">
+            <div class="position-relative">
+                <form action="{{ route('staff.search') }}" method="GET">
+                    <div class="input-group">
+                        <input type="text" class="form-control search-input" placeholder="Carian..." name="search">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-primary search-button">
+                                <i class="bx bx-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
             </div>
-        </form>
-    </div>
-    <div class="ms-auto d-flex gap-2 align-items-center">
-        <!-- Import Button and Form -->
-        <form action="{{ route('staff.import') }}" method="POST" enctype="multipart/form-data" class="d-flex align-items-center">
-            {{ csrf_field() }}
-            <div class="form-group mb-0">
-                <input type="file" name="file" class="form-control form-control-sm" required>
+            <div class="ms-auto d-flex gap-2 align-items-center">
+                <!-- Import Button and Form -->
+                <form action="{{ route('staff.import') }}" method="POST" enctype="multipart/form-data" class="d-flex align-items-center">
+                    {{ csrf_field() }}
+                    <div class="form-group mb-0">
+                        <input type="file" name="file" class="form-control form-control-sm" required>
+                    </div>
+                    <button type="submit" class="btn btn-info ms-2">Import</button>
+                </form>
+
+                <!-- Tambah Button -->
+                <a href="{{ route('staff.create') }}" class="btn btn-primary">
+                    Tambah Staf
+                </a>
+
             </div>
-            <button type="submit" class="btn btn-info ms-2">Import</button>
-        </form>
-
-         <!-- Tambah Button -->
-         <a href="{{ route('staff.create') }}" class="btn btn-primary">
-            Tambah Staf
-        </a>
-
-    </div>
-</div>
+        </div>
 
         <div class="table-responsive">
             <table class="table">
@@ -87,7 +87,7 @@
                     @if (count($staffList) > 0)
                     @foreach ($staffList as $staff)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ ($staffList->currentPage() - 1) * $staffList->perPage() + $loop->iteration }}</td>
                         <td>{{ ucfirst($staff->name) }}</td>
                         <td>{{ $staff->no_pekerja }}</td>
                         <td>{{ $staff->email }}</td>
@@ -128,11 +128,12 @@
                 </tbody>
             </table>
         </div>
-        <div class="mt-3 d-flex justify-content-between">
+        <div class="mt-3 d-flex justify-content-between align-items-center">
             <div class="d-flex align-items-center">
                 <span class="mr-2 mx-1">Jumlah rekod per halaman</span>
-                <form action="{{ route('staff') }}" method="GET" id="perPageForm">
-                    <select name="perPage" id="perPage" class="form-select"
+                <form action="{{ route('staff.search') }}" method="GET" id="perPageForm" class="d-flex align-items-center">
+                    <input type="hidden" name="search" value="{{ request('search') }}">
+                    <select name="perPage" id="perPage" class="form-select form-select-sm"
                         onchange="document.getElementById('perPageForm').submit()">
                         <option value="10" {{ Request::get('perPage') == '10' ? 'selected' : '' }}>10</option>
                         <option value="20" {{ Request::get('perPage') == '20' ? 'selected' : '' }}>20</option>
@@ -141,11 +142,13 @@
                 </form>
             </div>
 
-            <div class="mt-3 d-flex justify-content-end">
-                <div class="mx-1 mt-2">{{ $staffList->firstItem() }} – {{ $staffList->lastItem() }} dari
-                    {{ $staffList->total() }} rekod
+            <div class="d-flex justify-content-end align-items-center">
+                <span class="mx-2 mt-2 small text-muted">
+                    Menunjukkan {{ $staffList->firstItem() }} hingga {{ $staffList->lastItem() }} daripada {{ $staffList->total() }} rekod
+                </span>
+                <div class="pagination-wrapper">
+                    {{ $staffList->appends(['search' => request('search'), 'perPage' => $perPage])->links('pagination::bootstrap-4') }}
                 </div>
-                <div>{{ $staffList->links() }}</div>
             </div>
         </div>
     </div>
