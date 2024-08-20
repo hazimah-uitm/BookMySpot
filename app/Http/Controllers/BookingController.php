@@ -23,8 +23,8 @@ class BookingController extends Controller
 
     public function create()
     {
-        $staffs = Staff::where('attendance', 'hadir')
-            ->where('status', 'pending')
+        $staffs = Staff::where('attendance', 'Hadir')
+            ->where('status', 'Pending')
             ->get();
 
         $tables = Table::where('status', 'available')->get();
@@ -84,8 +84,8 @@ class BookingController extends Controller
         $booking = Booking::findOrFail($id);
         $currentStaffId = $booking->staff_id; 
     
-        $staffs = Staff::where('attendance', 'hadir')
-            ->where('status', 'pending')
+        $staffs = Staff::where('attendance', 'Hadir')
+            ->where('status', 'Pending')
             ->where('id', '!=', $currentStaffId) 
             ->get();
     

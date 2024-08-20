@@ -19,33 +19,35 @@ class StaffBookingController extends Controller
         $request->validate([
             'no_pekerja' => 'required|exists:staff,no_pekerja',
         ]);
-    
+        
         $staff = Staff::where('no_pekerja', $request->input('no_pekerja'))->firstOrFail();
-    
-        // Check if the staff's attendance is 'hadir' and status is 'pending'
-        if ($staff->attendance === 'hadir' && $staff->status === 'pending') {
+
+        
+        // Check if the staff's attendance is 'Hadir' and status is 'Pending'
+        if ($staff->attendance === 'Hadir' && $staff->status === 'Pending') {
             $tables = Table::where('status', 'available')->get();
-            return view('staff.booking.create', [
+            return view('pages.staff.booking.create', [
                 'staff' => $staff,
                 'tables' => $tables,
             ]);
         }
-    
-        // Check if the staff's attendance is 'hadir' and status is 'booked'
-        if ($staff->attendance === 'hadir' && $staff->status === 'booked') {
+        
+        // Check if the staff's attendance is 'Hadir' and status is 'Booked'
+        if ($staff->attendance === 'Hadir' && $staff->status === 'Booked') {
             $booking = Booking::where('staff_id', $staff->id)->first();
             if (!$booking) {
                 return redirect()->back()->withErrors(['no_pekerja' => 'No booking found for this staff.'])->withInput();
             }
-    
-            return view('staff.booking.print', [
+        
+            return view('pages.staff.booking.print', [
                 'booking' => $booking,
             ]);
         }
-    
+        
         // Handle all other cases where the staff cannot book or print
         return redirect()->back()->withErrors(['no_pekerja' => 'Your staff ID is not valid for booking or printing'])->withInput();
     }
+    
     
      
 
@@ -96,7 +98,7 @@ class StaffBookingController extends Controller
     public function printBooking($id)
     {
         $booking = Booking::findOrFail($id);
-        return view('staff.booking.print', [
+        return view('pages.staff.booking.print', [
             'booking' => $booking,
         ]);
     }
