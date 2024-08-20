@@ -16,24 +16,19 @@
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-12 col-md-8 col-lg-6">
-                        <!-- Form Container -->
-                        <form action="" method="POST" class="d-flex">
+                        <form action="{{ route('staff.booking.check') }}" method="POST" class="d-flex">
                             {{ csrf_field() }}
                             <div class="form-group flex-grow-1 me-2">
-                                <input type="text" class="form-control border-white text-white bg-transparent"
-                                    id="no_pekerja" name="no_pekerja" placeholder="Sila masukkan No. Pekerja">
+                                <input type="number" class="form-control border-white text-white bg-transparent"
+                                    id="no_pekerja" name="no_pekerja" placeholder="Sila masukkan No. Pekerja"
+                                    value="{{ old('no_pekerja') }}">
                             </div>
                             <button type="submit" class="btn btn-outline-light">Semak</button>
                         </form>
 
-                        <!-- Alert Messages -->
-                        @if (isset($exists))
-                            <div class="mt-3">
-                                @if ($exists)
-                                    <div class="alert alert-success">Staff ID exists.</div>
-                                @else
-                                    <div class="alert alert-danger">Staff ID does not exist.</div>
-                                @endif
+                        @if ($errors->any())
+                            <div class="alert alert-danger mt-3">
+                                {{ $errors->first('no_pekerja') }}
                             </div>
                         @endif
                     </div>

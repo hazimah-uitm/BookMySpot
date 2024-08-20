@@ -28,13 +28,11 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 
-//Staff
-Route::get('staff/view/{id}', 'StaffController@show')->name('staff.show');
-Route::get('/staff/search', 'StaffController@search')->name('staff.search');
-
-//Booking
-Route::get('booking/create', 'BookingController@create')->name('booking.create');
-Route::post('booking/store', 'BookingController@store')->name('booking.store');
+//Staff Booking
+Route::get('staff/booking', 'StaffBookingController@showForm')->name('staff.booking.form');
+Route::post('staff/booking/check', 'StaffBookingController@checkStaffId')->name('staff.booking.check');
+Route::post('staff/booking/store', 'StaffBookingController@store')->name('staff.booking.store');
+Route::get('staff/booking/print', 'StaffBookingController@printTicket')->name('staff.booking.print');
 
 Route::middleware('auth')->group(function () {
 
@@ -80,6 +78,8 @@ Route::middleware('auth')->group(function () {
     
     // Staff Management
     Route::get('staff', 'StaffController@index')->name('staff');
+    Route::get('staff/view/{id}', 'StaffController@show')->name('staff.show');
+    Route::get('/staff/search', 'StaffController@search')->name('staff.search');
     Route::post('/import-staff', 'StaffController@import')->name('staff.import');
     Route::get('staff/create', 'StaffController@create')->name('staff.create');
     Route::post('staff/store', 'StaffController@store')->name('staff.store');
@@ -92,6 +92,8 @@ Route::middleware('auth')->group(function () {
     
     // Booking Management
     Route::get('booking', 'BookingController@index')->name('booking');
+    Route::get('booking/create', 'BookingController@create')->name('booking.create');
+    Route::post('booking/store', 'BookingController@store')->name('booking.store');
     Route::get('booking/{id}/edit', 'BookingController@edit')->name('booking.edit');
     Route::post('booking/{id}', 'BookingController@update')->name('booking.update');
     Route::get('booking/view/{id}', 'BookingController@show')->name('booking.show');

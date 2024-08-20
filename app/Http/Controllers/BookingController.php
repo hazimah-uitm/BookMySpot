@@ -82,11 +82,11 @@ class BookingController extends Controller
     public function edit(Request $request, $id)
     {
         $booking = Booking::findOrFail($id);
-        $currentStaffId = $booking->staff_id; // Ensure this matches your field name
+        $currentStaffId = $booking->staff_id; 
     
         $staffs = Staff::where('attendance', 'hadir')
             ->where('status', 'pending')
-            ->where('id', '!=', $currentStaffId) // Optional: exclude current staff
+            ->where('id', '!=', $currentStaffId) 
             ->get();
     
         $tables = Table::where('status', 'available')->get();
@@ -97,12 +97,10 @@ class BookingController extends Controller
             'booking' => $booking,
             'tables' => $tables,
             'staffs' => $staffs,
-            'currentStaffId' => $currentStaffId, // Pass current staff ID
+            'currentStaffId' => $currentStaffId, 
         ]);
     }
     
-    
-
     public function update(Request $request, $id)
     {
         $request->validate([
