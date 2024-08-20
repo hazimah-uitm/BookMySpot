@@ -22,10 +22,20 @@ class Staff extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 
+        'name',
         'no_pekerja',
-        'status'
+        'email',
+        'attendance',
+        'category',
+        'department',
+        'campus',
+        'club',
+        'payment',
+        'status',
+        'created_at',
     ];
+
+    public $timestamps = true;
 
     public function booking()
     {

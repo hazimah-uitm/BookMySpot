@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\StaffImport;
 use App\Models\Staff;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class StaffController extends Controller
 {
@@ -19,6 +21,22 @@ class StaffController extends Controller
         ]);
     }
 
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,csv',
+        ]);
+
+        try {
+            Excel::import(new StaffImport, $request->file('file'));
+
+            return redirect()->back()->with('success', 'Staff data imported successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error importing data: ' . $e->getMessage());
+        }
+    }
+    
+
     public function create()
     {
         return view('pages.staff.create', [
@@ -30,8 +48,14 @@ class StaffController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'email' => 'required',
             'name' => 'required',
             'no_pekerja' => 'required|unique:staff,no_pekerja',
+            'attendance' => 'required|in:Hadir,Tidak Hadir',
+            'category' => 'required|in:Staf Akademik,Staf Pentadbiran',
+            'department' => 'required',
+            'campus' => 'required',
+            'club' => 'required|in:Ahli KEKiTA,Ahli PEWANI,Bukan Ahli  (Bayaran RM20 dikenakan)',
             'status' => 'required|in:Pending,Booked',
         ]);
 
@@ -64,8 +88,14 @@ class StaffController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
+            'email' => 'required',
             'name' => 'required',
-            'no_pekerja'   => 'required|unique:staff,no_pekerja,' . $id,
+            'no_pekerja' => 'required|unique:staff,no_pekerja,' . $id,
+            'attendance' => 'required|in:Hadir,Tidak Hadir',
+            'category' => 'required|in:Staf Akademik,Staf Pentadbiran',
+            'department' => 'required',
+            'campus' => 'required',
+            'club' => 'required|in:Ahli KEKiTA,Ahli PEWANI,Bukan Ahli  (Bayaran RM20 dikenakan)',
             'status' => 'required|in:Pending,Booked',
         ]);
 

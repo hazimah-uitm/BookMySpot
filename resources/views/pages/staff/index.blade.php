@@ -21,34 +21,64 @@
 <!--end breadcrumb-->
 <h6 class="mb-0 text-uppercase">Senarai Staf</h6>
 <hr />
+@if (session('success'))
+    <div class="alert alert-success mt-2">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if (session('error'))
+    <div class="alert alert-danger mt-2">
+        {{ session('error') }}
+    </div>
+@endif
 <div class="card">
     <div class="card-body">
-        <div class="d-lg-flex align-items-center mb-4 gap-3">
-            <div class="position_id-relative">
-                <form action="{{ route('staff.search') }}" method="GET">
-                    <div class="input-group">
-                        <input type="text" class="form-control search-input" placeholder="Carian..." name="search">
-                        <span class="input-group-btn">
-                            <button type="submit" class="btn btn-primary search-button">
-                                <i class="bx bx-search"></i>
-                            </button>
-                        </span>
-                    </div>
-                </form>
+    <div class="d-lg-flex align-items-center mb-4 gap-3">
+    <div class="position-relative">
+        <form action="{{ route('staff.search') }}" method="GET">
+            <div class="input-group">
+                <input type="text" class="form-control search-input" placeholder="Carian..." name="search">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-primary search-button">
+                        <i class="bx bx-search"></i>
+                    </button>
+                </span>
             </div>
-            <div class="ms-auto">
-                <a href="{{ route('staff.create') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0">
-                    <i class="bx bxs-plus-square"></i> Tambah Staf
-                </a>
+        </form>
+    </div>
+    <div class="ms-auto d-flex gap-2 align-items-center">
+        <!-- Import Button and Form -->
+        <form action="{{ route('staff.import') }}" method="POST" enctype="multipart/form-data" class="d-flex align-items-center">
+            {{ csrf_field() }}
+            <div class="form-group mb-0">
+                <input type="file" name="file" class="form-control form-control-sm" required>
             </div>
-        </div>
+            <button type="submit" class="btn btn-info ms-2">Import</button>
+        </form>
+
+         <!-- Tambah Button -->
+         <a href="{{ route('staff.create') }}" class="btn btn-primary">
+            Tambah Staf
+        </a>
+
+    </div>
+</div>
+
         <div class="table-responsive">
             <table class="table">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Nama</th>
-                        <th>No. Staf</th>
+                        <th>No. Pekerja</th>
+                        <th>Emel</th>
+                        <th>Kehadiran</th>
+                        <th>Kategori Staf</th>
+                        <th>Unit/Bahagian</th>
+                        <th>Kampus</th>
+                        <th>Keahlian Kelab</th>
+                        <th>Bukti Bayaran</th>
                         <th>Status</th>
                         <th>Tindakan</th>
                     </tr>
@@ -60,6 +90,13 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ ucfirst($staff->name) }}</td>
                         <td>{{ $staff->no_pekerja }}</td>
+                        <td>{{ $staff->email }}</td>
+                        <td>{{ $staff->attendance }}</td>
+                        <td>{{ $staff->category }}</td>
+                        <td>{{ $staff->department }}</td>
+                        <td>{{ $staff->campus }}</td>
+                        <td>{{ $staff->club }}</td>
+                        <td>{{ $staff->payment }}</td>
                         <td>
                             @if ($staff->status == 'Pending')
                             <span class="badge bg-warning">Pending</span>

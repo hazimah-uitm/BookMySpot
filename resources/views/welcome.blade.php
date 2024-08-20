@@ -21,7 +21,7 @@
                             {{ csrf_field() }}
                             <div class="form-group flex-grow-1 me-2">
                                 <input type="text" class="form-control border-white text-white bg-transparent"
-                                    id="staff_id" name="staff_id" placeholder="Sila masukkan No. Pekerja">
+                                    id="no_pekerja" name="no_pekerja" placeholder="Sila masukkan No. Pekerja">
                             </div>
                             <button type="submit" class="btn btn-outline-light">Semak</button>
                         </form>

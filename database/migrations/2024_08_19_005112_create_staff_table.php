@@ -17,6 +17,13 @@ class CreateStaffTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->integer('no_pekerja')->unique();
+            $table->string('email')->unique();
+            $table->enum('attendance', ['Hadir', 'Tidak Hadir']);
+            $table->enum('category', ['Staf Akademik', 'Staf Pentadbiran']);
+            $table->string('department');
+            $table->string('campus');
+            $table->enum('club', ['Ahli KEKiTA', 'Ahli PEWANI', 'Bukan Ahli  (Bayaran RM20 dikenakan)']);
+            $table->string('payment')->nullable();
             $table->enum('status', ['Pending', 'Booked'])->default('Pending');
             $table->softDeletes();
             $table->timestamps();

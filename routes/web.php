@@ -72,6 +72,7 @@ Route::middleware('auth')->group(function () {
     
     // Staff Management
     Route::get('staff', 'StaffController@index')->name('staff');
+    Route::post('/import-staff', 'StaffController@import')->name('staff.import');
     Route::get('staff/create', 'StaffController@create')->name('staff.create');
     Route::post('staff/store', 'StaffController@store')->name('staff.store');
     Route::get('staff/{id}/edit', 'StaffController@edit')->name('staff.edit');

@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Staff;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class StaffSeeder extends Seeder
@@ -15,45 +16,29 @@ class StaffSeeder extends Seeder
         // Create 5 staff members with "Pending" status
         Staff::insert([
             [
-                'no_pekerja' => '100001',
+                'email' => 'example1@example.com',
                 'name' => 'John Doe',
-                'status' => 'Pending'
+                'no_pekerja' => 12345,
+                'attendance' => 'Hadir',
+                'category' => 'Staf Akademik',
+                'department' => 'Department A',
+                'campus' => 'Campus X',
+                'club' => 'Ahli KEKiTA',
+                'payment' => 'Paid',
+                'status' => 'Pending',
             ],
             [
-                'no_pekerja' => '100002',
+                'email' => 'example2@example.com',
                 'name' => 'Jane Smith',
-                'status' => 'Pending'
+                'no_pekerja' => 123666,
+                'attendance' => 'Hadir',
+                'category' => 'Staf Pentadbiran',
+                'department' => 'Department A',
+                'campus' => 'Campus X',
+                'club' => 'Ahli KEKiTA',
+                'payment' => 'Paid',
+                'status' => 'Pending',
             ],
-            [
-                'no_pekerja' => '100003',
-                'name' => 'Alice Johnson',
-                'status' => 'Pending'
-            ],
-            [
-                'no_pekerja' => '100004',
-                'name' => 'Bob Brown',
-                'status' => 'Pending'
-            ],
-            [
-                'no_pekerja' => '100005',
-                'name' => 'Charlie Black',
-                'status' => 'Pending'
-            ],
-            [
-                'no_pekerja' => '100006',
-                'name' => 'Diana White',
-                'status' => 'Booked'
-            ],
-            [
-                'no_pekerja' => '100007',
-                'name' => 'Edward Green',
-                'status' => 'Booked'
-            ],
-            [
-                'no_pekerja' => '100008',
-                'name' => 'Fiona Blue',
-                'status' => 'Booked'
-            ]
         ]);
     }
 }
