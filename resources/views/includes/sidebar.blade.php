@@ -3,8 +3,7 @@
         <img src="{{ asset('assets/images/logo-icon.png') }}" class="logo-icon" alt="logo icon">
     </div>
     <div>
-        <h4 class="logo-text">BMS</h4>
-        <h6 class="logo-subtitle">Seat Pass System</h6>
+        <h4 class="logo-text">Seat Pass</h4>
     </div>
     <div class="toggle-icon ms-auto" id="toggle-icon"><i class='bx bx-arrow-to-left'></i></div>
 
@@ -74,7 +73,7 @@
         </a>
     </li>
     @role('Superadmin')
-    <li>
+    <!-- <li>
         <a class="has-arrow">
             <div class="parent-icon"><i class='bx bx-location-plus'></i>
             </div>
@@ -97,7 +96,7 @@
                 <a href="{{ route('position') }}"><i class="bx bx-right-arrow-alt"></i>Jawatan</a>
             </li>
         </ul>
-    </li>
+    </li> -->
     <li>
         <a href="{{ route('logs.debug') }}">
             <div class="parent-icon"><i class='bx bxs-bug'></i></div>
