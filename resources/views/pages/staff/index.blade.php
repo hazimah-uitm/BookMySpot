@@ -38,10 +38,14 @@
                 <div class="position-relative">
                     <form action="{{ route('staff.search') }}" method="GET">
                         <div class="input-group">
-                            <input type="text" class="form-control search-input" placeholder="Carian..." name="search">
+                            <input type="text" class="form-control search-input rounded" placeholder="Carian..."
+                                name="search">
                             <span class="input-group-btn">
                                 <button type="submit" class="btn btn-primary search-button">
                                     <i class="bx bx-search"></i>
+                                </button>
+                                <button type="reset" class="btn btn-secondary search-button">
+                                    <i class="bx bx-x"></i>
                                 </button>
                             </span>
                         </div>
@@ -75,8 +79,6 @@
                             <th>Nama</th>
                             <th>No. Pekerja</th>
                             <th>Kehadiran</th>
-                            <th>Kategori Staf</th>
-                            <th>Unit/Bahagian</th>
                             <th>Kampus</th>
                             <th>Status</th>
                             <th>Tindakan</th>
@@ -91,8 +93,6 @@
                                     <td>{{ ucfirst($staff->name) }}</td>
                                     <td>{{ $staff->no_pekerja }}</td>
                                     <td>{{ $staff->attendance }}</td>
-                                    <td>{{ $staff->category }}</td>
-                                    <td>{{ $staff->department }}</td>
                                     <td>{{ $staff->campus }}</td>
                                     <td>
                                         @if ($staff->status == 'Pending')
@@ -188,4 +188,11 @@
         </div>
     @endforeach
     <!--end page wrapper -->
+
+    <script>
+        document.querySelector('button[type="reset"]').addEventListener('click', function() {
+            // Redirect to another page or reload the page
+            window.location.href = "{{ route('staff') }}"; // Adjust the route as needed
+        });
+    </script>
 @endsection

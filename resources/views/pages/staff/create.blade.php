@@ -44,6 +44,82 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" id="email"
+                        name="email" value="{{ old('email', $staff->email ?? '') }}">
+                    @if ($errors->has('email'))
+                        <div class="invalid-feedback">Sila isi Email</div>
+                    @endif
+                </div>
+
+                <div class="mb-3">
+                    <label for="attendance" class="form-label">Kehadiran</label>
+                    <select class="form-select {{ $errors->has('attendance') ? 'is-invalid' : '' }}" id="attendance"
+                        name="attendance" required>
+                        <option value="">Pilih Kehadiran</option>
+                        <option value="Hadir" {{ old('attendance', $staff->attendance ?? '') == 'Hadir' ? 'selected' : '' }}>Hadir</option>
+                        <option value="Tidak Hadir" {{ old('attendance', $staff->attendance ?? '') == 'Tidak Hadir' ? 'selected' : '' }}>Tidak Hadir</option>
+                    </select>
+                    @if ($errors->has('attendance'))
+                        <div class="invalid-feedback">Sila pilih Kehadiran</div>
+                    @endif
+                </div>
+
+                <div class="mb-3">
+                    <label for="category" class="form-label">Kategori</label>
+                    <select class="form-select {{ $errors->has('category') ? 'is-invalid' : '' }}" id="category"
+                        name="category" required>
+                        <option value="">Pilih Kategori</option>
+                        <option value="Staf Akademik" {{ old('category', $staff->category ?? '') == 'Staf Akademik' ? 'selected' : '' }}>Staf Akademik</option>
+                        <option value="Staf Pentadbiran" {{ old('category', $staff->category ?? '') == 'Staf Pentadbiran' ? 'selected' : '' }}>Staf Pentadbiran</option>
+                    </select>
+                    @if ($errors->has('category'))
+                        <div class="invalid-feedback">Sila pilih Kategori</div>
+                    @endif
+                </div>
+
+                <div class="mb-3">
+                    <label for="department" class="form-label">Jabatan</label>
+                    <input type="text" class="form-control {{ $errors->has('department') ? 'is-invalid' : '' }}" id="department"
+                        name="department" value="{{ old('department', $staff->department ?? '') }}">
+                    @if ($errors->has('department'))
+                        <div class="invalid-feedback">Sila isi Jabatan</div>
+                    @endif
+                </div>
+
+                <div class="mb-3">
+                    <label for="campus" class="form-label">Kampus</label>
+                    <input type="text" class="form-control {{ $errors->has('campus') ? 'is-invalid' : '' }}" id="campus"
+                        name="campus" value="{{ old('campus', $staff->campus ?? '') }}">
+                    @if ($errors->has('campus'))
+                        <div class="invalid-feedback">Sila isi Kampus</div>
+                    @endif
+                </div>
+
+                <div class="mb-3">
+                    <label for="club" class="form-label">Kelab</label>
+                    <select class="form-select {{ $errors->has('club') ? 'is-invalid' : '' }}" id="club"
+                        name="club" required>
+                        <option value="">Pilih Kelab</option>
+                        <option value="Ahli KEKiTA" {{ old('club', $staff->club ?? '') == 'Ahli KEKiTA' ? 'selected' : '' }}>Ahli KEKiTA</option>
+                        <option value="Ahli PEWANI" {{ old('club', $staff->club ?? '') == 'Ahli PEWANI' ? 'selected' : '' }}>Ahli PEWANI</option>
+                        <option value="Bukan Ahli  (Bayaran RM20 dikenakan)" {{ old('club', $staff->club ?? '') == 'Bukan Ahli  (Bayaran RM20 dikenakan)' ? 'selected' : '' }}>Bukan Ahli  (Bayaran RM20 dikenakan)</option>
+                    </select>
+                    @if ($errors->has('club'))
+                        <div class="invalid-feedback">Sila pilih Kelab</div>
+                    @endif
+                </div>
+
+                <div class="mb-3">
+                    <label for="payment" class="form-label">Bayaran</label>
+                    <input type="text" class="form-control {{ $errors->has('payment') ? 'is-invalid' : '' }}" id="payment"
+                        name="payment" value="{{ old('payment', $staff->payment ?? '') }}">
+                    @if ($errors->has('payment'))
+                        <div class="invalid-feedback">Sila isi Bayaran</div>
+                    @endif
+                </div>
+
+                <div class="mb-3">
                     <label for="status" class="form-label">Status</label>
                     <div class="form-check">
                         <input type="radio" id="pending" name="status" value="Pending"

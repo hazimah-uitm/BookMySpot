@@ -59,10 +59,10 @@
                         @if (count($userList) > 0)
                             @foreach ($userList as $user)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ ($userList->currentPage() - 1) * $userList->perPage() + $loop->iteration }}</td>
                                     <td>{{ ucfirst($user->name) }}</td>
                                     <td>{{ $user->staff_id }}</td>
-                                    <td>{{ $user->campus->name }}</td>
+                                    <td>{{ $user->campus->name ?? null }}</td>
                                     <td>
                                         @if ($user->roles->count() === 1)
                                             {{ ucwords(str_replace('-', ' ', $user->roles->first()->name)) }}
@@ -105,11 +105,13 @@
                     </tbody>
                 </table>
             </div>
-            <div class="mt-3 d-flex justify-content-between">
+            <div class="mt-3 d-flex justify-content-between align-items-center">
                 <div class="d-flex align-items-center">
                     <span class="mr-2 mx-1">Jumlah rekod per halaman</span>
-                    <form action="{{ route('user') }}" method="GET" id="perPageForm">
-                        <select name="perPage" id="perPage" class="form-select"
+                    <form action="{{ route('user.search') }}" method="GET" id="perPageForm"
+                        class="d-flex align-items-center">
+                        <input type="hidden" name="search" value="{{ request('search') }}">
+                        <select name="perPage" id="perPage" class="form-select form-select-sm"
                             onchange="document.getElementById('perPageForm').submit()">
                             <option value="10" {{ Request::get('perPage') == '10' ? 'selected' : '' }}>10</option>
                             <option value="20" {{ Request::get('perPage') == '20' ? 'selected' : '' }}>20</option>
@@ -118,10 +120,14 @@
                     </form>
                 </div>
 
-                <div class="mt-3 d-flex justify-content-end">
-                    <div class="mx-1 mt-2">{{ $userList->firstItem() }} – {{ $userList->lastItem() }} dari
-                        {{ $userList->total() }} rekod</div>
-                    <div>{{ $userList->links() }}</div>
+                <div class="d-flex justify-content-end align-items-center">
+                    <span class="mx-2 mt-2 small text-muted">
+                        Menunjukkan {{ $userList->firstItem() ?? '0' }} hingga {{ $userList->lastItem() ?? '0' }} daripada
+                        {{ $userList->total() }} rekod
+                    </span>
+                    <div class="pagination-wrapper">
+                        {{ $userList->appends(['search' => request('search'), 'perPage' => $perPage])->links('pagination::bootstrap-4') }}
+                    </div>
                 </div>
             </div>
         </div>
