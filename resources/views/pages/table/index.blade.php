@@ -49,7 +49,7 @@
                         <th>#</th>
                         <th>No. Meja</th>
                         <th>Jumlah Tempat Duduk</th>
-                        <th>Jumlah Tempat Duduk Available</th>
+                        <th>Jumlah Tempat Duduk Kosong</th>
                         <th>Status</th>
                         <th>Tindakan</th>
                     </tr>

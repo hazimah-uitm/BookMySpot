@@ -13,7 +13,7 @@ class StaffController extends Controller
     {
         $perPage = $request->input('perPage', 10);
 
-        $staffList = Staff::latest()->paginate($perPage);
+        $staffList = Staff::orderBy('name', 'asc')->paginate($perPage);
 
         return view('pages.staff.index', [
             'staffList' => $staffList,
