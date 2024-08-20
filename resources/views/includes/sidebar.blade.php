@@ -66,12 +66,6 @@
             <div class="menu-title">Meja</div>
         </a>
     </li>
-    <li>
-        <a href="{{ route('logs.debug') }}">
-            <div class="parent-icon"><i class='bx bx-chair'></i></div>
-            <div class="menu-title">Tempat Duduk</div>
-        </a>
-    </li>
     @role('Superadmin')
     <!-- <li>
         <a class="has-arrow">
