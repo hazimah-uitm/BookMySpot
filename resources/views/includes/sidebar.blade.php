@@ -52,7 +52,7 @@
     </li>
 
     <li>
-        <a href="{{ route('user') }}">
+        <a href="{{ route('booking') }}">
             <div class="parent-icon"><i class='bx bx-calendar-check'></i>
             </div>
             <div class="menu-title">Senarai Tempahan</div>

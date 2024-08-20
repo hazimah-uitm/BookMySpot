@@ -18,7 +18,6 @@ class Booking extends Model
         'booking_no',
         'staff_id',
         'table_id',
-        'booking_date'
     ];
 
     public function staff()

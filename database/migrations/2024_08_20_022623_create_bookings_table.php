@@ -15,10 +15,9 @@ class CreateBookingsTable extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('booking_no');
+            $table->string('booking_no')->unique();
             $table->unsignedBigInteger('staff_id')->unique();
             $table->unsignedBigInteger('table_id');
-            $table->dateTime('booking_date');
             $table->softDeletes();
             $table->timestamps();
 

@@ -28,6 +28,14 @@ Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 
+//Staff
+Route::get('staff/view/{id}', 'StaffController@show')->name('staff.show');
+Route::get('/staff/search', 'StaffController@search')->name('staff.search');
+
+//Booking
+Route::get('booking/create', 'BookingController@create')->name('booking.create');
+Route::post('booking/store', 'BookingController@store')->name('booking.store');
+
 Route::middleware('auth')->group(function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
@@ -77,12 +85,21 @@ Route::middleware('auth')->group(function () {
     Route::post('staff/store', 'StaffController@store')->name('staff.store');
     Route::get('staff/{id}/edit', 'StaffController@edit')->name('staff.edit');
     Route::post('staff/{id}', 'StaffController@update')->name('staff.update');
-    Route::get('staff/view/{id}', 'StaffController@show')->name('staff.show');
-    Route::get('/staff/search', 'StaffController@search')->name('staff.search');
     Route::delete('staff/{id}', 'StaffController@destroy')->name('staff.destroy');
     Route::get('/staff/trash', 'StaffController@trashList')->name('staff.trash');
     Route::get('/staff/{id}/restore', 'StaffController@restore')->name('staff.restore');
     Route::delete('/staff/{id}/force-delete', 'StaffController@forceDelete')->name('staff.forceDelete');
+    
+    // Booking Management
+    Route::get('booking', 'BookingController@index')->name('booking');
+    Route::get('booking/{id}/edit', 'BookingController@edit')->name('booking.edit');
+    Route::post('booking/{id}', 'BookingController@update')->name('booking.update');
+    Route::get('booking/view/{id}', 'BookingController@show')->name('booking.show');
+    Route::get('/booking/search', 'BookingController@search')->name('booking.search');
+    Route::delete('booking/{id}', 'BookingController@destroy')->name('booking.destroy');
+    Route::get('/booking/trash', 'BookingController@trashList')->name('booking.trash');
+    Route::get('/booking/{id}/restore', 'BookingController@restore')->name('booking.restore');
+    Route::delete('/booking/{id}/force-delete', 'BookingController@forceDelete')->name('booking.forceDelete');
     
     // Table Management
     Route::get('table', 'TableController@index')->name('table');
