@@ -23,7 +23,12 @@ class Staff extends Model
      */
     protected $fillable = [
         'name', 
-        'staff_id',
+        'no_pekerja',
         'status'
     ];
+
+    public function booking()
+    {
+        return $this->hasOne(Booking::class, 'staff_id');
+    } 
 }

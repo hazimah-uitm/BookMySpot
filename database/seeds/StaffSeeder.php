@@ -15,42 +15,42 @@ class StaffSeeder extends Seeder
         // Create 5 staff members with "Pending" status
         Staff::insert([
             [
-                'staff_id' => '100001',
+                'no_pekerja' => '100001',
                 'name' => 'John Doe',
                 'status' => 'Pending'
             ],
             [
-                'staff_id' => '100002',
+                'no_pekerja' => '100002',
                 'name' => 'Jane Smith',
                 'status' => 'Pending'
             ],
             [
-                'staff_id' => '100003',
+                'no_pekerja' => '100003',
                 'name' => 'Alice Johnson',
                 'status' => 'Pending'
             ],
             [
-                'staff_id' => '100004',
+                'no_pekerja' => '100004',
                 'name' => 'Bob Brown',
                 'status' => 'Pending'
             ],
             [
-                'staff_id' => '100005',
+                'no_pekerja' => '100005',
                 'name' => 'Charlie Black',
                 'status' => 'Pending'
             ],
             [
-                'staff_id' => '100006',
+                'no_pekerja' => '100006',
                 'name' => 'Diana White',
                 'status' => 'Booked'
             ],
             [
-                'staff_id' => '100007',
+                'no_pekerja' => '100007',
                 'name' => 'Edward Green',
                 'status' => 'Booked'
             ],
             [
-                'staff_id' => '100008',
+                'no_pekerja' => '100008',
                 'name' => 'Fiona Blue',
                 'status' => 'Booked'
             ]

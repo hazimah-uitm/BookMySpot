@@ -31,7 +31,7 @@ class StaffController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'staff_id' => 'required|unique:staff,staff_id',
+            'no_pekerja' => 'required|unique:staff,no_pekerja',
             'status' => 'required|in:Pending,Booked',
         ]);
 
@@ -65,7 +65,7 @@ class StaffController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'staff_id'   => 'required|unique:staff,staff_id,' . $id,
+            'no_pekerja'   => 'required|unique:staff,no_pekerja,' . $id,
             'status' => 'required|in:Pending,Booked',
         ]);
 
@@ -84,7 +84,7 @@ class StaffController extends Controller
 
         if ($search) {
             $staffList = Staff::where('name', 'LIKE', "%$search%")
-                ->orWhere('staff_id', 'LIKE', "%$search%")
+                ->orWhere('no_pekerja', 'LIKE', "%$search%")
                 ->latest()
                 ->paginate(10);
         } else {

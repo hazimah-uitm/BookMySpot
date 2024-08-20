@@ -35,10 +35,10 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="staff_id" class="form-label">No. Pekerja</label>
-                    <input type="number" class="form-control {{ $errors->has('staff_id') ? 'is-invalid' : '' }}" id="staff_id"
-                        name="staff_id" value="{{ old('staff_id') }}">
-                    @if ($errors->has('staff_id'))
+                    <label for="no_pekerja" class="form-label">No. Pekerja</label>
+                    <input type="number" class="form-control {{ $errors->has('no_pekerja') ? 'is-invalid' : '' }}" id="no_pekerja"
+                        name="no_pekerja" value="{{ old('no_pekerja') }}">
+                    @if ($errors->has('no_pekerja'))
                         <div class="invalid-feedback">Sila isi No. Pekerja</div>
                     @endif
                 </div>

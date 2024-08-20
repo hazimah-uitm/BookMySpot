@@ -23,7 +23,7 @@
                                 <input type="text" class="form-control border-white text-white bg-transparent"
                                     id="staff_id" name="staff_id" placeholder="Sila masukkan No. Pekerja">
                             </div>
-                            <button type="submit" class="btn btn-light">Semak</button>
+                            <button type="submit" class="btn btn-outline-light">Semak</button>
                         </form>
 
                         <!-- Alert Messages -->

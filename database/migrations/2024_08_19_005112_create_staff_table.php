@@ -14,9 +14,9 @@ class CreateStaffTable extends Migration
     public function up()
     {
         Schema::create('staff', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('name');
-            $table->integer('staff_id')->unique();
+            $table->integer('no_pekerja')->unique();
             $table->enum('status', ['Pending', 'Booked'])->default('Pending');
             $table->softDeletes();
             $table->timestamps();

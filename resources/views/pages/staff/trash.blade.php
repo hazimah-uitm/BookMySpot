@@ -35,7 +35,7 @@
                     @foreach ($trashList as $staff)
                     <tr>
                         <td>{{ ucfirst($staff->name) }}</td>
-                        <td>{{ $staff->staff_id }}</td>
+                        <td>{{ $staff->no_pekerja }}</td>
                         <td>
                             @if ($staff->status == 'Pending')
                             <span class="badge bg-warning">Pending</span>

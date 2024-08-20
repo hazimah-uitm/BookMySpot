@@ -36,7 +36,7 @@
                     </tr>
                     <tr>
                         <th>ID Pekerja</th>
-                        <td>{{ $staff->staff_id }}</td>
+                        <td>{{ $staff->no_pekerja }}</td>
                     </tr>
                     <tr>
                         <th>Status</th>

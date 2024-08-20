@@ -10,7 +10,7 @@ use Spatie\Permission\Traits\HasRoles;
 
 class Table extends Model
 {
-    use Notifiable, LogsActivity, HasRoles, SoftDeletes;
+    use LogsActivity, HasRoles, SoftDeletes;
 
     protected static $logAttributes = ['*'];
 
@@ -27,4 +27,9 @@ class Table extends Model
         'available_seat',
         'status'
     ];
+
+    public function booking()
+    {
+        return $this->hasMany(Booking::class, 'table_id');
+    } 
 }
