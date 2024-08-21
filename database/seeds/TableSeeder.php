@@ -15,33 +15,33 @@ class TableSeeder extends Seeder
         Table::insert([
             [
                 'table_no' => 'T01',
-                'total_seat' => 4,
-                'available_seat' => 4,
+                'total_seat' => 8,
+                'available_seat' => 8,
                 'status' => 'Available',
             ],
             [
                 'table_no' => 'T02',
-                'total_seat' => 2,
+                'total_seat' => 8,
                 'available_seat' => 1,
                 'status' => 'Available',
             ],
             [
                 'table_no' => 'T03',
-                'total_seat' => 6,
-                'available_seat' => 0,
+                'total_seat' => 8,
+                'available_seat' => 8,
                 'status' => 'Booked',
             ],
             [
                 'table_no' => 'T04',
-                'total_seat' => 4,
-                'available_seat' => 4,
+                'total_seat' => 8,
+                'available_seat' => 1,
                 'status' => 'Available',
             ],
             [
                 'table_no' => 'T05',
                 'total_seat' => 8,
                 'available_seat' => 8,
-                'status' => 'Available',
+                'status' => 'Booked',
             ],
         ]);
     }

@@ -6,6 +6,7 @@ use App\Models\Booking;
 use App\Models\Staff;
 use App\Models\Table;
 use Illuminate\Http\Request;
+use Barryvdh\Snappy\Facades\SnappyPdf as PDF;
 
 class StaffBookingController extends Controller
 {
@@ -39,7 +40,7 @@ class StaffBookingController extends Controller
                 return redirect()->back()->withErrors(['no_pekerja' => 'No booking found for this staff.'])->withInput();
             }
         
-            return view('pages.staff.booking.print', [
+            return view('pages.staff.booking.ticket', [
                 'booking' => $booking,
             ]);
         }
@@ -49,7 +50,12 @@ class StaffBookingController extends Controller
     }
     
     
-     
+    public function printTicket($id)
+    {
+        $booking = Booking::find($id);
+        $pdf = PDF::loadView('pages.staff.booking.ticket_pdf', compact('booking'));
+        return $pdf->inline('ticket-' . $booking->booking_no . '.pdf');
+    }
 
     public function store(Request $request)
     {

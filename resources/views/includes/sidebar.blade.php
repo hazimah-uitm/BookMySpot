@@ -11,8 +11,15 @@
 <!--navigation-->
 <ul class="metismenu" id="menu">
     <li>
+        <a href="{{ url('/') }}">
+            <div class="parent-icon"><i class='bx bx-home' ></i>
+            </div>
+            <div class="menu-title">Laman Utama</div>
+        </a>
+    </li>
+    <li>
         <a href="{{ route('home') }}">
-            <div class="parent-icon"><i class='bx bx-home-circle'></i>
+            <div class="parent-icon"><i class='bx bxs-dashboard' ></i>
             </div>
             <div class="menu-title">Dashboard</div>
         </a>

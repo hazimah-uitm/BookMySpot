@@ -35,9 +35,23 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
+                    @guest
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">Admin Login</a>
                     </li>
+                    @else
+                    <li class="nav-item">
+                        <form action="{{ route('home') }}" method="get" class="d-inline">
+                            <button type="submit" class="nav-link btn btn-link">Dashboard</button>
+                        </form>
+                    </li>
+                    <li class="nav-item">
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-inline">
+                            {{ csrf_field() }}
+                            <button type="submit" class="nav-link btn btn-link">Logout</button>
+                        </form>
+                    </li>
+                    @endguest
                 </ul>
             </div>
         </div>

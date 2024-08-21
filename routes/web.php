@@ -32,7 +32,7 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('passw
 Route::get('staff/booking', 'StaffBookingController@showForm')->name('staff.booking.form');
 Route::post('staff/booking/check', 'StaffBookingController@checkStaffId')->name('staff.booking.check');
 Route::post('staff/booking/store', 'StaffBookingController@store')->name('staff.booking.store');
-Route::get('staff/booking/print', 'StaffBookingController@printTicket')->name('staff.booking.print');
+Route::get('staff/booking/{id}/print', 'StaffBookingController@printTicket')->name('staff.booking.print');
 
 Route::middleware('auth')->group(function () {
 
