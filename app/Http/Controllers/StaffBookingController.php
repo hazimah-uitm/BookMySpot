@@ -25,7 +25,7 @@ class StaffBookingController extends Controller
         
         // Check if the staff's attendance is 'Hadir' and status is 'Pending'
         if ($staff->attendance === 'Hadir' && $staff->status === 'Pending') {
-            $tables = Table::where('status', 'available')->get();
+            $tables = Table::get();
             return view('pages.staff.booking.create', [
                 'staff' => $staff,
                 'tables' => $tables,
@@ -36,7 +36,7 @@ class StaffBookingController extends Controller
         if ($staff->attendance === 'Hadir' && $staff->status === 'Booked') {
             $booking = Booking::where('staff_id', $staff->id)->first();
             if (!$booking) {
-                return redirect()->back()->withErrors(['no_pekerja' => 'No booking found for this staff.'])->withInput();
+                return redirect()->back()->withErrors(['no_pekerja' => 'Tiada tempahan untuk No. Pekerja tersebut.'])->withInput();
             }
         
             return view('pages.staff.booking.ticket', [
@@ -45,7 +45,7 @@ class StaffBookingController extends Controller
         }
         
         // Handle all other cases where the staff cannot book or print
-        return redirect()->back()->withErrors(['no_pekerja' => 'Your staff ID is not valid for booking or printing'])->withInput();
+        return redirect()->back()->withErrors(['no_pekerja' => 'No. Pekerja anda tidak ditemui dalam sistem'])->withInput();
     }
     
     
@@ -70,7 +70,7 @@ class StaffBookingController extends Controller
         $dompdf->render();
 
         // Stream the PDF to the browser
-        return $dompdf->stream('ticket-' . $booking->booking_no . '.pdf', [
+        return $dompdf->stream('Tiket-' . $booking->booking_no . '.pdf', [
             'Attachment' => 0 // 0 to view in browser, 1 to download
         ]);
     }
@@ -103,7 +103,7 @@ class StaffBookingController extends Controller
         $staff->status = 'Booked';
         $staff->save();
     
-        return redirect()->route('staff.booking.view', ['id' => $booking->id])->with('success', 'Booking successful');
+        return redirect()->route('staff.booking.view', ['id' => $booking->id])->with('success', 'Tempahan berjaya dihantar!');
     }
     
 
