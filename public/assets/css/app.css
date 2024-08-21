@@ -33,7 +33,7 @@ body {
 	font-size: 14px;
 	color: #4c5258;
 	letter-spacing: .5px;
-	background-color: #EBEDEF;
+	background-color: #ebedef;
 	overflow-x: hidden;
 	font-family: Roboto, sans-serif
 }
@@ -683,7 +683,7 @@ a {
 	box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important
 }
 
-.bg-login {
+/* .bg-login {
 	background-image: url(../images/login-images/login-bg.jpg);
 	background-size: cover;
 	background-position: center;
@@ -692,20 +692,20 @@ a {
 }
 
 .bg-login::before {
-	content: "";
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, 0.75);
-	z-index: 1;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 1; 
 }
 
 .bg-login>* {
 	position: relative;
 	z-index: 2;
-}
+} */
 
 .bg-forgot {
 	background-image: url(../images/login-images/bg-forgot-password.jpg);
@@ -837,7 +837,7 @@ input.search-control-2::placeholder {
 	top: 0;
 	left: 0;
 	width: 100%;
-	background-color: rgba(0, 0, 0, 0.5) !important;
+	background-color: rgba(255, 255, 255, 0.5) !important;
 	/* Semi-transparent dark background */
 	z-index: 1050;
 	/* Lower z-index for navbar */
@@ -845,7 +845,7 @@ input.search-control-2::placeholder {
 }
 
 .navbar-nav .nav-link {
-	color: #ffffff;
+	color: #000000;
 	padding: 0 0.5rem;
 	font-size: 0.875rem;
 	text-decoration: none;

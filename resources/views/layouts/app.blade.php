@@ -26,7 +26,7 @@
 <body class="bg-login">
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top custom-navbar">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top custom-navbar">
         <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">Tempahan Meja Malam Gala</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
