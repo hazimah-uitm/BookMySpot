@@ -8,17 +8,38 @@
             <div class="row justify-content-center">
                 <div class="col-12 col-md-8 col-lg-6">
                     <h1 class="text-center text-white mb-4">Tiket Tempahan</h1>
-                    <div class="card bg-light text-dark">
+                    <div class="card bg-light text-dark shadow-sm">
                         <div class="card-body">
-                            <h4 class="card-title mb-4">Maklumat Tempahan</h4>
-                            <p><strong>No. Tempahan:</strong> {{ $booking->booking_no }}</p>
-                            <p><strong>Nama:</strong> {{ $booking->staff->name }}</p>
-                            <p><strong>No. Pekerja:</strong> {{ $booking->staff->no_pekerja }}</p>
-                            <p><strong>No. Meja:</strong> {{ $booking->table->table_no }}</p>
-                            <p><strong>Tarikh Tempahan:</strong> {{ $booking->created_at->format('d-m-Y H:i') }}</p>
-                            <p><strong>Sila tunjuk tiket ini kepada urusetia semasa datang ke Malam Gala Dinner.</strong></p>
-
-                            <a href="{{ route('staff.booking.print', $booking->id) }}" class="btn btn-primary mt-3" target="_blank">Muat Turun</a>
+                            <table class="table table-borderless">
+                                <tr>
+                                    <th class="text-uppercase">No. Meja</th>
+                                    <td>{{ $booking->table->table_no }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-uppercase">Nama</th>
+                                    <td>{{ $booking->staff->name }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-uppercase">No. Pekerja</th>
+                                    <td>{{ $booking->staff->no_pekerja }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-uppercase">No. Tempahan</th>
+                                    <td>{{ $booking->booking_no }}</td>
+                                </tr>
+                                <tr>
+                                    <th class="text-uppercase">Tarikh Tempahan</th>
+                                    <td>{{ $booking->created_at->format('d-m-Y H:i') }}</td>
+                                </tr>
+                            </table>
+                            <div class="alert alert-info mt-4">
+                                <strong>Nota:</strong> Sila tunjuk tiket ini kepada urusetia semasa datang ke Malam Gala Dinner.
+                            </div>
+                            <div class="text-center">
+                                <a href="{{ route('staff.booking.print', $booking->id) }}" class="btn btn-primary mt-3" target="_blank">
+                                    <i class="fas fa-download"></i> Muat Turun Tiket
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
