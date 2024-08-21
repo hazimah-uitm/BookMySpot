@@ -12,37 +12,20 @@ class TableSeeder extends Seeder
      */
     public function run()
     {
-        Table::insert([
-            [
-                'table_no' => 'T01',
+        $tables = [];
+
+        // Generate 60 tables with table numbers from T01 to T60
+        for ($i = 1; $i <= 60; $i++) {
+            $tableNo = sprintf('T%02d', $i); // Format table number with leading zeroes
+            $tables[] = [
+                'table_no' => $tableNo,
                 'total_seat' => 8,
                 'available_seat' => 8,
                 'status' => 'Available',
-            ],
-            [
-                'table_no' => 'T02',
-                'total_seat' => 8,
-                'available_seat' => 1,
-                'status' => 'Available',
-            ],
-            [
-                'table_no' => 'T03',
-                'total_seat' => 8,
-                'available_seat' => 8,
-                'status' => 'Booked',
-            ],
-            [
-                'table_no' => 'T04',
-                'total_seat' => 8,
-                'available_seat' => 1,
-                'status' => 'Available',
-            ],
-            [
-                'table_no' => 'T05',
-                'total_seat' => 8,
-                'available_seat' => 8,
-                'status' => 'Booked',
-            ],
-        ]);
+            ];
+        }
+
+        // Insert all tables into the database
+        Table::insert($tables);
     }
 }

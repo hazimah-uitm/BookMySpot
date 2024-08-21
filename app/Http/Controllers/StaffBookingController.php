@@ -18,11 +18,13 @@ class StaffBookingController extends Controller
     {
         $request->validate([
             'no_pekerja' => 'required|exists:staff,no_pekerja',
+        ], [
+            'no_pekerja.required' => 'No. Pekerja diperlukan.',
+            'no_pekerja.exists' => 'No. Pekerja yang dimasukkan tidak wujud dalam sistem.',
         ]);
-        
+    
         $staff = Staff::where('no_pekerja', $request->input('no_pekerja'))->firstOrFail();
-
-        
+    
         // Check if the staff's attendance is 'Hadir' and status is 'Pending'
         if ($staff->attendance === 'Hadir' && $staff->status === 'Pending') {
             $tables = Table::get();
@@ -38,15 +40,15 @@ class StaffBookingController extends Controller
             if (!$booking) {
                 return redirect()->back()->withErrors(['no_pekerja' => 'Tiada tempahan untuk No. Pekerja tersebut.'])->withInput();
             }
-        
+    
             return view('pages.staff.booking.ticket', [
                 'booking' => $booking,
             ]);
         }
-        
+    
         // Handle all other cases where the staff cannot book or print
-        return redirect()->back()->withErrors(['no_pekerja' => 'No. Pekerja anda tidak ditemui dalam sistem'])->withInput();
-    }
+        return redirect()->back()->withErrors(['no_pekerja' => 'No. Pekerja tidak sah untuk tempahan atau cetakan'])->withInput();
+    }    
     
     
     public function printTicket($id)

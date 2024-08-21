@@ -11,7 +11,7 @@ class TableController extends Controller
     {
         $perPage = $request->input('perPage', 10);
 
-        $tableList = Table::latest()->paginate($perPage);
+        $tableList = Table::orderBy('table_no', 'asc')->paginate($perPage);
 
         return view('pages.table.index', [
             'tableList' => $tableList,
