@@ -6,8 +6,7 @@ use App\Models\Booking;
 use App\Models\Staff;
 use App\Models\Table;
 use Illuminate\Http\Request;
-use Barryvdh\Snappy\Facades\SnappyPdf as PDF;
-
+use Dompdf\Dompdf;
 class StaffBookingController extends Controller
 {
     public function showForm()
@@ -52,9 +51,28 @@ class StaffBookingController extends Controller
     
     public function printTicket($id)
     {
-        $booking = Booking::find($id);
-        $pdf = PDF::loadView('pages.staff.booking.ticket_pdf', compact('booking'));
-        return $pdf->inline('ticket-' . $booking->booking_no . '.pdf');
+        // Fetch the booking from the database
+        $booking = Booking::findOrFail($id);
+
+        // Initialize Dompdf
+        $dompdf = new Dompdf();
+
+        // Load the view and pass the booking data
+        $view = view('pages.staff.booking.ticket_pdf', compact('booking'))->render();
+
+        // Load HTML content into Dompdf
+        $dompdf->loadHtml($view);
+
+        // Set paper size and orientation
+        $dompdf->setPaper('A4', 'portrait');
+
+        // Render the PDF
+        $dompdf->render();
+
+        // Stream the PDF to the browser
+        return $dompdf->stream('ticket-' . $booking->booking_no . '.pdf', [
+            'Attachment' => 0 // 0 to view in browser, 1 to download
+        ]);
     }
 
     public function store(Request $request)
