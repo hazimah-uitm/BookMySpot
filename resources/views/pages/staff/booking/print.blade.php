@@ -6,9 +6,11 @@
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Booking Details</h4>
-            <p><strong>Booking Number:</strong> {{ $booking->booking_no }}</p>
-            <p><strong>Table:</strong> {{ $booking->table->name }}</p>
-            <p><strong>Date:</strong> {{ $booking->created_at->format('d-m-Y H:i') }}</p>
+            <p><strong>No. Tempahan:</strong> {{ $booking->booking_no }}</p>
+            <p><strong>Nama:</strong> {{ $booking->staff->name }}</p>
+            <p><strong>No. Pekerja:</strong> {{ $booking->staff->no_pekerja }}</p>
+            <p><strong>No. Meja:</strong> {{ $booking->table->table_no }}</p>
+            <p><strong>Tarikh Tempahan:</strong> {{ $booking->created_at->format('d-m-Y H:i') }}</p>
 
             <!-- Add any additional ticket details here -->
 

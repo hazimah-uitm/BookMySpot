@@ -79,7 +79,7 @@ class StaffBookingController extends Controller
         $staff->status = 'Booked';
         $staff->save();
 
-        return redirect()->route('staff.booking.form')->with('success', 'Booking successful');
+        return redirect()->route('staff.booking.print')->with('success', 'Booking successful');
     }
 
     protected function generateBookingNumber()
