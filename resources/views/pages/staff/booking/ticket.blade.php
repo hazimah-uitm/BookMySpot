@@ -10,7 +10,7 @@
                     <h1 class="text-center text-white mb-4">Tiket Tempahan</h1>
                     <div class="card bg-light text-dark">
                         <div class="card-body">
-                            <h4 class="card-title mb-4">Keterangan Tempahan</h4>
+                            <h4 class="card-title mb-4">Maklumat Tempahan</h4>
                             <p><strong>No. Tempahan:</strong> {{ $booking->booking_no }}</p>
                             <p><strong>Nama:</strong> {{ $booking->staff->name }}</p>
                             <p><strong>No. Pekerja:</strong> {{ $booking->staff->no_pekerja }}</p>

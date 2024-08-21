@@ -33,6 +33,7 @@ Route::get('staff/booking', 'StaffBookingController@showForm')->name('staff.book
 Route::post('staff/booking/check', 'StaffBookingController@checkStaffId')->name('staff.booking.check');
 Route::post('staff/booking/store', 'StaffBookingController@store')->name('staff.booking.store');
 Route::get('staff/booking/{id}/print', 'StaffBookingController@printTicket')->name('staff.booking.print');
+Route::get('staff/booking/view/{id}', 'StaffBookingController@show')->name('staff.booking.view');
 
 Route::middleware('auth')->group(function () {
 

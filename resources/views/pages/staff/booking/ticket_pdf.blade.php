@@ -23,7 +23,7 @@
 </head>
 <body>
     <div class="card">
-        <h4 class="card-title">Keterangan Tempahan</h4>
+        <h4 class="card-title">Maklumat Tempahan</h4>
         <p><strong>No. Tempahan:</strong> {{ $booking->booking_no }}</p>
         <p><strong>Nama:</strong> {{ $booking->staff->name }}</p>
         <p><strong>No. Pekerja:</strong> {{ $booking->staff->no_pekerja }}</p>

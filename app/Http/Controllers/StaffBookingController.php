@@ -63,30 +63,31 @@ class StaffBookingController extends Controller
             'staff_id' => 'required|exists:staff,id',
             'table_id' => 'required|exists:tables,id',
         ]);
-
+    
         $table = Table::findOrFail($request->input('table_id'));
-
+    
         if ($table->available_seat <= 0) {
             return redirect()->back()->withErrors(['table_id' => 'No seats available for this table'])->withInput();
         }
-
+    
         $booking = new Booking();
         $booking->booking_no = $this->generateBookingNumber();
         $booking->staff_id = $request->input('staff_id');
         $booking->table_id = $request->input('table_id');
-
+    
         $booking->save();
-
+    
         $table->available_seat -= 1;
         $table->status = $table->available_seat > 0 ? 'Available' : 'Booked';
         $table->save();
-
+    
         $staff = Staff::findOrFail($request->input('staff_id'));
         $staff->status = 'Booked';
         $staff->save();
-
-        return redirect()->route('staff.booking.print')->with('success', 'Booking successful');
+    
+        return redirect()->route('staff.booking.view', ['id' => $booking->id])->with('success', 'Booking successful');
     }
+    
 
     protected function generateBookingNumber()
     {
@@ -101,10 +102,10 @@ class StaffBookingController extends Controller
         return 'MG-' . str_pad($number, 4, '0', STR_PAD_LEFT);
     }
 
-    public function printBooking($id)
+    public function show($id)
     {
         $booking = Booking::findOrFail($id);
-        return view('pages.staff.booking.print', [
+        return view('pages.staff.booking.ticket', [
             'booking' => $booking,
         ]);
     }
