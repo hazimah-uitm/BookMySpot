@@ -26,7 +26,7 @@ class StaffBookingController extends Controller
         $staff = Staff::where('no_pekerja', $request->input('no_pekerja'))->firstOrFail();
     
         if ($staff->attendance === 'Hadir' && $staff->status === 'Belum Tempah') {
-            $tables = Table::orderBy('table_no', 'asc')->where('type', 'Open')->get(); // Fetch all tables
+            $tables = Table::orderBy('table_no', 'asc')->where('type', 'Terbuka')->get(); // Fetch all tables
             return view('pages.staff.booking.create', [
                 'staff' => $staff,
                 'tables' => $tables,
@@ -39,7 +39,7 @@ class StaffBookingController extends Controller
                 return redirect()->back()->withErrors(['no_pekerja' => 'Tiada tempahan untuk No. Pekerja tersebut.'])->withInput();
             }
     
-            $tables = Table::orderBy('table_no', 'asc')->where('type', 'Open')->get();
+            $tables = Table::orderBy('table_no', 'asc')->where('type', 'Terbuka')->get();
             return view('pages.staff.booking.ticket', [
                 'booking' => $booking,
                 'tables' => $tables, // Ensure $tables is passed here
@@ -129,7 +129,7 @@ class StaffBookingController extends Controller
     public function show($id)
     {
         $booking = Booking::findOrFail($id);
-        $tables = Table::orderBy('table_no', 'asc')->where('type', 'Open')->get();
+        $tables = Table::orderBy('table_no', 'asc')->where('type', 'Terbuka')->get();
         return view('pages.staff.booking.ticket', [
             'booking' => $booking,
             'tables' => $tables,

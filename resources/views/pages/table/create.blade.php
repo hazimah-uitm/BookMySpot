@@ -68,16 +68,16 @@
             <div class="mb-3">
                 <label for="type" class="form-label">Jenis Meja</label>
                 <div class="form-check">
-                    <input type="radio" id="reserved" name="type" value="Reserved"
-                        {{ old('type') == 'Reserved' ? 'checked' : '' }}
+                    <input type="radio" id="Ditempah" name="type" value="Ditempah"
+                        {{ old('type') == 'Ditempah' ? 'checked' : '' }}
                         required>
-                    <label class="form-check-label" for="reserved">Reserved</label>
+                    <label class="form-check-label" for="Ditempah">Ditempah</label>
                 </div>
                 <div class="form-check">
-                    <input type="radio" id="open" name="type" value="Open"
-                        {{ old('type') == 'Open' ? 'checked' : '' }}
+                    <input type="radio" id="Terbuka" name="type" value="Terbuka"
+                        {{ old('type') == 'Terbuka' ? 'checked' : '' }}
                         required>
-                    <label class="form-check-label" for="open">Open</label>
+                    <label class="form-check-label" for="Terbuka">Terbuka</label>
                 </div>
                 @if ($errors->has('type'))
                 <div class="invalid-feedback">

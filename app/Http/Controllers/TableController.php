@@ -33,7 +33,7 @@ class TableController extends Controller
             'table_no' => 'required|unique:tables,table_no',
             'total_seat' => 'required|integer',
             'available_seat' => 'required|integer',
-            'type' => 'required|in:Reserved,Open',
+            'type' => 'required|in:Ditempah,Terbuka',
             'status' => 'required|in:Available,Booked',
         ], [
             'table_no.required' => 'Sila isi No. Meja',
@@ -90,7 +90,7 @@ class TableController extends Controller
             'table_no' => 'required|unique:tables,table_no,' . $id,
             'total_seat' => 'required|integer',
             'available_seat' => 'required|integer',
-            'type' => 'required|in:Reserved,Open',
+            'type' => 'required|in:Ditempah,Terbuka',
             'status' => 'required|in:Available,Booked',
         ], [
             'table_no.required' => 'Sila isi No. Meja',
