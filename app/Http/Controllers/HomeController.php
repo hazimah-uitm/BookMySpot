@@ -29,7 +29,7 @@ class HomeController extends Controller
         $tables = Table::with('booking.staff')->paginate($perPage);
         
         // for not paginate
-        $tableList = Table::all();
+        $tableList = Table::orderBy('table_no', 'asc')->get();
 
         return view('home', [
             'tables' => $tables,

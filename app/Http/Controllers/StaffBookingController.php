@@ -26,7 +26,7 @@ class StaffBookingController extends Controller
         $staff = Staff::where('no_pekerja', $request->input('no_pekerja'))->firstOrFail();
     
         if ($staff->attendance === 'Hadir' && $staff->status === 'Pending') {
-            $tables = Table::all(); // Fetch all tables
+            $tables = Table::orderBy('table_no', 'asc')->get(); // Fetch all tables
             return view('pages.staff.booking.create', [
                 'staff' => $staff,
                 'tables' => $tables,
