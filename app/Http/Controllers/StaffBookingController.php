@@ -129,7 +129,7 @@ class StaffBookingController extends Controller
     public function show($id)
     {
         $booking = Booking::findOrFail($id);
-        $tables = Table::get();
+        $tables = Table::orderBy('table_no', 'asc')->get(); 
         return view('pages.staff.booking.ticket', [
             'booking' => $booking,
             'tables' => $tables,
