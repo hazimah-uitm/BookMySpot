@@ -58,7 +58,7 @@ class StaffController extends Controller
             'campus' => 'required',
             'club' => 'required|in:Ahli KEKiTA,Ahli PEWANI,Bukan Ahli  (Bayaran RM20 dikenakan)',
             'payment' => 'nullable',
-            'status' => 'required|in:Pending,Booked',
+            'status' => 'required|in:Belum Tempah,Selesai Tempah',
         ],[
             'email.unique' => 'Emel sudah wujud',
             'name.required' => 'Sila isi Nama',
@@ -112,7 +112,7 @@ class StaffController extends Controller
             'campus' => 'required',
             'club' => 'required|in:Ahli KEKiTA,Ahli PEWANI,Bukan Ahli  (Bayaran RM20 dikenakan)',
             'payment' => 'nullable',
-            'status' => 'required|in:Pending,Booked',
+            'status' => 'required|in:Belum Tempah,Selesai Tempah',
         ],[
             'email.unique' => 'Emel sudah wujud',
             'name.required' => 'Sila isi Nama',

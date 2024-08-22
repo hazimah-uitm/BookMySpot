@@ -24,7 +24,7 @@ class CreateStaffTable extends Migration
             $table->string('campus');
             $table->enum('club', ['Ahli KEKiTA', 'Ahli PEWANI', 'Bukan Ahli  (Bayaran RM20 dikenakan)']);
             $table->string('payment')->nullable();
-            $table->enum('status', ['Pending', 'Booked'])->default('Pending');
+            $table->enum('status', ['Belum Tempah', 'Selesai Tempah'])->default('Belum Tempah');
             $table->softDeletes();
             $table->timestamps();
         });

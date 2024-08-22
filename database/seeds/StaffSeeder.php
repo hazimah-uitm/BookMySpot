@@ -13,7 +13,7 @@ class StaffSeeder extends Seeder
      */
     public function run()
     {
-        // Create 5 staff members with "Pending" status
+        // Create 5 staff members with "Belum Tempah" status
         Staff::insert([
             [
                 'email' => 'example1@example.com',
@@ -25,7 +25,7 @@ class StaffSeeder extends Seeder
                 'campus' => 'Campus X',
                 'club' => 'Ahli KEKiTA',
                 'payment' => 'Paid',
-                'status' => 'Pending',
+                'status' => 'Belum Tempah',
             ],
             [
                 'email' => 'example2@example.com',
@@ -37,7 +37,7 @@ class StaffSeeder extends Seeder
                 'campus' => 'Campus X',
                 'club' => 'Ahli KEKiTA',
                 'payment' => 'Paid',
-                'status' => 'Pending',
+                'status' => 'Belum Tempah',
             ],
         ]);
     }

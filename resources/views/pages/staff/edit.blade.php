@@ -188,14 +188,12 @@
                 <div class="mb-3">
                     <label class="form-label">Status</label>
                     <div class="form-check">
-                        <input type="radio" id="pending" name="status" value="Pending"
-                            {{ old('status', $staff->status ?? '') == 'Pending' ? 'checked' : '' }} required>
-                        <label class="form-check-label" for="pending">Pending</label>
+                        <input type="radio" id="BelumTempah" name="status" value="Belum Tempah" checked>
+                        <label class="form-check-label" for="BelumTempah">Belum Tempah</label>
                     </div>
                     <div class="form-check">
-                        <input type="radio" id="booked" name="status" value="Booked"
-                            {{ old('status', $staff->status ?? '') == 'Booked' ? 'checked' : '' }} required>
-                        <label class="form-check-label" for="booked">Booked</label>
+                        <input type="radio" id="SelesaiTempah" name="status" value="Selesai Tempah">
+                        <label class="form-check-label" for="SelesaiTempah">Selesai Tempah</label>
                     </div>
                     @if ($errors->has('status'))
                         <div class="invalid-feedback">

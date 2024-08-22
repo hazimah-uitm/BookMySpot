@@ -25,7 +25,7 @@ class StaffImport implements ToModel, WithHeadingRow
             'campus'     => $row['campus'],
             'club'       => $row['club'],
             'payment' => $row['payment'] ?? null,
-            'status'     => $row['status'] ?? "Pending",
+            'status'     => $row['status'] ?? "Belum Tempah",
             'created_at' => $row['created_at'], // Ensure this matches your Excel file column
         ]);
     }

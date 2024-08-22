@@ -25,7 +25,7 @@ class StaffBookingController extends Controller
     
         $staff = Staff::where('no_pekerja', $request->input('no_pekerja'))->firstOrFail();
     
-        if ($staff->attendance === 'Hadir' && $staff->status === 'Pending') {
+        if ($staff->attendance === 'Hadir' && $staff->status === 'Belum Tempah') {
             $tables = Table::orderBy('table_no', 'asc')->where('type', 'Open')->get(); // Fetch all tables
             return view('pages.staff.booking.create', [
                 'staff' => $staff,
@@ -33,7 +33,7 @@ class StaffBookingController extends Controller
             ]);
         }
     
-        if ($staff->attendance === 'Hadir' && $staff->status === 'Booked') {
+        if ($staff->attendance === 'Hadir' && $staff->status === 'Selesai Tempah') {
             $booking = Booking::where('staff_id', $staff->id)->first();
             if (!$booking) {
                 return redirect()->back()->withErrors(['no_pekerja' => 'Tiada tempahan untuk No. Pekerja tersebut.'])->withInput();
@@ -106,7 +106,7 @@ class StaffBookingController extends Controller
         $table->save();
     
         $staff = Staff::findOrFail($request->input('staff_id'));
-        $staff->status = 'Booked';
+        $staff->status = 'Selesai Tempah';
         $staff->save();
     
         return redirect()->route('staff.booking.view', ['id' => $booking->id])->with('success', 'Tempahan berjaya dihantar!');

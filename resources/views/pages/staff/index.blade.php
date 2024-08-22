@@ -96,10 +96,10 @@
                                     <td>{{ $staff->attendance }}</td>
                                     <td>{{ $staff->campus }}</td>
                                     <td>
-                                        @if ($staff->status == 'Pending')
-                                            <span class="badge bg-warning">Pending</span>
+                                        @if ($staff->status == 'Belum Tempah')
+                                            <span class="badge bg-warning">Belum Tempah</span>
                                         @else
-                                            <span class="badge bg-success">Booked</span>
+                                            <span class="badge bg-success">Selesai Tempah</span>
                                         @endif
                                     </td>
                                     <td>

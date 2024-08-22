@@ -24,7 +24,7 @@ class BookingController extends Controller
     public function create()
     {
         $staffs = Staff::where('attendance', 'Hadir')
-            ->where('status', 'Pending')
+            ->where('status', 'Belum Tempah')
             ->get();
 
         $tables = Table::all();
@@ -64,7 +64,7 @@ class BookingController extends Controller
 
         // Update staff status to 'Booked'
         $staff = Staff::findOrFail($request->input('staff_id'));
-        $staff->status = 'Booked';
+        $staff->status = 'Selesai Tempah';
         $staff->save();
 
         return redirect()->route('booking')->with('success', 'Tempahan berjaya disimpan');
@@ -85,7 +85,7 @@ class BookingController extends Controller
         $currentStaffId = $booking->staff_id;
 
         $staffs = Staff::where('attendance', 'Hadir')
-            ->where('status', 'Pending')
+            ->where('status', 'Belum Tempah')
             ->where('id', '!=', $currentStaffId)
             ->get();
 
@@ -134,7 +134,7 @@ class BookingController extends Controller
 
         // Update staff status to 'Booked'
         $staff = Staff::findOrFail($request->input('staff_id'));
-        $staff->status = 'Booked';
+        $staff->status = 'Selesai Tempah';
         $staff->save();
 
         return redirect()->route('booking')->with('success', 'Tempahan berjaya dikemaskini');
