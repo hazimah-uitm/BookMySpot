@@ -66,6 +66,29 @@
             </div>
 
             <div class="mb-3">
+                <label for="type" class="form-label">Jenis Meja</label>
+                <div class="form-check">
+                    <input type="radio" id="reserved" name="type" value="Reserved"
+                        {{ old('type') == 'Reserved' ? 'checked' : '' }}
+                        required>
+                    <label class="form-check-label" for="reserved">Reserved</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" id="open" name="type" value="Open"
+                        {{ old('type') == 'Open' ? 'checked' : '' }}
+                        required>
+                    <label class="form-check-label" for="open">Open</label>
+                </div>
+                @if ($errors->has('type'))
+                <div class="invalid-feedback">
+                    @foreach ($errors->get('type') as $error)
+                    {{ $error }}
+                    @endforeach
+                </div>
+                @endif
+            </div>
+
+            <div class="mb-3">
                 <label for="status" class="form-label">Status</label>
                 <div class="form-check">
                     <input type="radio" id="available" name="status" value="Available"

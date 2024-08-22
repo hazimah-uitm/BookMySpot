@@ -44,7 +44,7 @@ class HomeController extends Controller
             ->paginate($perPage);
 
         // Fetch all tables for layout without pagination
-        $tableList = Table::orderBy('table_no', 'asc')->get();
+        $tableList = Table::orderBy('table_no', 'asc')->where('type', 'Open')->get();
 
         return view('home', [
             'tables' => $tables,

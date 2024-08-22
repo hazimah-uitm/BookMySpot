@@ -109,7 +109,7 @@ Route::middleware('auth')->group(function () {
     Route::get('table/create', 'TableController@create')->name('table.create');
     Route::post('table/store', 'TableController@store')->name('table.store');
     Route::get('table/{id}/edit', 'TableController@edit')->name('table.edit');
-    Route::post('table/{id}', 'TableController@update')->name('table.update');
+    Route::post('table/{id}/update', 'TableController@update')->name('table.update');
     Route::get('table/view/{id}', 'TableController@show')->name('table.show');
     Route::get('/table/search', 'TableController@search')->name('table.search');
     Route::delete('table/{id}', 'TableController@destroy')->name('table.destroy');

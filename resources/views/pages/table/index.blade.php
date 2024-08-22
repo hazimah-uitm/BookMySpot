@@ -57,6 +57,7 @@
                             <th>No. Meja</th>
                             <th>Jumlah Tempat Duduk</th>
                             <th>Jumlah Tempat Duduk Kosong</th>
+                            <th>Jenis Meja</th>
                             <th>Status</th>
                             <th>Tindakan</th>
                         </tr>
@@ -70,6 +71,7 @@
                                     <td>{{ $table->table_no }}</td>
                                     <td>{{ $table->total_seat }}</td>
                                     <td>{{ $table->available_seat }}</td>
+                                    <td>{{ $table->type }}</td>
                                     <td>
                                         @if ($table->status == 'Available')
                                             <span class="badge bg-success">Available</span>

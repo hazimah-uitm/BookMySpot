@@ -21,7 +21,7 @@
 
 <div class="card">
     <div class="card-body">
-        <form method="POST" action="{{ $save_route }}">
+        <form method="POST" action="{{ $save_route }}" enctype="multipart/form-data">
             {{ csrf_field() }}
 
             <div class="mb-3">
@@ -57,6 +57,29 @@
                 @if ($errors->has('available_seat'))
                 <div class="invalid-feedback">
                     @foreach ($errors->get('available_seat') as $error)
+                    {{ $error }}
+                    @endforeach
+                </div>
+                @endif
+            </div>
+
+            <div class="mb-3">
+                <label for="type" class="form-label">Jenis Meja</label>
+                <div class="form-check">
+                    <input type="radio" id="reserved" name="type" value="Reserved"
+                        {{ old('type', $table->type ?? '') == 'Reserved' ? 'checked' : '' }}
+                        required>
+                    <label class="form-check-label" for="reserved">Reserved</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" id="open" name="type" value="Open"
+                        {{ old('type', $table->type ?? '') == 'Open' ? 'checked' : '' }}
+                        required>
+                    <label class="form-check-label" for="open">Open</label>
+                </div>
+                @if ($errors->has('type'))
+                <div class="invalid-feedback">
+                    @foreach ($errors->get('status') as $error)
                     {{ $error }}
                     @endforeach
                 </div>
