@@ -30,107 +30,172 @@
                     <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}" id="name"
                         name="name" value="{{ old('name') }}">
                     @if ($errors->has('name'))
-                        <div class="invalid-feedback">Sila isi Nama Penuh</div>
+                        <div class="invalid-feedback">
+                            @foreach ($errors->get('name') as $error)
+                                {{ $error }}
+                            @endforeach
+                        </div>
                     @endif
                 </div>
 
                 <div class="mb-3">
                     <label for="no_pekerja" class="form-label">No. Pekerja</label>
-                    <input type="number" class="form-control {{ $errors->has('no_pekerja') ? 'is-invalid' : '' }}" id="no_pekerja"
-                        name="no_pekerja" value="{{ old('no_pekerja') }}">
+                    <input type="number" class="form-control {{ $errors->has('no_pekerja') ? 'is-invalid' : '' }}"
+                        id="no_pekerja" name="no_pekerja" value="{{ old('no_pekerja') }}">
                     @if ($errors->has('no_pekerja'))
-                        <div class="invalid-feedback">Sila isi No. Pekerja</div>
+                        <div class="invalid-feedback">
+                            @foreach ($errors->get('no_pekerja') as $error)
+                                {{ $error }}
+                            @endforeach
+                        </div>
                     @endif
                 </div>
 
                 <div class="mb-3">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" id="email"
-                        name="email" value="{{ old('email', $staff->email ?? '') }}">
+                    <label for="email" class="form-label">Alamat Emel</label>
+                    <input type="text" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
+                        id="email" name="email" value="{{ old('email') }}">
                     @if ($errors->has('email'))
-                        <div class="invalid-feedback">Sila isi Email</div>
+                        <div class="invalid-feedback">
+                            @foreach ($errors->get('email') as $error)
+                                {{ $error }}
+                            @endforeach
+                        </div>
                     @endif
                 </div>
 
                 <div class="mb-3">
-                    <label for="attendance" class="form-label">Kehadiran</label>
-                    <select class="form-select {{ $errors->has('attendance') ? 'is-invalid' : '' }}" id="attendance"
-                        name="attendance" required>
-                        <option value="">Pilih Kehadiran</option>
-                        <option value="Hadir" {{ old('attendance', $staff->attendance ?? '') == 'Hadir' ? 'selected' : '' }}>Hadir</option>
-                        <option value="Tidak Hadir" {{ old('attendance', $staff->attendance ?? '') == 'Tidak Hadir' ? 'selected' : '' }}>Tidak Hadir</option>
-                    </select>
+                    <label class="form-label">Kehadiran</label>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input {{ $errors->has('attendance') ? 'is-invalid' : '' }}"
+                            id="attendancePresent" name="attendance" value="Hadir"
+                            {{ old('attendance', $staff->attendance ?? '') == 'Hadir' ? 'checked' : '' }} required>
+                        <label class="form-check-label" for="attendancePresent">
+                            Hadir
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input {{ $errors->has('attendance') ? 'is-invalid' : '' }}"
+                            id="attendanceAbsent" name="attendance" value="Tidak Hadir"
+                            {{ old('attendance', $staff->attendance ?? '') == 'Tidak Hadir' ? 'checked' : '' }}>
+                        <label class="form-check-label" for="attendanceAbsent">
+                            Tidak Hadir
+                        </label>
+                    </div>
                     @if ($errors->has('attendance'))
-                        <div class="invalid-feedback">Sila pilih Kehadiran</div>
+                        <div class="invalid-feedback">
+                            @foreach ($errors->get('attendance') as $error)
+                                {{ $error }}
+                            @endforeach
+                        </div>
                     @endif
                 </div>
 
                 <div class="mb-3">
-                    <label for="category" class="form-label">Kategori</label>
-                    <select class="form-select {{ $errors->has('category') ? 'is-invalid' : '' }}" id="category"
-                        name="category" required>
-                        <option value="">Pilih Kategori</option>
-                        <option value="Staf Akademik" {{ old('category', $staff->category ?? '') == 'Staf Akademik' ? 'selected' : '' }}>Staf Akademik</option>
-                        <option value="Staf Pentadbiran" {{ old('category', $staff->category ?? '') == 'Staf Pentadbiran' ? 'selected' : '' }}>Staf Pentadbiran</option>
-                    </select>
+                    <label class="form-label">Kategori</label>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input {{ $errors->has('category') ? 'is-invalid' : '' }}"
+                            id="categoryAcademic" name="category" value="Staf Akademik"
+                            {{ old('category', $staff->category ?? '') == 'Staf Akademik' ? 'checked' : '' }} required>
+                        <label class="form-check-label" for="categoryAcademic">
+                            Staf Akademik
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input {{ $errors->has('category') ? 'is-invalid' : '' }}"
+                            id="categoryAdmin" name="category" value="Staf Pentadbiran"
+                            {{ old('category', $staff->category ?? '') == 'Staf Pentadbiran' ? 'checked' : '' }}>
+                        <label class="form-check-label" for="categoryAdmin">
+                            Staf Pentadbiran
+                        </label>
+                    </div>
                     @if ($errors->has('category'))
-                        <div class="invalid-feedback">Sila pilih Kategori</div>
+                        <div class="invalid-feedback">
+                            @foreach ($errors->get('category') as $error)
+                                {{ $error }}
+                            @endforeach
+                        </div>
                     @endif
                 </div>
 
                 <div class="mb-3">
                     <label for="department" class="form-label">Jabatan</label>
-                    <input type="text" class="form-control {{ $errors->has('department') ? 'is-invalid' : '' }}" id="department"
-                        name="department" value="{{ old('department', $staff->department ?? '') }}">
+                    <input type="text" class="form-control {{ $errors->has('department') ? 'is-invalid' : '' }}"
+                        id="department" name="department" value="{{ old('department', $staff->department ?? '') }}">
                     @if ($errors->has('department'))
-                        <div class="invalid-feedback">Sila isi Jabatan</div>
+                        <div class="invalid-feedback">
+                            @foreach ($errors->get('department') as $error)
+                                {{ $error }}
+                            @endforeach
+                        </div>
                     @endif
                 </div>
 
                 <div class="mb-3">
                     <label for="campus" class="form-label">Kampus</label>
-                    <input type="text" class="form-control {{ $errors->has('campus') ? 'is-invalid' : '' }}" id="campus"
-                        name="campus" value="{{ old('campus', $staff->campus ?? '') }}">
+                    <select class="form-select {{ $errors->has('campus') ? 'is-invalid' : '' }}" id="campus"
+                        name="campus">
+                        <option value="" disabled selected>Pilih Kampus</option>
+                        <option value="Kampus Samarahan"
+                            {{ old('campus', $staff->campus ?? '') == 'Kampus Samarahan' ? 'selected' : '' }}>
+                            Kampus Samarahan
+                        </option>
+                        <option value="Kampus Samarahan 2"
+                            {{ old('campus', $staff->campus ?? '') == 'Kampus Samarahan 2' ? 'selected' : '' }}>
+                            Kampus Samarahan 2
+                        </option>
+                        <option value="Kampus Mukah"
+                            {{ old('campus', $staff->campus ?? '') == 'Kampus Mukah' ? 'selected' : '' }}>
+                            Kampus Mukah
+                        </option>
+                    </select>
                     @if ($errors->has('campus'))
-                        <div class="invalid-feedback">Sila isi Kampus</div>
+                        <div class="invalid-feedback">
+                            @foreach ($errors->get('campus') as $error)
+                                {{ $error }}
+                            @endforeach
+                        </div>
                     @endif
                 </div>
 
                 <div class="mb-3">
-                    <label for="club" class="form-label">Kelab</label>
+                    <label for="club" class="form-label">Keahlian Kelab</label>
                     <select class="form-select {{ $errors->has('club') ? 'is-invalid' : '' }}" id="club"
                         name="club" required>
-                        <option value="">Pilih Kelab</option>
-                        <option value="Ahli KEKiTA" {{ old('club', $staff->club ?? '') == 'Ahli KEKiTA' ? 'selected' : '' }}>Ahli KEKiTA</option>
-                        <option value="Ahli PEWANI" {{ old('club', $staff->club ?? '') == 'Ahli PEWANI' ? 'selected' : '' }}>Ahli PEWANI</option>
-                        <option value="Bukan Ahli  (Bayaran RM20 dikenakan)" {{ old('club', $staff->club ?? '') == 'Bukan Ahli  (Bayaran RM20 dikenakan)' ? 'selected' : '' }}>Bukan Ahli  (Bayaran RM20 dikenakan)</option>
+                        <option value="">Pilih Keahlian Kelab</option>
+                        <option value="Ahli KEKiTA"
+                            {{ old('club', $staff->club ?? '') == 'Ahli KEKiTA' ? 'selected' : '' }}>Ahli KEKiTA</option>
+                        <option value="Ahli PEWANI"
+                            {{ old('club', $staff->club ?? '') == 'Ahli PEWANI' ? 'selected' : '' }}>Ahli PEWANI</option>
+                        <option value="Bukan Ahli  (Bayaran RM20 dikenakan)"
+                            {{ old('club', $staff->club ?? '') == 'Bukan Ahli  (Bayaran RM20 dikenakan)' ? 'selected' : '' }}>
+                            Bukan Ahli (Bayaran RM20 dikenakan)</option>
                     </select>
                     @if ($errors->has('club'))
-                        <div class="invalid-feedback">Sila pilih Kelab</div>
+                        <div class="invalid-feedback">
+                            @foreach ($errors->get('club') as $error)
+                                {{ $error }}
+                            @endforeach
+                        </div>
                     @endif
                 </div>
 
                 <div class="mb-3">
-                    <label for="payment" class="form-label">Bayaran</label>
-                    <input type="text" class="form-control {{ $errors->has('payment') ? 'is-invalid' : '' }}" id="payment"
-                        name="payment" value="{{ old('payment', $staff->payment ?? '') }}">
-                    @if ($errors->has('payment'))
-                        <div class="invalid-feedback">Sila isi Bayaran</div>
-                    @endif
+                    <label for="payment" class="form-label">Pautan Bayaran</label>
+                    <input type="text" class="form-control {{ $errors->has('payment') ? 'is-invalid' : '' }}"
+                        id="payment" name="payment" value="{{ old('payment', $staff->payment ?? '') }}">
                 </div>
 
                 <div class="mb-3">
                     <label for="status" class="form-label">Status</label>
                     <div class="form-check">
                         <input type="radio" id="pending" name="status" value="Pending"
-                            {{ old('status', $staff->status ?? '') == 'Pending' ? 'checked' : '' }}
-                            required>
+                            {{ old('status', $staff->status ?? '') == 'Pending' ? 'checked' : '' }} required>
                         <label class="form-check-label" for="pending">Pending</label>
                     </div>
                     <div class="form-check">
                         <input type="radio" id="booked" name="status" value="Booked"
-                            {{ old('status', $staff->status ?? '') == 'Booked' ? 'checked' : '' }}
-                            required>
+                            {{ old('status', $staff->status ?? '') == 'Booked' ? 'checked' : '' }} required>
                         <label class="form-check-label" for="booked">Booked</label>
                     </div>
                     @if ($errors->has('status'))

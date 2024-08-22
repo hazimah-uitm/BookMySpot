@@ -65,12 +65,10 @@
                         <button type="submit" class="btn btn-info ms-2">Import</button>
                     </form>
 
-                    @role('Superadmin')
-                        <!-- Tambah Button -->
-                        <a href="{{ route('staff.create') }}" class="btn btn-primary">
-                            Tambah Staf
-                        </a>
-                    @endrole
+                    <!-- Tambah Button -->
+                    <a href="{{ route('staff.create') }}" class="btn btn-primary">
+                        Tambah Staf
+                    </a>
                 </div>
             </div>
 
@@ -105,12 +103,10 @@
                                         @endif
                                     </td>
                                     <td>
-                                        @role('Superadmin')
-                                            <a href="{{ route('staff.edit', $staff->id) }}" class="btn btn-info btn-sm"
-                                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Kemaskini">
-                                                <i class="bx bxs-edit"></i>
-                                            </a>
-                                        @endrole
+                                        <a href="{{ route('staff.edit', $staff->id) }}" class="btn btn-info btn-sm"
+                                            data-bs-toggle="tooltip" data-bs-placement="bottom" title="Kemaskini">
+                                            <i class="bx bxs-edit"></i>
+                                        </a>
                                         <a href="{{ route('staff.show', $staff->id) }}" class="btn btn-primary btn-sm"
                                             data-bs-toggle="tooltip" data-bs-placement="bottom" title="Papar">
                                             <i class="bx bx-show"></i>

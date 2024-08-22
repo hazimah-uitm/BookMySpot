@@ -6,6 +6,7 @@ use App\Imports\StaffImport;
 use App\Models\Staff;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Validation\Rule;
 
 class StaffController extends Controller
 {
@@ -48,7 +49,7 @@ class StaffController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'email' => 'required',
+            'email' => 'required|unique:staff,email',
             'name' => 'required',
             'no_pekerja' => 'required|unique:staff,no_pekerja',
             'attendance' => 'required|in:Hadir,Tidak Hadir',
@@ -56,7 +57,18 @@ class StaffController extends Controller
             'department' => 'required',
             'campus' => 'required',
             'club' => 'required|in:Ahli KEKiTA,Ahli PEWANI,Bukan Ahli  (Bayaran RM20 dikenakan)',
+            'payment' => 'nullable',
             'status' => 'required|in:Pending,Booked',
+        ],[
+            'email.unique' => 'Emel sudah wujud',
+            'name.required' => 'Sila isi Nama',
+            'no_pekerja.unique' => 'No. Pekerja telah wujud',
+            'attendance.required' => 'Sila sahkan kehadiran',
+            'category.required' => 'Sila isi kategori staf',
+            'department.required' => 'Sila isi unit/bahagian staf',
+            'campus.required' => 'Sila isi kampus staf',
+            'club.required' => 'Sila isi keahlian kelab',
+            'status.required' => 'Sila pilih Status',
         ]);
 
         $staff = new Staff();
@@ -76,37 +88,53 @@ class StaffController extends Controller
         ]);
     }
 
-    public function edit(Request $request, $id)
+    public function edit($id)
     {
+        $staff = Staff::findOrFail($id);
+    
         return view('pages.staff.edit', [
+            'staff' => $staff,
             'save_route' => route('staff.update', $id),
-            'str_mode' => 'Kemas Kini',
-            'staff' => Staff::findOrFail($id),
+            'str_mode' => 'Kemaskini',
         ]);
     }
+    
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'email' => 'required',
+            'email' => ['required', Rule::unique('staff', 'email')->ignore($id)],
             'name' => 'required',
-            'no_pekerja' => 'required|unique:staff,no_pekerja,' . $id,
+            'no_pekerja' => ['required', Rule::unique('staff', 'no_pekerja')->ignore($id)],
             'attendance' => 'required|in:Hadir,Tidak Hadir',
             'category' => 'required|in:Staf Akademik,Staf Pentadbiran',
             'department' => 'required',
             'campus' => 'required',
             'club' => 'required|in:Ahli KEKiTA,Ahli PEWANI,Bukan Ahli  (Bayaran RM20 dikenakan)',
+            'payment' => 'nullable',
             'status' => 'required|in:Pending,Booked',
+        ],[
+            'email.unique' => 'Emel sudah wujud',
+            'name.required' => 'Sila isi Nama',
+            'no_pekerja.unique' => 'No. Pekerja telah wujud',
+            'attendance.required' => 'Sila sahkan kehadiran',
+            'category.required' => 'Sila isi kategori staf',
+            'department.required' => 'Sila isi unit/bahagian staf',
+            'campus.required' => 'Sila isi kampus staf',
+            'club.required' => 'Sila isi keahlian kelab',
+            'status.required' => 'Sila pilih Status',
         ]);
-
+    
+        // Find the staff record by ID
         $staff = Staff::findOrFail($id);
-
+    
+        // Update the staff record with new data
         $staff->fill($request->all());
         $staff->save();
-
-
-        return redirect()->route('staff')->with('success', 'Maklumat berjaya dikemaskini');
+    
+        return redirect()->route('staff')->with('success', 'Maklumat berjaya dikemas kini');
     }
+    
 
     public function search(Request $request)
     {
