@@ -27,7 +27,7 @@ class BookingController extends Controller
             ->where('status', 'Pending')
             ->get();
 
-        $tables = Table::where('status', 'available')->get();
+        $tables = Table::all();
         return view('pages.booking.create', [
             'save_route' => route('booking.store'),
             'str_mode' => 'Tambah',
