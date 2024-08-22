@@ -33,12 +33,14 @@ class TableController extends Controller
             'table_no' => 'required|unique:tables,table_no',
             'total_seat' => 'required|integer',
             'available_seat' => 'required|integer',
+            'type' => 'required|in:Reserved,Open',
             'status' => 'required|in:Available,Booked',
         ], [
             'table_no.required' => 'Sila isi No. Meja',
             'table_no.unique' => 'No. Meja telah wujud',
             'total_seat.required' => 'Sila isi Jumlah Tempat Duduk',
             'available_seat.required' => 'Sila isi Jumlah Tempat Duduk Kosong',
+            'type.required' => 'Sila pilih Jenis Meja',
             'status.required' => 'Sila pilih Status Meja',
         ]);
     
@@ -55,6 +57,7 @@ class TableController extends Controller
         $table->table_no = $table_no;
         $table->total_seat = $request->input('total_seat');
         $table->available_seat = $request->input('available_seat');
+        $table->type = $request->input('type');
         $table->status = $request->input('status');
 
         $table->save();
@@ -87,12 +90,14 @@ class TableController extends Controller
             'table_no' => 'required|unique:tables,table_no,' . $id,
             'total_seat' => 'required|integer',
             'available_seat' => 'required|integer',
+            'type' => 'required|in:Reserved,Open',
             'status' => 'required|in:Available,Booked',
         ], [
             'table_no.required' => 'Sila isi No. Meja',
             'table_no.unique' => 'No. Meja telah wujud',
             'total_seat.required' => 'Sila isi Jumlah Tempat Duduk',
             'available_seat.required' => 'Sila isi Jumlah Tempat Duduk Kosong',
+            'type.required' => 'Sila pilih Status Meja',
             'status.required' => 'Sila pilih Status Meja',
         ]);
     
@@ -114,6 +119,7 @@ class TableController extends Controller
         $table->table_no = $table_no;
         $table->total_seat = $request->input('total_seat');
         $table->available_seat = $request->input('available_seat');
+        $table->type = $request->input('type');
         $table->status = $request->input('status');
         $table->save();
     

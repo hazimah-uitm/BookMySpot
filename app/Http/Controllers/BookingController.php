@@ -82,25 +82,25 @@ class BookingController extends Controller
     public function edit(Request $request, $id)
     {
         $booking = Booking::findOrFail($id);
-        $currentStaffId = $booking->staff_id; 
-    
+        $currentStaffId = $booking->staff_id;
+
         $staffs = Staff::where('attendance', 'Hadir')
             ->where('status', 'Pending')
-            ->where('id', '!=', $currentStaffId) 
+            ->where('id', '!=', $currentStaffId)
             ->get();
-    
+
         $tables = Table::where('status', 'available')->get();
-    
+
         return view('pages.booking.edit', [
             'save_route' => route('booking.update', $id),
             'str_mode' => 'Kemas Kini',
             'booking' => $booking,
             'tables' => $tables,
             'staffs' => $staffs,
-            'currentStaffId' => $currentStaffId, 
+            'currentStaffId' => $currentStaffId,
         ]);
     }
-    
+
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -147,17 +147,26 @@ class BookingController extends Controller
         $search = $request->input('search');
         $perPage = $request->input('perPage', 10); // Default to 10 if not provided
 
-        if ($search) {
-            $bookingList = Booking::where('booking_no', 'LIKE', "%$search%")
-                ->latest()
-                ->paginate($perPage);
-        } else {
-            $bookingList = Booking::latest()->paginate($perPage);
-        }
+        $bookingList = Booking::with(['staff', 'table']) // Assuming relationships with 'Staff' and 'Table' models
+            ->where(function ($query) use ($search) {
+                if ($search) {
+                    $query->where('booking_no', 'LIKE', "%$search%")
+                        ->orWhereHas('table', function ($q) use ($search) {
+                            $q->where('table_no', 'LIKE', "%$search%");
+                        })
+                        ->orWhereHas('staff', function ($q) use ($search) {
+                            $q->where('name', 'LIKE', "%$search%")
+                                ->orWhere('no_pekerja', 'LIKE', "%$search%");
+                        });
+                }
+            })
+            ->latest()
+            ->paginate($perPage);
 
         return view('pages.booking.index', [
             'bookingList' => $bookingList,
             'perPage' => $perPage,
+            'search' => $search, // Include search value to keep it in the form
         ]);
     }
 

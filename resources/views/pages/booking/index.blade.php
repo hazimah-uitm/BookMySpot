@@ -38,24 +38,27 @@
                 <div class="position-relative">
                     <form action="{{ route('booking.search') }}" method="GET">
                         <div class="input-group">
-                            <input type="text" class="form-control search-input rounded" placeholder="Carian..."
-                                name="search">
-                            <span class="input-group-btn">
-                                <button type="submit" class="btn btn-primary search-button">
-                                    <i class="bx bx-search"></i>
-                                </button>
-                                <button type="reset" class="btn btn-secondary search-button">
-                                    <i class="bx bx-x"></i>
-                                </button>
-                            </span>
+                            <!-- Search Input Field -->
+                            <input type="text" class="form-control rounded" placeholder="Carian..." name="search"
+                                value="{{ request('search') }}">
+
+                            <!-- Search Button -->
+                            <button type="submit" class="btn btn-primary ms-1 rounded">
+                                <i class="bx bx-search"></i>
+                            </button>
+
+                            <!-- Reset Button -->
+                            <button type="reset" class="btn btn-secondary search-button ms-1">
+                                Reset
+                            </button>
                         </div>
                     </form>
                 </div>
                 <div class="ms-auto d-flex gap-2 align-items-center">
-                        <!-- Tambah Button -->
-                        <a href="{{ route('booking.create') }}" class="btn btn-primary">
-                            Tambah Tempahan
-                        </a>
+                    <!-- Tambah Button -->
+                    <a href="{{ route('booking.create') }}" class="btn btn-primary">
+                        Tambah Tempahan
+                    </a>
                 </div>
             </div>
 
@@ -79,9 +82,9 @@
                                     <td>{{ ($bookingList->currentPage() - 1) * $bookingList->perPage() + $loop->iteration }}
                                     </td>
                                     <td>{{ $booking->table->table_no }}</td>
-                                    <td>{{ $booking->booking_no }}</td>
                                     <td>{{ $booking->staff->name }}</td>
                                     <td>{{ $booking->staff->no_pekerja }}</td>
+                                    <td>{{ $booking->booking_no }}</td>
                                     <td>{{ $booking->created_at->format('d-m-Y H:i') }}</td>
                                     <td>
                                         @role('Superadmin')
@@ -89,10 +92,10 @@
                                                 data-bs-toggle="tooltip" data-bs-placement="bottom" title="Kemaskini">
                                                 <i class="bx bxs-edit"></i>
                                             </a>
-                                        <a href="{{ route('booking.show', $booking->id) }}" class="btn btn-primary btn-sm"
-                                            data-bs-toggle="tooltip" data-bs-placement="bottom" title="Papar">
-                                            <i class="bx bx-show"></i>
-                                        </a>
+                                            <a href="{{ route('booking.show', $booking->id) }}" class="btn btn-primary btn-sm"
+                                                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Papar">
+                                                <i class="bx bx-show"></i>
+                                            </a>
                                         @endrole
                                         <a type="button" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                             data-bs-title="Padam">

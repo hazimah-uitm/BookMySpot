@@ -25,6 +25,7 @@ class Table extends Model
         'table_no', 
         'total_seat',
         'available_seat',
+        'type',
         'status'
     ];
 

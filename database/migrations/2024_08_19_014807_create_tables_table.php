@@ -18,6 +18,7 @@ class CreateTablesTable extends Migration
             $table->string('table_no')->unique();
             $table->integer('total_seat');
             $table->integer('available_seat');
+            $table->enum('type', ['Reserved', 'Open'])->default('Open');
             $table->enum('status', ['Available', 'Booked'])->default('Available');
             $table->softDeletes();
             $table->timestamps();
