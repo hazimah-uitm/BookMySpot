@@ -26,7 +26,9 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $perPage = $request->input('perPage', 10);
-        $tables = Table::with('booking.staff')->paginate($perPage);
+        $tables = Table::with('booking.staff')
+            ->orderBy('table_no', 'asc') 
+            ->paginate($perPage);  
         
         // for not paginate
         $tableList = Table::orderBy('table_no', 'asc')->get();
