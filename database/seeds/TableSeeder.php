@@ -39,6 +39,7 @@ class TableSeeder extends Seeder
             ['table_no' => 'S9', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
             ['table_no' => 'S29', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
             ['table_no' => 'S22', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
+            ['table_no' => 'S1', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
             ['table_no' => 'S2', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
             ['table_no' => 'S3', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
             ['table_no' => 'A1', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
