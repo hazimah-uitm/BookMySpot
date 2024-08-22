@@ -110,7 +110,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                    <button type="button" id="confirmBooking" class="btn btn-primary">Tempah</button>
+                    <button type="button" id="confirmBooking" class="btn btn-primary">Hantar</button>
                 </div>
             </div>
         </div>

@@ -5,16 +5,6 @@ Email: codervent@gmail.com
 File: app.css
 */
 
-    .sticky-submit {
-        position: fixed;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        z-index: 1000;
-        width: calc(100% - 40px);
-        max-width: 600px;
-    }
-
 .hall-layout {
 	position: relative;
 }
@@ -42,6 +32,10 @@ File: app.css
 .table-round.bg-secondary {
 	background-color: #a6acaf !important;
 	cursor: not-allowed;
+}
+
+.table-round.bg-warning {
+	background-color: #f1c540 !important;
 }
 
 .selected {
