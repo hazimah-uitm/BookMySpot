@@ -74,6 +74,15 @@
     <script src="{{ asset('public/assets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
     <script src="{{ asset('public/assets/plugins/chartjs/chart.min.js') }}"></script>
     <script src="{{ asset('public/assets/js/index.js') }}"></script>
+    <!-- jQuery (needed for Select2) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Select2 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+
+    <!-- Select2 JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
     <!--app JS-->
     <script src="{{ asset('public/assets/js/app.js') }}"></script>
     <script>

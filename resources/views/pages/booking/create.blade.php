@@ -34,9 +34,9 @@
                 {{ csrf_field() }}
 
                 <div class="mb-3">
-                    <label for="staff_id" class="form-label">Pilih No. Meja</label>
-                    <select class="form-select {{ $errors->has('staff_id') ? 'is-invalid' : '' }}" id="staff_id"
-                        name="staff_id">
+                    <label for="staff_id" class="form-label">Pilih Staf</label>
+                    <select class="form-select select2 {{ $errors->has('staff_id') ? 'is-invalid' : '' }}"
+                        id="staff_id" name="staff_id">
                         <option value="">Sila pilih Staf</option>
                         @foreach ($staffs as $staff)
                             <option value="{{ $staff->id }}" {{ old('staff_id') == $staff->id ? 'selected' : '' }}>
@@ -45,14 +45,14 @@
                         @endforeach
                     </select>
                     @if ($errors->has('staff_id'))
-                        <div class="invalid-feedback">Sila pilih No. Meja</div>
+                        <div class="invalid-feedback">Sila pilih Staf</div>
                     @endif
                 </div>
 
                 <div class="mb-3">
                     <label for="table_id" class="form-label">Pilih No. Meja</label>
-                    <select class="form-select {{ $errors->has('table_id') ? 'is-invalid' : '' }}" id="table_id"
-                        name="table_id">
+                    <select class="form-select select2 {{ $errors->has('table_id') ? 'is-invalid' : '' }}"
+                        id="table_id" name="table_id">
                         <option value="">Sila pilih No. Meja</option>
                         @foreach ($tables as $table)
                             <option value="{{ $table->id }}" {{ old('table_id') == $table->id ? 'selected' : '' }}>
@@ -69,5 +69,15 @@
             </form>
         </div>
     </div>
-    <!-- End Page Wrapper -->
+
+    <!-- Initialize Select2 -->
+    <script>
+        $(document).ready(function() {
+            $('.select2').select2({
+                width: 'resolve', // Adjust width as needed
+                placeholder: 'Sila pilih',
+                allowClear: true
+            });
+        });
+    </script>
 @endsection
