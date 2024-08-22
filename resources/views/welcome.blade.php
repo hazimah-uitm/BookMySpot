@@ -19,7 +19,7 @@
                         {{ csrf_field() }}
                         <div class="form-group flex-grow-1 me-2">
                             <input type="number" class="form-control custom-placeholder"
-                                id="no_pekerja" name="no_pekerja" placeholder="Sila masukkan No. Pekerja"
+                                id="no_pekerja" name="no_pekerja" placeholder="Sila Masukkan No. Pekerja Anda"
                                 value="{{ old('no_pekerja') }}">
                         </div>
                         <button type="submit" class="btn btn-primary">Semak</button>

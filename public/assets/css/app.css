@@ -5,29 +5,75 @@ Email: codervent@gmail.com
 File: app.css
 */
 
+.hall-layout {
+	position: relative;
+}
+
+.stage 
+{
+	width: 100%;
+	padding: 2px 0;
+	margin-bottom: 20px;
+	font-size: 1rem;
+}
+
+.table-round {
+	border-radius: 50%;
+	height: 150px;
+	width: 150px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border: 2px solid white;
+	cursor: pointer;
+}
+
+.table-round.bg-secondary {
+	background-color: #a6acaf !important;
+	cursor: not-allowed;
+}
+
+.selected {
+	background-color: #f1c540 !important;
+	/* Yellow color */
+}
+
 .custom-placeholder::placeholder {
-    color: #b3bac0 !important; /* Solid black or any high-contrast color */
+	color: #84888f !important;
+	/* Solid black or any high-contrast color */
 	font-style: italic;
-    opacity: 1 !important; /* Ensure full opacity */
+	font-size: 15px;
+	opacity: 1 !important;
+	/* Ensure full opacity */
 }
 
 
 .banner-container {
-    position: relative;
-    width: 100%;
-    max-width: 720px; /* Match the banner width */
-    margin: 0 auto; /* Center align the container */
-    border-radius: 5px; /* Rounded corners for the container */
-    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Shadow for the container */
-    overflow: hidden; /* Ensure the image fits within the container */
+	position: relative;
+	width: 100%;
+	max-width: 720px;
+	/* Match the banner width */
+	margin: 0 auto;
+	/* Center align the container */
+	border-radius: 5px;
+	/* Rounded corners for the container */
+	box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+	/* Shadow for the container */
+	overflow: hidden;
+	/* Ensure the image fits within the container */
 }
 
 .banner-main {
-    width: 720px; /* Fixed width for the banner image */
-    height: auto; /* Maintain aspect ratio */
-    border-radius: 5px; /* Match image corners with the container */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for the image */
-    display: block;
+	width: 720px;
+	/* Fixed width for the banner image */
+	height: auto;
+	/* Maintain aspect ratio */
+	border-radius: 5px;
+	/* Match image corners with the container */
+	box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+	/* Shadow for the image */
+	display: block;
 }
 
 

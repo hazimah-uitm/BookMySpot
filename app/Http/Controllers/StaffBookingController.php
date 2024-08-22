@@ -19,8 +19,8 @@ class StaffBookingController extends Controller
         $request->validate([
             'no_pekerja' => 'required|exists:staff,no_pekerja',
         ], [
-            'no_pekerja.required' => 'No. Pekerja diperlukan.',
-            'no_pekerja.exists' => 'No. Pekerja yang dimasukkan tidak wujud dalam sistem.',
+            'no_pekerja.required' => 'Mohon isi No. Pekerja.',
+            'no_pekerja.exists' => 'Harap maaf. Anda tiada dalam senarai pengesahan RSVP.',
         ]);
     
         $staff = Staff::where('no_pekerja', $request->input('no_pekerja'))->firstOrFail();
@@ -47,7 +47,7 @@ class StaffBookingController extends Controller
         }
     
         // Handle all other cases where the staff cannot book or print
-        return redirect()->back()->withErrors(['no_pekerja' => 'No. Pekerja tidak sah untuk tempahan atau cetakan'])->withInput();
+        return redirect()->back()->withErrors(['no_pekerja' => 'Harap maaf. Status kehadiran RSVP anda adalah tidak hadir.'])->withInput();
     }    
     
     
