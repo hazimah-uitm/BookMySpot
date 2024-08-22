@@ -59,7 +59,7 @@
                                     <th>No Meja</th>
                                     <th>Jumlah Kerusi</th>
                                     <th>Kerusi Kosong</th>
-                                    <th>Tempahan</th>
+                                    <th>Senarai Staf</th>
                                 </tr>
                             </thead>
                             <tbody>
