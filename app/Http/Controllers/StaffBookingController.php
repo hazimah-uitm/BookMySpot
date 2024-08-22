@@ -82,7 +82,11 @@ class StaffBookingController extends Controller
         $request->validate([
             'staff_id' => 'required|exists:staff,id',
             'table_id' => 'required|exists:tables,id',
+        ], [
+            'table_id.required' => 'Sila pilih meja untuk tempahan.',
+            'table_id.exists' => 'Meja yang dipilih tidak wujud.',
         ]);
+        
     
         $table = Table::findOrFail($request->input('table_id'));
     

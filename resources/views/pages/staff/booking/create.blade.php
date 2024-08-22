@@ -10,8 +10,10 @@
                     <h2 class="text-center text-uppercase mb-4">Tempahan Meja</h2>
                     <div class="card bg-light text-dark">
                         <div class="card-body">
+                            <!-- Error message container -->
+                            <div id="formErrors" class="alert alert-danger mt-3" style="display: none;"></div>
                             <!-- Staff Details -->
-                            <form action="{{ route('staff.booking.store') }}" method="POST">
+                            <form id="bookingForm" action="{{ route('staff.booking.store') }}" method="POST">
                                 {{ csrf_field() }}
                                 <div class="mt-3">
                                     <table class="table table-borderless">
@@ -27,7 +29,7 @@
                                         </tbody>
                                     </table>
                                     <input type="hidden" name="staff_id" value="{{ $staff->id }}">
-
+                                    <button type="submit" class="btn btn-primary w-100 mt-2">Tempah</button>
                                     <div class="mt-4">
                                         <!-- Layout Plan Accordion -->
                                         <div class="accordion" id="layoutAccordion">
@@ -54,8 +56,8 @@
                                                 @foreach ($tables as $table)
                                                 <div class="col-6 col-md-4 col-lg-3 d-flex justify-content-center mb-4">
                                                     <div class="table-round p-3 
-                                                        @if ($table->available_seat > 0) bg-success
-                                                        @else bg-secondary text-light @endif"
+                            @if ($table->available_seat > 0) bg-success
+                            @else bg-secondary text-light @endif"
                                                         id="table-container-{{ $table->id }}">
 
                                                         @if ($table->available_seat > 0)
@@ -87,37 +89,51 @@
                                     <button type="submit" class="btn btn-primary w-100 mt-4">Tempah</button>
                                 </div>
                             </form>
-
-                            @if ($errors->any())
-                            <div class="alert alert-danger mt-3">
-                                {{ $errors->first('table_id') }}
-                            </div>
-                            @endif
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const radios = document.querySelectorAll('.table-radio');
-        radios.forEach(radio => {
-            radio.addEventListener('change', function() {
-                // Remove 'selected' class from all table containers
-                document.querySelectorAll('.table-round').forEach(container => {
-                    container.classList.remove('selected');
-                });
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('bookingForm');
+            const errorsContainer = document.getElementById('formErrors');
 
-                // Add 'selected' class to the container of the selected radio button
-                const selectedTable = document.getElementById('table-container-' + this.value);
-                if (selectedTable) {
-                    selectedTable.classList.add('selected');
+            form.addEventListener('submit', function(event) {
+                const selectedTable = document.querySelector('input[name="table_id"]:checked');
+
+                if (!selectedTable) {
+                    event.preventDefault(); // Prevent form submission
+                    errorsContainer.textContent = 'Sila pilih meja untuk tempahan.';
+                    errorsContainer.style.display = 'block';
+
+                    // Scroll to the top of the page
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth' // Smooth scrolling effect
+                    });
+                } else {
+                    errorsContainer.style.display = 'none'; // Hide errors if valid
                 }
             });
+
+            const radios = document.querySelectorAll('.table-radio');
+            radios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    // Remove 'selected' class from all table containers
+                    document.querySelectorAll('.table-round').forEach(container => {
+                        container.classList.remove('selected');
+                    });
+
+                    // Add 'selected' class to the container of the selected radio button
+                    const selectedTable = document.getElementById('table-container-' + this.value);
+                    if (selectedTable) {
+                        selectedTable.classList.add('selected');
+                    }
+                });
+            });
         });
-    });
-</script>
-@endsection
+    </script>
+    @endsection
