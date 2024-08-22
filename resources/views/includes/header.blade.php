@@ -22,6 +22,7 @@
                     </ul>
                 </li>
                 <hr style="margin-top: 5px; margin-bottom: 5px; border-color: #ccc;">
+                @role('Superadmin')
                 <li>
                     <a class="dropdown-item" href="{{ route('profile.show', ['id' => Auth::id()]) }}">
                         <i class='bx bx-user'></i> <span>Profil</span>
@@ -32,6 +33,7 @@
                         <i class='bx bx-lock'></i> <span>Tukar Kata Laluan</span>
                     </a>
                 </li>
+                @endrole
                 <li>
                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <i class='bx bx-log-out-circle'></i><span>Log Keluar</span>

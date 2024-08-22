@@ -12,18 +12,69 @@ class TableSeeder extends Seeder
      */
     public function run()
     {
-        $tables = [];
-
-        // Generate 60 tables with table numbers from T01 to T60
-        for ($i = 1; $i <= 60; $i++) {
-            $tableNo = sprintf('T%02d', $i); // Format table number with leading zeroes
-            $tables[] = [
-                'table_no' => $tableNo,
-                'total_seat' => 8,
-                'available_seat' => 8,
-                'status' => 'Available',
-            ];
-        }
+        $tables = [
+            ['table_no' => 'S23', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
+            ['table_no' => 'S16', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
+            ['table_no' => 'S10', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
+            ['table_no' => 'S4', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
+            ['table_no' => 'S24', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
+            ['table_no' => 'S17', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
+            ['table_no' => 'S11', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
+            ['table_no' => 'S5', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
+            ['table_no' => 'S25', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
+            ['table_no' => 'S18', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
+            ['table_no' => 'S12', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
+            ['table_no' => 'S6', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
+            ['table_no' => 'S26', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
+            ['table_no' => 'S19', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
+            ['table_no' => 'S13', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
+            ['table_no' => 'S7', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
+            ['table_no' => 'S27', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
+            ['table_no' => 'S20', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
+            ['table_no' => 'S14', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
+            ['table_no' => 'S8', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
+            ['table_no' => 'S28', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
+            ['table_no' => 'S21', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
+            ['table_no' => 'S15', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
+            ['table_no' => 'S9', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
+            ['table_no' => 'S29', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
+            ['table_no' => 'S22', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
+            ['table_no' => 'S1', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
+            ['table_no' => 'S2', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
+            ['table_no' => 'S3', 'total_seat' => 8, 'available_seat' => 8, 'status' => 'Available'],
+            ['table_no' => 'A1', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+            ['table_no' => 'A2', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+            ['table_no' => 'A3', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+            ['table_no' => 'PS2', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+            ['table_no' => 'G4', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+            ['table_no' => 'G3', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+            ['table_no' => 'PS1', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+            ['table_no' => 'G2', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+            ['table_no' => 'G1', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+            ['table_no' => 'P2', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+            ['table_no' => 'P1', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+            ['table_no' => 'D1', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+            ['table_no' => 'D2', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+            ['table_no' => 'VVIP', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+            ['table_no' => 'KK/PW/BDU', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+            ['table_no' => 'MEDIA', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+            ['table_no' => 'PROTOKOL', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+            ['table_no' => 'URUSETIA', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+            ['table_no' => 'AJK', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+            ['table_no' => 'A4', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+            ['table_no' => 'A5', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+            ['table_no' => 'G6', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+            ['table_no' => 'G5', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+            ['table_no' => 'A6', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+            ['table_no' => 'G8', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+            ['table_no' => 'G7', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+            ['table_no' => 'A7', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+            ['table_no' => 'A8', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+            ['table_no' => 'A9', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+            ['table_no' => 'AL1', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+            ['table_no' => 'AL2', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+            ['table_no' => 'AL3', 'total_seat' => 8, 'available_seat' => 0, 'status' => 'Booked'],
+        ];
 
         // Insert all tables into the database
         Table::insert($tables);
