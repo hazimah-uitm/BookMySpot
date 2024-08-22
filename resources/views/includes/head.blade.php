@@ -2,15 +2,15 @@
  <meta charset="utf-8">
  <meta name="viewport" content="width=device-width, initial-scale=1">
  <!--favicon-->
- <link rel="icon" href="{{ asset('assets/images/logo-icon.png') }}" type="image/png" />
+ <link rel="icon" href="{{ asset('public/assets/images/logo-icon.png') }}" type="image/png" />
  <!--plugins-->
- <link href="{{ asset('assets/plugins/metismenu/css/metisMenu.min.css') }}" rel="stylesheet" />
+ <link href="{{ asset('public/assets/plugins/metismenu/css/metisMenu.min.css') }}" rel="stylesheet" />
  <!-- loader-->
- <link href="{{ asset('assets/css/pace.min.css') }}" rel="stylesheet" />
- <script src="{{ asset('assets/js/pace.min.js') }}"></script>
+ <link href="{{ asset('public/assets/css/pace.min.css') }}" rel="stylesheet" />
+ <script src="{{ asset('public/assets/js/pace.min.js') }}"></script>
  <!-- Bootstrap CSS -->
- <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
- <link href="{{ asset('assets/css/bootstrap-extended.css') }}" rel="stylesheet">
+ <link href="{{ asset('public/assets/css/bootstrap.min.css') }}" rel="stylesheet">
+ <link href="{{ asset('public/assets/css/bootstrap-extended.css') }}" rel="stylesheet">
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
@@ -19,10 +19,10 @@
      rel="stylesheet">
      <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
- <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
- <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet">
+ <link href="{{ asset('public/assets/css/app.css') }}" rel="stylesheet">
+ <link href="{{ asset('public/assets/css/icons.css') }}" rel="stylesheet">
  <!-- Theme Style CSS -->
- <link rel="stylesheet" href="{{ asset('assets/css/semi-dark.css') }}" />
+ <link rel="stylesheet" href="{{ asset('public/assets/css/semi-dark.css') }}" />
  {{-- js --}}
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 

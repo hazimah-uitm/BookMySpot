@@ -25,30 +25,30 @@ class StaffBookingController extends Controller
     
         $staff = Staff::where('no_pekerja', $request->input('no_pekerja'))->firstOrFail();
     
-        // Check if the staff's attendance is 'Hadir' and status is 'Pending'
         if ($staff->attendance === 'Hadir' && $staff->status === 'Pending') {
-            $tables = Table::get();
+            $tables = Table::all(); // Fetch all tables
             return view('pages.staff.booking.create', [
                 'staff' => $staff,
                 'tables' => $tables,
             ]);
         }
-        
-        // Check if the staff's attendance is 'Hadir' and status is 'Booked'
+    
         if ($staff->attendance === 'Hadir' && $staff->status === 'Booked') {
             $booking = Booking::where('staff_id', $staff->id)->first();
             if (!$booking) {
                 return redirect()->back()->withErrors(['no_pekerja' => 'Tiada tempahan untuk No. Pekerja tersebut.'])->withInput();
             }
     
+            $tables = Table::all(); // Fetch all tables if needed
             return view('pages.staff.booking.ticket', [
                 'booking' => $booking,
+                'tables' => $tables, // Ensure $tables is passed here
             ]);
         }
     
-        // Handle all other cases where the staff cannot book or print
         return redirect()->back()->withErrors(['no_pekerja' => 'Harap maaf. Status kehadiran RSVP anda adalah tidak hadir.'])->withInput();
-    }    
+    }
+     
     
     
     public function printTicket($id)

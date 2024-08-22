@@ -31,7 +31,7 @@
                             </div>
                         </div>
                         <div class="col-md-6 col-xl-5">
-                            <img src="/assets/images/errors-images/404-error.png" class="img-fluid mx-auto d-block" alt="404 Error">
+                            <img src="/public/assets/images/errors-images/404-error.png" class="img-fluid mx-auto d-block" alt="404 Error">
                         </div>
                     </div>
                     <!--end row-->
@@ -41,7 +41,7 @@
     </div>
     <!-- end wrapper -->
     <!-- Bootstrap JS -->
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="public/assets/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

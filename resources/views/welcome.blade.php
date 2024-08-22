@@ -9,7 +9,7 @@
                 <!-- Banner Container -->
                 <div class="d-flex align-items-center justify-content-center flex-column flex-md-row mb-4 position-relative">
                     <div class="banner-container">
-                        <img src="{{ asset('assets/images/banner.png') }}" class="banner-main img-fluid rounded" alt="banner">
+                        <img src="{{ asset('public/assets/images/banner.png') }}" class="banner-main img-fluid rounded" alt="banner">
                     </div>
                 </div>
             </div>

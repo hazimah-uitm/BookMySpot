@@ -64,12 +64,12 @@
     @yield('content')
     <!--end wrapper-->
     <!-- Bootstrap JS -->
-    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('public/assets/js/bootstrap.bundle.min.js') }}"></script>
     <!--plugins-->
-    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/simplebar/js/simplebar.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
+    <script src="{{ asset('public/assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('public/assets/plugins/simplebar/js/simplebar.min.js') }}"></script>
+    <script src="{{ asset('public/assets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
+    <script src="{{ asset('public/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
     <!--Password show & hide js -->
     <script>
         $(document).ready(function() {
@@ -109,7 +109,7 @@
             ' <a href="https://sarawak.uitm.edu.my/" target="_blank">UiTM Cawangan Sarawak</a>.';
     </script>
     <!--app JS-->
-    <script src="{{ asset('assets/js/app.js') }}"></script>
+    <script src="{{ asset('public/assets/js/app.js') }}"></script>
 </body>
 
 </html>

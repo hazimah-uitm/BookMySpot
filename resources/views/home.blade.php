@@ -16,7 +16,7 @@
                                 </h4>
                                 <div id="collapseLayout" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#layoutAccordion">
                                     <div class="accordion-body">
-                                        <img src="{{ asset('assets/images/layout.jpg') }}" alt="Pelan Meja" class="img-fluid">
+                                        <img src="{{ asset('public/assets/images/layout.jpg') }}" alt="Pelan Meja" class="img-fluid">
                                     </div>
                                 </div>
                             </div>

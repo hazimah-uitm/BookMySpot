@@ -67,15 +67,15 @@
     <!--end wrapper-->
 
     <!-- Bootstrap JS -->
-    <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('public/assets/js/bootstrap.bundle.min.js') }}"></script>
     <!--plugins-->
-    <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('public/assets/js/jquery.min.js') }}"></script>
 
-    <script src="{{ asset('assets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
-    <script src="{{ asset('assets/plugins/chartjs/chart.min.js') }}"></script>
-    <script src="{{ asset('assets/js/index.js') }}"></script>
+    <script src="{{ asset('public/assets/plugins/metismenu/js/metisMenu.min.js') }}"></script>
+    <script src="{{ asset('public/assets/plugins/chartjs/chart.min.js') }}"></script>
+    <script src="{{ asset('public/assets/js/index.js') }}"></script>
     <!--app JS-->
-    <script src="{{ asset('assets/js/app.js') }}"></script>
+    <script src="{{ asset('public/assets/js/app.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Get the toggle icon element

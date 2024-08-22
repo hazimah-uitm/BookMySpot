@@ -3,7 +3,7 @@
 
 <head>
     <title>Tiket Tempahan Meja</title>
-    <link rel="icon" href="{{ asset('assets/images/logo-icon.png') }}" type="image/png" />
+    <link rel="icon" href="{{ asset('public/assets/images/logo-icon.png') }}" type="image/png" />
     <style>
         body {
             font-family: Arial, sans-serif;
