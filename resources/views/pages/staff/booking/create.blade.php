@@ -29,7 +29,6 @@
                                         </tbody>
                                     </table>
                                     <input type="hidden" name="staff_id" value="{{ $staff->id }}">
-                                    <button type="submit" class="btn btn-primary w-100 mt-2">Tempah</button>
                                     <div class="mt-4">
                                         <!-- Layout Plan Accordion -->
                                         <div class="accordion" id="layoutAccordion">
@@ -86,7 +85,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary w-100 mt-4">Tempah</button>
                                 </div>
                             </form>
                         </div>
@@ -96,44 +94,82 @@
         </div>
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('bookingForm');
-            const errorsContainer = document.getElementById('formErrors');
+    <!-- Confirmation Modal -->
+    <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bookingModalLabel">Sahkan Tempahan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Anda telah memilih meja <strong><span id="selectedTableNo"></span></strong>. Adakah anda pasti untuk memilih No. Meja ini?</p>
+                    <div class="alert alert-info mt-4">
+                        <strong>Nota:</strong> Segala tempahan yang telah dihantar tidak boleh dikemaskini.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" id="confirmBooking" class="btn btn-primary">Tempah</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-            form.addEventListener('submit', function(event) {
-                const selectedTable = document.querySelector('input[name="table_id"]:checked');
+</div>
 
-                if (!selectedTable) {
-                    event.preventDefault(); // Prevent form submission
-                    errorsContainer.textContent = 'Sila pilih meja untuk tempahan.';
-                    errorsContainer.style.display = 'block';
+<!-- JavaScript for handling table selection and confirmation -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('bookingForm');
+        const errorsContainer = document.getElementById('formErrors');
+        const bookingModal = new bootstrap.Modal(document.getElementById('bookingModal'));
+        const selectedTableNo = document.getElementById('selectedTableNo');
+        const confirmBookingButton = document.getElementById('confirmBooking');
 
-                    // Scroll to the top of the page
-                    window.scrollTo({
-                        top: 0,
-                        behavior: 'smooth' // Smooth scrolling effect
-                    });
-                } else {
-                    errorsContainer.style.display = 'none'; // Hide errors if valid
-                }
-            });
+        form.addEventListener('submit', function(event) {
+            const selectedTable = document.querySelector('input[name="table_id"]:checked');
 
-            const radios = document.querySelectorAll('.table-radio');
-            radios.forEach(radio => {
-                radio.addEventListener('change', function() {
-                    // Remove 'selected' class from all table containers
-                    document.querySelectorAll('.table-round').forEach(container => {
-                        container.classList.remove('selected');
-                    });
+            if (!selectedTable) {
+                event.preventDefault(); // Prevent form submission
+                errorsContainer.textContent = 'Sila pilih meja untuk tempahan.';
+                errorsContainer.style.display = 'block';
 
-                    // Add 'selected' class to the container of the selected radio button
-                    const selectedTable = document.getElementById('table-container-' + this.value);
-                    if (selectedTable) {
-                        selectedTable.classList.add('selected');
-                    }
+                // Scroll to the top of the page
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth' // Smooth scrolling effect
                 });
+            } else {
+                errorsContainer.style.display = 'none'; // Hide errors if valid
+                selectedTableNo.textContent = selectedTable.nextElementSibling.textContent; // Display selected table number
+                bookingModal.show(); // Show confirmation modal
+                event.preventDefault(); // Prevent form submission until confirmation
+            }
+        });
+
+        confirmBookingButton.addEventListener('click', function() {
+            form.submit(); // Submit the form
+        });
+
+        const radios = document.querySelectorAll('.table-radio');
+        radios.forEach(radio => {
+            radio.addEventListener('change', function() {
+                // Remove 'selected' class from all table containers
+                document.querySelectorAll('.table-round').forEach(container => {
+                    container.classList.remove('selected');
+                });
+
+                // Add 'selected' class to the container of the selected radio button
+                const selectedTable = document.getElementById('table-container-' + this.value);
+                if (selectedTable) {
+                    selectedTable.classList.add('selected');
+                }
+
+                // Trigger the form submission process
+                form.dispatchEvent(new Event('submit'));
             });
         });
-    </script>
-    @endsection
+    });
+</script>
+@endsection
