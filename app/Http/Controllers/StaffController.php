@@ -116,6 +116,8 @@ class StaffController extends Controller
         if ($search) {
             $staffList = Staff::where('name', 'LIKE', "%$search%")
                 ->orWhere('no_pekerja', 'LIKE', "%$search%")
+                ->orWhere('attendance', 'LIKE', "%$search%")
+                ->orWhere('campus', 'LIKE', "%$search%")
                 ->latest()
                 ->paginate($perPage);
         } else {
