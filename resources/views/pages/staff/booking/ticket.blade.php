@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-12 col-md-8 col-lg-6">
-                    <h1 class="text-center text-white mb-4">Tiket Tempahan</h1>
+                <h2 class="text-center text-uppercase mb-4">Maklumat Tempahan Meja</h2>
                     <div class="card bg-light text-dark shadow-sm">
                         <div class="card-body">
                             <table class="table table-borderless">
@@ -33,7 +33,7 @@
                                 </tr>
                             </table>
                             <div class="alert alert-info mt-4">
-                                <strong>Nota:</strong> Sila tunjuk tiket ini kepada urusetia semasa datang ke Malam Gala Dinner.
+                                <strong>Nota:</strong> Sila tunjukkan tiket ini kepada urusetia ketika hadir ke Malam Gala.
                             </div>
                             <div class="text-center">
                                 <a href="{{ route('staff.booking.print', $booking->id) }}" class="btn btn-primary mt-3" target="_blank">

@@ -5,15 +5,40 @@ Email: codervent@gmail.com
 File: app.css
 */
 
+.custom-placeholder::placeholder {
+    color: #b3bac0 !important; /* Solid black or any high-contrast color */
+	font-style: italic;
+    opacity: 1 !important; /* Ensure full opacity */
+}
+
+
+.banner-container {
+    position: relative;
+    width: 100%;
+    max-width: 720px; /* Match the banner width */
+    margin: 0 auto; /* Center align the container */
+    border-radius: 5px; /* Rounded corners for the container */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Shadow for the container */
+    overflow: hidden; /* Ensure the image fits within the container */
+}
+
+.banner-main {
+    width: 720px; /* Fixed width for the banner image */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 5px; /* Match image corners with the container */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for the image */
+    display: block;
+}
+
 
 .pagination-wrapper .pagination {
-    margin-bottom: 0;
-    justify-content: flex-end;
+	margin-bottom: 0;
+	justify-content: flex-end;
 }
 
 .pagination-wrapper {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 
@@ -56,7 +81,7 @@ a {
 /* Media query to adjust padding for smaller screens if needed */
 @media (max-width: 768px) {
 	.wrapper-main {
-		padding-top: 1rem;
+		padding-top: 3rem;
 		/* You may need more padding on smaller screens */
 	}
 }
@@ -94,26 +119,21 @@ a {
 	width: 30px
 }
 
-.banner-main {
-	width: 700px
-}
-
 .logo-text {
-    font-size: 20px;
-    margin-left: 10px;
-    margin-top: 0px;
-    margin-bottom: 0;
-    letter-spacing: 3px;
+	font-size: 14px;
+	margin-left: 10px;
+	margin-top: 0px;
+	margin-bottom: 0;
 	color: #fff
 }
 
 .logo-subtitle {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 400;
-    font-size: 15px;
-    margin-left: 10px;
-    margin-top: 2px;
-    color: #fff;
+	font-family: 'Poppins', sans-serif;
+	font-weight: 400;
+	font-size: 15px;
+	margin-left: 10px;
+	margin-top: 2px;
+	color: #fff;
 }
 
 .logo-icon-login {
@@ -127,21 +147,20 @@ a {
 }
 
 .logo-text-login {
-	font-size: 30px;
-	margin-left: 8px;
+	font-size: 25px;
+	margin-left: 0px;
 	margin-top: 0;
 	margin-bottom: 0;
-	letter-spacing: 10px;
-	color: #fff;
+	color: #000;
 }
 
 .logo-subtitle-login {
 	font-family: 'Poppins', sans-serif;
-	font-weight: 400;
-	font-size: 10.5px;
+	font-weight: bold;
+	font-size: 12px;
 	margin-left: 0;
 	margin-top: 5px;
-	color: #fff;
+	color: #302f2f;
 }
 
 .toggle-icon {
@@ -683,30 +702,6 @@ a {
 	box-shadow: 0 .125rem .25rem rgba(0, 0, 0, .075) !important
 }
 
-/* .bg-login {
-	background-image: url(../images/login-images/login-bg.jpg);
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-attachment: fixed
-}
-
-.bg-login::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.75);
-    z-index: 1; 
-}
-
-.bg-login>* {
-	position: relative;
-	z-index: 2;
-} */
-
 .bg-forgot {
 	background-image: url(../images/login-images/bg-forgot-password.jpg);
 	background-size: cover;
@@ -832,30 +827,52 @@ input.search-control-2::placeholder {
 	display: none
 }
 
+/* navbar welcome */
 .custom-navbar {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	background-color: rgba(255, 255, 255, 0.5) !important;
-	/* Semi-transparent dark background */
-	z-index: 1050;
-	/* Lower z-index for navbar */
-	padding: 0.3rem;
+	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.navbar-nav .nav-link {
-	color: #000000;
-	padding: 0 0.5rem;
-	font-size: 0.875rem;
-	text-decoration: none;
-	transition: color 0.3s;
+.navbar-brand {
+	font-weight: bold;
 }
 
-.navbar-nav .nav-link:hover {
-	color: #b7b9bf;
+/* Style for the nav links */
+.nav-link {
+	color: #555 !important;
+	font-weight: 500;
+	transition: color 0.3s ease, background-color 0.3s ease;
+	padding: 8px 16px;
+	border-radius: 4px;
 	text-decoration: none;
 }
+
+/* Hover effect for nav links */
+.nav-link:hover {
+	color: #007bff !important;
+}
+
+/* Style for the active nav link */
+.nav-link.active {
+	color: #fff !important;
+	background-color: #007bff;
+}
+
+.navbar-toggler {
+	border: none;
+}
+
+.navbar-toggler:focus {
+	outline: none;
+	box-shadow: none;
+}
+
+.navbar-toggler-icon {
+	background-image: url("data:image/svg+xml;charset=UTF8,%3Csvg viewBox='0 0 16 16' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 1)' stroke-width='1.5' d='M1 2.5h14M1 8h14M1 13.5h14'/%3E%3C/svg%3E");
+	width: 20px;
+	height: 20px;
+}
+
+/* navbar welcome */
 
 #floating-success-message {
 	position: fixed;

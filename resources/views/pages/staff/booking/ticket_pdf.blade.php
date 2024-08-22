@@ -79,7 +79,7 @@
             </tr>
         </table>
         <div class="note">
-            <p><strong>Nota:</strong> Sila tunjuk tiket ini kepada urusetia semasa datang ke Malam Gala Dinner.</p>
+            <p><strong>Nota:</strong> Sila tunjukkan tiket ini kepada urusetia ketika hadir ke Malam Gala.</p>
         </div>
     </div>
 </body>

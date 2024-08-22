@@ -2,25 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--favicon-->
-    <link rel="icon" href="{{ asset('assets/images/uitm-favicon.png') }}" type="image/png" />
-    <!--plugins-->
-    <link href="{{ asset('assets/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
-    <link href="{{ asset('assets/plugins/metismenu/css/metisMenu.min.css') }}" rel="stylesheet" />
-    <!-- loader-->
-    <link href="{{ asset('assets/css/pace.min.css') }}" rel="stylesheet" />
-    <script src="{{ asset('assets/js/pace.min.js') }}"></script>
-    <!-- Bootstrap CSS -->
-    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/bootstrap-extended.css') }}" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
-    <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet">
-    <title>{{ config('app.name') }}</title>
+    @include('includes.head')
 </head>
 
 <body class="bg-login">
@@ -28,7 +10,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top custom-navbar">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">Tempahan Meja Malam Gala</a>
+            <a class="navbar-brand fs-6 fs-sm-5 fs-md-4 fs-lg-2 text-uppercase" href="{{ url('/') }}">Tempahan Meja Malam Gala</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -37,18 +19,18 @@
                 <ul class="navbar-nav ms-auto">
                     @guest
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Admin Login</a>
+                        <a class="nav-link text-uppercase" href="{{ route('login') }}">Log Masuk Admin</a>
                     </li>
                     @else
                     <li class="nav-item">
                         <form action="{{ route('home') }}" method="get" class="d-inline">
-                            <button type="submit" class="nav-link btn btn-link">Dashboard</button>
+                            <button type="submit" class="nav-link btn btn-link text-uppercase">Dashboard</button>
                         </form>
                     </li>
                     <li class="nav-item">
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-inline">
                             {{ csrf_field() }}
-                            <button type="submit" class="nav-link btn btn-link">Logout</button>
+                            <button type="submit" class="nav-link btn btn-link text-uppercase">Log Keluar</button>
                         </form>
                     </li>
                     @endguest
@@ -117,6 +99,14 @@
                 $('#show_hide_password_confirm i').addClass("bx-show");
             }
         });
+    </script>
+     <script>
+        // Get the current year
+        var currentYear = new Date().getFullYear();
+
+        // Update the content of the element with the current year
+        document.getElementById("copyright").innerHTML = 'Copyright © ' + currentYear +
+            ' <a href="https://sarawak.uitm.edu.my/" target="_blank">UiTM Cawangan Sarawak</a>.';
     </script>
     <!--app JS-->
     <script src="{{ asset('assets/js/app.js') }}"></script>

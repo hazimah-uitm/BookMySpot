@@ -17,6 +17,8 @@
  <link
      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=M+PLUS+Code+Latin:wght@100..700&family=Teko:wght@300..700&display=swap"
      rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
  <link href="{{ asset('assets/css/app.css') }}" rel="stylesheet">
  <link href="{{ asset('assets/css/icons.css') }}" rel="stylesheet">
  <!-- Theme Style CSS -->

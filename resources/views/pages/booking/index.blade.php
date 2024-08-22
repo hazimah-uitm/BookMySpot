@@ -64,10 +64,11 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>No. Tempahan</th>
+                            <th>No. Meja</th>
                             <th>Nama</th>
                             <th>No. Pekerja</th>
-                            <th>No. Meja</th>
+                            <th>No. Tempahan</th>
+                            <th>Tarikh Tempahan</th>
                             <th>Tindakan</th>
                         </tr>
                     </thead>
@@ -77,21 +78,22 @@
                                 <tr>
                                     <td>{{ ($bookingList->currentPage() - 1) * $bookingList->perPage() + $loop->iteration }}
                                     </td>
+                                    <td>{{ $booking->table->table_no }}</td>
                                     <td>{{ $booking->booking_no }}</td>
                                     <td>{{ $booking->staff->name }}</td>
                                     <td>{{ $booking->staff->no_pekerja }}</td>
-                                    <td>{{ $booking->table->table_no }}</td>
+                                    <td>{{ $booking->created_at->format('d-m-Y H:i') }}</td>
                                     <td>
                                         @role('Superadmin')
                                             <a href="{{ route('booking.edit', $booking->id) }}" class="btn btn-info btn-sm"
                                                 data-bs-toggle="tooltip" data-bs-placement="bottom" title="Kemaskini">
                                                 <i class="bx bxs-edit"></i>
                                             </a>
-                                        @endrole
                                         <a href="{{ route('booking.show', $booking->id) }}" class="btn btn-primary btn-sm"
                                             data-bs-toggle="tooltip" data-bs-placement="bottom" title="Papar">
                                             <i class="bx bx-show"></i>
                                         </a>
+                                        @endrole
                                         <a type="button" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                             data-bs-title="Padam">
                                             <span class="btn btn-danger btn-sm" data-bs-toggle="modal"

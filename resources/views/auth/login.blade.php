@@ -9,8 +9,8 @@
                 <div class="d-flex align-items-center justify-content-center flex-column flex-md-row mb-4">
                     <img src="{{ asset('assets/images/putih.png') }}" class="logo-icon-login" alt="logo icon">
                     <div class="ms-3">
-                        <h4 class="logo-text-login mb-0">Tempahan Meja</h4>
-                        <h6 class="logo-subtitle-login mb-0">Malam Gala Sempena Sambutan 25 Tahun UiTM Sebagai Sebuah Universiti</h6>
+                        <h4 class="logo-text-login mb-0 text-uppercase">Tempahan Meja Malam Gala</h4>
+                        <h6 class="logo-subtitle-login mb-0">Sempena Sambutan 25 Tahun UiTM Sebagai Sebuah Universiti</h6>
                     </div>
                 </div>
             </div>
