@@ -26,7 +26,7 @@
                     <tr>
                         <th>No. Meja</th>
                         <th>Jumlah Tempat Duduk</th>
-                        <th>Jumlah Tempat Duduk Available</th>
+                        <th>Jumlah Tempat Duduk Kosonge</th>
                         <th>Status</th>
                         <th>Tindakan</th>
                     </tr>
@@ -39,10 +39,10 @@
                         <td>{{ $table->total_seat }}</td>
                         <td>{{ $table->available_seat }}</td>
                         <td>
-                            @if ($table->status == 'Available')
-                            <span class="badge bg-success">Available</span>
+                            @if ($table->status == 'Tersedia')
+                            <span class="badge bg-success">Tersedia</span>
                             @else
-                            <span class="badge bg-warning">Booked</span>
+                            <span class="badge bg-warning">Penuh</span>
                             @endif
                         </td>
                         <td>

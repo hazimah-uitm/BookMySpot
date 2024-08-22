@@ -66,9 +66,9 @@
                             <th>Bukti Pembayaran</th>
                             <td>
                                 @if ($staff->payment)
-                                    <a href="{{ $staff->payment }}" target="_blank">Lihat Bukti Pembayaran</a>
+                                    <a href="{{ $staff->payment }}" target="_blank">Papar Bukti Pembayaran</a>
                                 @else
-                                    Tiada bukti pembayaran.
+                                    -
                                 @endif
                             </td>
                         </tr>

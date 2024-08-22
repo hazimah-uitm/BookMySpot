@@ -73,10 +73,10 @@
                                     <td>{{ $table->available_seat }}</td>
                                     <td>{{ $table->type }}</td>
                                     <td>
-                                        @if ($table->status == 'Available')
-                                            <span class="badge bg-success">Available</span>
+                                        @if ($table->status == 'Tersedia')
+                                            <span class="badge bg-success">Tersedia</span>
                                         @else
-                                            <span class="badge bg-warning">Booked</span>
+                                            <span class="badge bg-warning">Penuh</span>
                                         @endif
                                     </td>
                                     <td>

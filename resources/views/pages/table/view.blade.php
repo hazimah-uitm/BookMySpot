@@ -39,7 +39,7 @@
                         <td>{{ $table->total_seat }}</td>
                     </tr>
                     <tr>
-                        <th>Jumlah Tempat Duduk Available</th>
+                        <th>Jumlah Tempat Duduk Kosong</th>
                         <td>{{ $table->available_seat }}</td>
                     </tr>
                     <tr>

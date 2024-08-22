@@ -59,10 +59,10 @@ class BookingController extends Controller
 
         // Update the table's available seats
         $table->available_seat -= 1;
-        $table->status = $table->available_seat > 0 ? 'Available' : 'Booked'; // Update status if no seats are available
+        $table->status = $table->available_seat > 0 ? 'Tersedia' : 'Penuh'; // Update status if no seats are available
         $table->save();
 
-        // Update staff status to 'Booked'
+        // Update staff status to 'Penuh'
         $staff = Staff::findOrFail($request->input('staff_id'));
         $staff->status = 'Selesai Tempah';
         $staff->save();
@@ -89,7 +89,7 @@ class BookingController extends Controller
             ->where('id', '!=', $currentStaffId)
             ->get();
 
-        $tables = Table::where('status', 'available')->get();
+        $tables = Table::where('status', 'Tersedia')->get();
 
         return view('pages.booking.edit', [
             'save_route' => route('booking.update', $id),
@@ -121,18 +121,18 @@ class BookingController extends Controller
 
         // Update old table's available seats
         $oldTable->available_seat += 1; // Restore seat
-        $oldTable->status = 'Available'; // Ensure status reflects available seats
+        $oldTable->status = 'Tersedia'; // Ensure status reflects available seats
         $oldTable->save();
 
         // Update new table's available seats
         if ($newTable->available_seat <= 0) {
-            return redirect()->back()->withErrors(['table_id' => 'No seats available for this table'])->withInput();
+            return redirect()->back()->withErrors(['table_id' => 'Meja telah penuh'])->withInput();
         }
         $newTable->available_seat -= 1; // Deduct seat
-        $newTable->status = $newTable->available_seat > 0 ? 'Available' : 'Booked'; // Update status if no seats are available
+        $newTable->status = $newTable->available_seat > 0 ? 'Tersedia' : 'Penuh'; // Update status if no seats are available
         $newTable->save();
 
-        // Update staff status to 'Booked'
+        // Update staff status to 'Penuh'
         $staff = Staff::findOrFail($request->input('staff_id'));
         $staff->status = 'Selesai Tempah';
         $staff->save();

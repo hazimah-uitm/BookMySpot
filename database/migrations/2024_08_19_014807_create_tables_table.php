@@ -19,7 +19,7 @@ class CreateTablesTable extends Migration
             $table->integer('total_seat');
             $table->integer('available_seat');
             $table->enum('type', ['Ditempah', 'Terbuka'])->default('Terbuka');
-            $table->enum('status', ['Available', 'Booked'])->default('Available');
+            $table->enum('status', ['Tersedia', 'Penuh'])->default('Tersedia');
             $table->softDeletes();
             $table->timestamps();
         });

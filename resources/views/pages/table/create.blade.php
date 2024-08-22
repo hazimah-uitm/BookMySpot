@@ -91,16 +91,16 @@
             <div class="mb-3">
                 <label for="status" class="form-label">Status</label>
                 <div class="form-check">
-                    <input type="radio" id="available" name="status" value="Available"
-                        {{ old('status') == 'Available' ? 'checked' : '' }}
+                    <input type="radio" id="Tersedia" name="status" value="Tersedia"
+                        {{ old('status') == 'Tersedia' ? 'checked' : '' }}
                         required>
-                    <label class="form-check-label" for="available">Available</label>
+                    <label class="form-check-label" for="Tersedia">Tersedia</label>
                 </div>
                 <div class="form-check">
-                    <input type="radio" id="booked" name="status" value="Booked"
-                        {{ old('status') == 'Booked' ? 'checked' : '' }}
+                    <input type="radio" id="Penuh" name="status" value="Penuh"
+                        {{ old('status') == 'Penuh' ? 'checked' : '' }}
                         required>
-                    <label class="form-check-label" for="booked">Booked</label>
+                    <label class="form-check-label" for="Penuh">Penuh</label>
                 </div>
                 @if ($errors->has('status'))
                 <div class="invalid-feedback">

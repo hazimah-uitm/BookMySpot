@@ -155,7 +155,7 @@
                 } else {
                     errorsContainer.style.display = 'none'; // Hide errors if valid
                     selectedTableNo.textContent = selectedTable.nextElementSibling
-                    .textContent; // Display selected table number
+                        .textContent; // Display selected table number
                     bookingModal.show(); // Show confirmation modal
                     event.preventDefault(); // Prevent form submission until confirmation
                 }

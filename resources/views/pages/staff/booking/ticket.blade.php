@@ -10,25 +10,6 @@
                         <h2 class="text-center text-uppercase mb-4">Maklumat Tempahan Meja</h2>
                         <div class="card bg-light text-dark shadow-sm">
                             <div class="card-body">
-                                <div class="position-relative">
-                                    <form action="{{ route('home.search') }}" method="GET">
-                                        <div class="input-group">
-                                            <!-- Search Input Field -->
-                                            <input type="text" class="form-control rounded" placeholder="Carian..."
-                                                name="search" value="{{ request('search') }}">
-
-                                            <!-- Search Button -->
-                                            <button type="submit" class="btn btn-primary ms-1 rounded">
-                                                <i class="bx bx-search"></i>
-                                            </button>
-
-                                            <!-- Reset Button -->
-                                            <button type="reset" class="btn btn-secondary search-button ms-1">
-                                                Reset
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
                                 <table class="table table-borderless">
                                     <tr>
                                         <th class="text-uppercase">No. Meja</th>

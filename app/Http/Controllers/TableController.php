@@ -34,7 +34,7 @@ class TableController extends Controller
             'total_seat' => 'required|integer',
             'available_seat' => 'required|integer',
             'type' => 'required|in:Ditempah,Terbuka',
-            'status' => 'required|in:Available,Booked',
+            'status' => 'required|in:Tersedia,Penuh',
         ], [
             'table_no.required' => 'Sila isi No. Meja',
             'table_no.unique' => 'No. Meja telah wujud',
@@ -91,7 +91,7 @@ class TableController extends Controller
             'total_seat' => 'required|integer',
             'available_seat' => 'required|integer',
             'type' => 'required|in:Ditempah,Terbuka',
-            'status' => 'required|in:Available,Booked',
+            'status' => 'required|in:Tersedia,Penuh',
         ], [
             'table_no.required' => 'Sila isi No. Meja',
             'table_no.unique' => 'No. Meja telah wujud',

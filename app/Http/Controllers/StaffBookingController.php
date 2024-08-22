@@ -102,7 +102,7 @@ class StaffBookingController extends Controller
         $booking->save();
     
         $table->available_seat -= 1;
-        $table->status = $table->available_seat > 0 ? 'Available' : 'Booked';
+        $table->status = $table->available_seat > 0 ? 'Tersedia' : 'Penuh';
         $table->save();
     
         $staff = Staff::findOrFail($request->input('staff_id'));
