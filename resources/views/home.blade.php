@@ -26,7 +26,7 @@
                     <!-- Hall Layout -->
                     <div class="hall-layout position-relative text-center mt-4">
                         <!-- Stage -->
-                        <div class="stage bg-dark text-white text-center mb-4">Pentas</div>
+                        <div class="stage bg-dark text-white text-center mb-4">PENTAS</div>
                         <!-- Tables -->
                         <div class="row justify-content-center mt-4">
                             @foreach ($tableList as $table)
@@ -53,7 +53,7 @@
                     <!-- Booking Table -->
                     <div class="table-responsive mt-4">
                     <h4 class="mb-1 text-center text-uppercase">Senarai Tempahan</h4>
-                        <table class="table table-striped">
+                        <table class="table">
                             <thead>
                                 <tr>
                                     <th>No Meja</th>
