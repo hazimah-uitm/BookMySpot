@@ -48,8 +48,6 @@
 
                                         <!-- Hall Layout -->
                                         <div class="hall-layout position-relative text-center mt-4">
-                                            <!-- Stage -->
-                                            <div class="stage bg-dark text-white text-center mb-4">Pentas</div>
                                             <!-- Tables -->
                                             <div class="row justify-content-center mt-4">
                                                 @foreach ($tables as $table)

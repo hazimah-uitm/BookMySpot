@@ -124,7 +124,8 @@ class StaffController extends Controller
 
         return view('pages.staff.index', [
             'staffList' => $staffList,
-            'perPage' => $perPage, // Pass perPage to the view
+            'perPage' => $perPage, 
+            'search' => $search, 
         ]);
     }
 

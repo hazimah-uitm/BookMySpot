@@ -140,8 +140,6 @@ class BookingController extends Controller
         return redirect()->route('booking')->with('success', 'Tempahan berjaya dikemaskini');
     }
 
-
-
     public function search(Request $request)
     {
         $search = $request->input('search');

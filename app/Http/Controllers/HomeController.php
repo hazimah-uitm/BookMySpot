@@ -25,17 +25,31 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $perPage = $request->input('perPage', 10);
+        $perPage = $request->input('perPage', 5);
+        $search = $request->input('search');
+
+        // Fetch paginated table data with search functionality
         $tables = Table::with('booking.staff')
-            ->orderBy('table_no', 'asc') 
-            ->paginate($perPage);  
-        
-        // for not paginate
+            ->where(function ($query) use ($search) {
+                if ($search) {
+                    $query->where('table_no', 'LIKE', "%$search%")
+                        ->orWhere('status', 'LIKE', "%$search%")
+                        ->orWhereHas('booking.staff', function ($q) use ($search) {
+                            $q->where('name', 'LIKE', "%$search%")
+                                ->orWhere('no_pekerja', 'LIKE', "%$search%");
+                        });
+                }
+            })
+            ->orderBy('table_no', 'asc')
+            ->paginate($perPage);
+
+        // Fetch all tables for layout without pagination
         $tableList = Table::orderBy('table_no', 'asc')->get();
 
         return view('home', [
             'tables' => $tables,
-            'tableList' => $tableList,
+            'tableList' => $tableList, // Used for the hall layout
+            'search' => $search,
         ]);
     }
 }

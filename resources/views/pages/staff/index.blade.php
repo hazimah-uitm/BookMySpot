@@ -38,16 +38,19 @@
                 <div class="position-relative">
                     <form action="{{ route('staff.search') }}" method="GET">
                         <div class="input-group">
-                            <input type="text" class="form-control search-input rounded" placeholder="Carian..."
-                                name="search">
-                            <span class="input-group-btn">
-                                <button type="submit" class="btn btn-primary search-button">
-                                    <i class="bx bx-search"></i>
-                                </button>
-                                <button type="reset" class="btn btn-secondary search-button">
-                                    <i class="bx bx-x"></i>
-                                </button>
-                            </span>
+                            <!-- Search Input Field -->
+                            <input type="text" class="form-control rounded" placeholder="Carian..." name="search"
+                                value="{{ request('search') }}">
+
+                            <!-- Search Button -->
+                            <button type="submit" class="btn btn-primary ms-1 rounded">
+                                <i class="bx bx-search"></i>
+                            </button>
+
+                            <!-- Reset Button -->
+                            <button type="reset" class="btn btn-secondary ms-1 rounded" onclick="resetForm()">
+                                Reset
+                            </button>
                         </div>
                     </form>
                 </div>

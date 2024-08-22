@@ -48,7 +48,7 @@
                             </button>
 
                             <!-- Reset Button -->
-                            <button type="reset" class="btn btn-secondary search-button ms-1">
+                            <button type="reset" class="btn btn-secondary ms-1 rounded" onclick="resetForm()">
                                 Reset
                             </button>
                         </div>

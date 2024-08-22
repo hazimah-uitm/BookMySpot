@@ -27,12 +27,19 @@
                 <div class="position_id-relative">
                     <form action="{{ route('table.search') }}" method="GET">
                         <div class="input-group">
-                            <input type="text" class="form-control search-input" placeholder="Carian..." name="search">
-                            <span class="input-group-btn">
-                                <button type="submit" class="btn btn-primary search-button">
-                                    <i class="bx bx-search"></i>
-                                </button>
-                            </span>
+                            <!-- Search Input Field -->
+                            <input type="text" class="form-control rounded" placeholder="Carian..." name="search"
+                                value="{{ request('search') }}">
+
+                            <!-- Search Button -->
+                            <button type="submit" class="btn btn-primary ms-1 rounded">
+                                <i class="bx bx-search"></i>
+                            </button>
+
+                            <!-- Reset Button -->
+                            <button type="reset" class="btn btn-secondary ms-1 rounded" onclick="resetForm()">
+                                Reset
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -58,7 +65,8 @@
                         @if (count($tableList) > 0)
                             @foreach ($tableList as $table)
                                 <tr>
-                                    <td>{{ ($tableList->currentPage() - 1) * $tableList->perPage() + $loop->iteration }}</td>
+                                    <td>{{ ($tableList->currentPage() - 1) * $tableList->perPage() + $loop->iteration }}
+                                    </td>
                                     <td>{{ $table->table_no }}</td>
                                     <td>{{ $table->total_seat }}</td>
                                     <td>{{ $table->available_seat }}</td>
@@ -154,4 +162,10 @@
         </div>
     @endforeach
     <!--end page wrapper -->
+    <script>
+        document.querySelector('button[type="reset"]').addEventListener('click', function() {
+            // Redirect to another page or reload the page
+            window.location.href = "{{ route('table') }}"; // Adjust the route as needed
+        });
+    </script>
 @endsection

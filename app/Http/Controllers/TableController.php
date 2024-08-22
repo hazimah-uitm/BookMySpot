@@ -129,18 +129,21 @@ class TableController extends Controller
     public function search(Request $request)
     {
         $search = $request->input('search');
+        $perPage = $request->input('perPage', 10);
 
         if ($search) {
             $tableList = Table::where('table_no', 'LIKE', "%$search%")
-                ->orWhere('total_seat', 'LIKE', "%$search%")
+                ->orWhere('status', 'LIKE', "%$search%")
                 ->latest()
-                ->paginate(10);
+                ->paginate($perPage);
         } else {
-            $tableList = Table::latest()->paginate(10);
+            $tableList = Table::latest()->paginate($perPage);
         }
 
         return view('pages.table.index', [
             'tableList' => $tableList,
+            'perPage' => $perPage,
+            'search' => $search,
         ]);
     }
 
