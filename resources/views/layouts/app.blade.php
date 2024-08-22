@@ -5,10 +5,10 @@
     @include('includes.head')
 </head>
 
-<body class="bg-login">
+<body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top custom-navbar">
+    <nav class="navbar navbar-expand-lg fixed-top custom-navbar">
         <div class="container">
             <a class="navbar-brand fs-6 fs-sm-5 fs-md-4 fs-lg-2 text-uppercase" href="{{ url('/') }}">Tempahan Meja Malam Gala</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
