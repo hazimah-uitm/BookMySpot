@@ -880,6 +880,7 @@ input.search-control-2::placeholder {
 /* navbar welcome */
 .custom-navbar {
 	box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	background-color: #fff;
 }
 
 .navbar-brand {
