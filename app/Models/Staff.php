@@ -42,4 +42,9 @@ class Staff extends Model
     {
         return $this->hasOne(Booking::class, 'staff_id');
     } 
+
+    public function attendances()
+    {
+        return $this->hasMany(Attendance::class, 'no_pekerja', 'no_pekerja');
+    }
 }

@@ -86,8 +86,6 @@
                                                         class="bx bx-trash"></i></span>
                                             </a>
                                         @endhasanyrole
-
-
                                     </td>
                                 </tr>
                             @endforeach

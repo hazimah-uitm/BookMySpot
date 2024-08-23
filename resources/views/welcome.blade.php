@@ -15,6 +15,7 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-12 col-md-8 col-lg-6">
+                <h2 class="text-center text-uppercase mb-4">SEMAK NO. PEKERJA</h2>
                     <form action="{{ route('staff.booking.check') }}" method="POST" class="d-flex">
                         {{ csrf_field() }}
                         <div class="form-group flex-grow-1 me-2">

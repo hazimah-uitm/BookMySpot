@@ -23,6 +23,11 @@
                     </li>
                     @else
                     <li class="nav-item">
+                        <form action="{{ route('attendance.create') }}" method="get" class="d-inline">
+                            <button type="submit" class="nav-link btn btn-link text-uppercase">Kehadiran</button>
+                        </form>
+                    </li>
+                    <li class="nav-item">
                         <form action="{{ route('home') }}" method="get" class="d-inline">
                             <button type="submit" class="nav-link btn btn-link text-uppercase">Dashboard</button>
                         </form>

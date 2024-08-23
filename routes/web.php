@@ -76,7 +76,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/user-role/{id}/restore', 'UserRoleController@restore')->name('user-role.restore');
     Route::delete('/user-role/{id}/force-delete', 'UserRoleController@forceDelete')->name('user-role.forceDelete');
 
-    
+
     // Staff Management
     Route::get('staff', 'StaffController@index')->name('staff');
     Route::get('staff/view/{id}', 'StaffController@show')->name('staff.show');
@@ -90,7 +90,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/staff/trash', 'StaffController@trashList')->name('staff.trash');
     Route::get('/staff/{id}/restore', 'StaffController@restore')->name('staff.restore');
     Route::delete('/staff/{id}/force-delete', 'StaffController@forceDelete')->name('staff.forceDelete');
-    
+
     // Booking Management
     Route::get('booking', 'BookingController@index')->name('booking');
     Route::get('booking/create', 'BookingController@create')->name('booking.create');
@@ -103,7 +103,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/booking/trash', 'BookingController@trashList')->name('booking.trash');
     Route::get('/booking/{id}/restore', 'BookingController@restore')->name('booking.restore');
     Route::delete('/booking/{id}/force-delete', 'BookingController@forceDelete')->name('booking.forceDelete');
-    
+
     // Table Management
     Route::get('table', 'TableController@index')->name('table');
     Route::get('table/create', 'TableController@create')->name('table.create');
@@ -127,5 +127,16 @@ Route::middleware('auth')->group(function () {
     Route::get('position/view/{id}', 'PositionController@show')->name('position.show');
     Route::get('/position/search', 'PositionController@search')->name('position.search');
 
+    // Attendance
+    Route::get('attendance', 'AttendanceController@index')->name('attendance');
+    Route::get('attendance/create', 'AttendanceController@create')->name('attendance.create');
+    Route::post('attendance/store', 'AttendanceController@store')->name('attendance.store');
+    Route::get('attendance/{id}/edit', 'AttendanceController@edit')->name('attendance.edit');
+    Route::post('attendance/{id}/update', 'AttendanceController@update')->name('attendance.update');
+    Route::get('attendance/view/{id}', 'AttendanceController@show')->name('attendance.show');
+    Route::get('/attendance/search', 'AttendanceController@search')->name('attendance.search');
+    Route::delete('attendance/{id}', 'AttendanceController@destroy')->name('attendance.destroy');
+    Route::get('/attendance/trash', 'AttendanceController@trashList')->name('attendance.trash');
+    Route::get('/attendance/{id}/restore', 'AttendanceController@restore')->name('attendance.restore');
+    Route::delete('/attendance/{id}/force-delete', 'AttendanceController@forceDelete')->name('attendance.forceDelete');
 });
-

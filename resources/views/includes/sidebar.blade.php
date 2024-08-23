@@ -49,7 +49,15 @@
     </li>
     @endrole
 
-    <li class="menu-label">Pengurusan Tempahan</li>
+    <li class="menu-label">Pengurusan</li>
+    <li>
+        <a href="{{ route('attendance') }}">
+            <div class="parent-icon"><i class='bx bx-check-circle'></i>
+            </div>
+            <div class="menu-title">Senarai Kehadiran</div>
+        </a>
+    </li>
+
     <li>
         <a href="{{ route('staff') }}">
             <div class="parent-icon"><i class='bx bx-user-circle'></i>
