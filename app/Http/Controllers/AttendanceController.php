@@ -39,13 +39,19 @@ class AttendanceController extends Controller
 
         $staff = Staff::where('no_pekerja', $request->input('no_pekerja'))->firstOrFail();
 
-        $attendance = Attendance::firstOrNew(['no_pekerja' => $staff->no_pekerja]);
-        $attendance->name = $staff->name; 
+        $existingAttendance = Attendance::where('no_pekerja', $staff->no_pekerja)->first();
+
+        if ($existingAttendance) {
+            return redirect()->back()->withErrors(['no_pekerja' => 'Rekod kehadiran untuk No. Pekerja ini sudah wujud']);
+        }
+
+        $attendance = new Attendance();
+        $attendance->no_pekerja = $staff->no_pekerja;
+        $attendance->name = $staff->name;
         $attendance->check_in = now();
-        $attendance->type = $staff->type; 
+        $attendance->type = $staff->type;
         $attendance->save();
 
-        // Return a success message
         return redirect()->back()->with('success', 'Kehadiran berjaya direkod!');
     }
 
