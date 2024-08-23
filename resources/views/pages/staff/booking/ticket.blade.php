@@ -48,12 +48,6 @@
                                                 <strong>Nota:</strong> <em>Sila tunjukkan tiket ini kepada urusetia ketika
                                                     hadir ke Malam Gala.</em>
                                             </div>
-                                            <div class="text-center">
-                                                <a href="{{ route('staff.booking.print', $booking->id) }}"
-                                                    class="btn btn-primary" target="_blank">
-                                                    <i class="fas fa-download"></i> Muat Turun Tiket
-                                                </a>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -65,6 +59,13 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="text-center">
+                            <a href="{{ route('staff.booking.print', $booking->id) }}" class="btn btn-primary w-100"
+                                target="_blank">
+                                <i class="fas fa-download"></i> Muat Turun Tiket
+                            </a>
                         </div>
 
                         <div class="card bg-light text-dark shadow-sm mt-3">

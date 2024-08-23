@@ -4,6 +4,15 @@ Author: codervent
 Email: codervent@gmail.com
 File: app.css
 */
+.qr-code-container {
+    width: 200px; /* Adjust width as necessary */
+    margin: 0 auto;
+}
+
+.qr-code-container img {
+    width: 100%; /* Ensure the QR code image fits the container */
+    height: auto;
+}
 
 .ticket-card {
 	border-radius: 15px;
