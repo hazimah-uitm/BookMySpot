@@ -27,7 +27,7 @@ class StaffImport implements ToModel, WithHeadingRow
             'payment' => $row['payment'] ?? null,
             'type'     => $row['type'],
             'status'     => $row['status'] ?? "Belum Tempah",
-            'created_at' => $row['created_at'],
+            'created_at' => $row['created_at'] ?? now(),
         ]);
     }
 }

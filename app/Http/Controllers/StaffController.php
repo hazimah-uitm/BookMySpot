@@ -13,14 +13,35 @@ class StaffController extends Controller
     public function index(Request $request)
     {
         $perPage = $request->input('perPage', 10);
-
-        $staffList = Staff::orderBy('name', 'asc')->paginate($perPage);
-
+        $type = $request->input('type');
+        $attendance = $request->input('attendance');
+        $status = $request->input('status');
+    
+        $query = Staff::query();
+    
+        if ($type) {
+            $query->where('type', $type);
+        }
+    
+        if ($attendance) {
+            $query->where('attendance', $attendance);
+        }
+    
+        if ($status) {
+            $query->where('status', $status);
+        }
+    
+        $staffList = $query->orderBy('name', 'asc')->paginate($perPage);
+    
         return view('pages.staff.index', [
             'staffList' => $staffList,
             'perPage' => $perPage,
+            'type' => $type,
+            'attendance' => $attendance,
+            'status' => $status,
         ]);
     }
+    
 
     public function import(Request $request)
     {
@@ -138,23 +159,43 @@ class StaffController extends Controller
     public function search(Request $request)
     {
         $search = $request->input('search');
-        $perPage = $request->input('perPage', 10); // Default to 10 if not provided
-
+        $perPage = $request->input('perPage', 10);
+        $type = $request->input('type');
+        $attendance = $request->input('attendance');
+        $status = $request->input('status');
+    
+        $query = Staff::query();
+    
         if ($search) {
-            $staffList = Staff::where('name', 'LIKE', "%$search%")
-                ->orWhere('no_pekerja', 'LIKE', "%$search%")
-                ->orWhere('attendance', 'LIKE', "%$search%")
-                ->orWhere('campus', 'LIKE', "%$search%")
-                ->latest()
-                ->paginate($perPage);
-        } else {
-            $staffList = Staff::latest()->paginate($perPage);
+            $query->where('name', 'LIKE', "%$search%")
+                  ->orWhere('no_pekerja', 'LIKE', "%$search%")
+                  ->orWhere('attendance', 'LIKE', "%$search%")
+                  ->orWhere('status', 'LIKE', "%$search%")
+                  ->orWhere('type', 'LIKE', "%$search%")
+                  ->orWhere('campus', 'LIKE', "%$search%");
         }
-
+    
+        if ($type) {
+            $query->where('type', $type);
+        }
+    
+        if ($attendance) {
+            $query->where('attendance', $attendance);
+        }
+    
+        if ($status) {
+            $query->where('status', $status);
+        }
+    
+        $staffList = $query->latest()->paginate($perPage);
+    
         return view('pages.staff.index', [
             'staffList' => $staffList,
-            'perPage' => $perPage, 
-            'search' => $search, 
+            'perPage' => $perPage,
+            'search' => $search,
+            'type' => $type,
+            'attendance' => $attendance,
+            'status' => $status,
         ]);
     }
 

@@ -6,8 +6,7 @@
         <div class="ps-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
-                    <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="bx bx-home-alt"></i></a>
-                    </li>
+                    <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="bx bx-home-alt"></i></a></li>
                     <li class="breadcrumb-item active" aria-current="page">Senarai Staf</li>
                 </ol>
             </nav>
@@ -36,39 +35,50 @@
         <div class="card-body">
             <div class="d-lg-flex align-items-center mb-4 gap-3">
                 <div class="position-relative">
-                    <form action="{{ route('staff.search') }}" method="GET">
-                        <div class="input-group">
-                            <!-- Search Input Field -->
-                            <input type="text" class="form-control rounded" placeholder="Carian..." name="search"
-                                value="{{ request('search') }}">
+                    <form action="{{ route('staff.search') }}" method="GET" id="searchForm"
+                        class="d-lg-flex align-items-center mb-4 gap-3">
+                        <div class="position-relative">
+                            <div class="input-group">
+                                <input type="text" class="form-control rounded" placeholder="Carian..." name="search"
+                                    value="{{ request('search') }}" id="searchInput">
+                                <!-- Type Filter -->
+                                <select name="type" class="form-select form-select-sm ms-2" id="typeFilter">
+                                    <option value="">Pilih Jenis</option>
+                                    <option value="Staf" {{ request('type') == 'Staf' ? 'selected' : '' }}>Staf</option>
+                                    <option value="Bukan Staf" {{ request('type') == 'Bukan Staf' ? 'selected' : '' }}>Bukan
+                                        Staf
+                                    </option>
+                                </select>
 
-                            <!-- Search Button -->
-                            <button type="submit" class="btn btn-primary ms-1 rounded">
-                                <i class="bx bx-search"></i>
-                            </button>
+                                <!-- Attendance Filter -->
+                                <select name="attendance" class="form-select form-select-sm ms-2" id="attendanceFilter">
+                                    <option value="">Pilih Kehadiran</option>
+                                    <option value="Hadir" {{ request('attendance') == 'Hadir' ? 'selected' : '' }}>Hadir
+                                    </option>
+                                    <option value="Tidak Hadir"
+                                        {{ request('attendance') == 'Tidak Hadir' ? 'selected' : '' }}>Tidak
+                                        Hadir</option>
+                                </select>
 
-                            <!-- Reset Button -->
-                            <button type="reset" class="btn btn-secondary ms-1 rounded" onclick="resetForm()">
-                                Reset
-                            </button>
+                                <!-- status Filter -->
+                                <select name="status" class="form-select form-select-sm ms-2" id="statusFilter">
+                                    <option value="">Pilih Status</option>
+                                    <option value="Selesai Tempah" {{ request('status') == 'Selesai Tempah' ? 'selected' : '' }}>Selesai Tempah
+                                    </option>
+                                    <option value="Belum Tempah"
+                                        {{ request('status') == 'Belum Tempah' ? 'selected' : '' }}>Belum Tempah</option>
+                                </select>
+
+                                <input type="hidden" name="perPage" value="{{ request('perPage', 10) }}">
+                                <button type="submit" class="btn btn-primary ms-1 rounded" id="searchButton">
+                                    <i class="bx bx-search"></i>
+                                </button>
+                                <button type="button" class="btn btn-secondary ms-1 rounded" id="resetButton">
+                                    Reset
+                                </button>
+                            </div>
                         </div>
                     </form>
-                </div>
-                <div class="ms-auto d-flex gap-2 align-items-center">
-                    <!-- Import Button and Form -->
-                    <form action="{{ route('staff.import') }}" method="POST" enctype="multipart/form-data"
-                        class="d-flex align-items-center">
-                        {{ csrf_field() }}
-                        <div class="form-group mb-0">
-                            <input type="file" name="file" class="form-control form-control-sm" required>
-                        </div>
-                        <button type="submit" class="btn btn-info ms-2">Import</button>
-                    </form>
-
-                    <!-- Tambah Button -->
-                    <a href="{{ route('staff.create') }}" class="btn btn-primary">
-                        Tambah Staf
-                    </a>
                 </div>
             </div>
 
@@ -132,6 +142,9 @@
                     <form action="{{ route('staff.search') }}" method="GET" id="perPageForm"
                         class="d-flex align-items-center">
                         <input type="hidden" name="search" value="{{ request('search') }}">
+                        <input type="hidden" name="type" value="{{ request('type') }}">
+                        <input type="hidden" name="attendance" value="{{ request('attendance') }}">
+                        <input type="hidden" name="status" value="{{ request('status') }}">
                         <select name="perPage" id="perPage" class="form-select form-select-sm"
                             onchange="document.getElementById('perPageForm').submit()">
                             <option value="10" {{ Request::get('perPage') == '10' ? 'selected' : '' }}>10</option>
@@ -147,7 +160,12 @@
                         {{ $staffList->total() }} rekod
                     </span>
                     <div class="pagination-wrapper">
-                        {{ $staffList->appends(['search' => request('search'), 'perPage' => $perPage])->links('pagination::bootstrap-4') }}
+                        {{ $staffList->appends([
+                                'search' => request('search'),
+                                'perPage' => request('perPage'),
+                                'type' => request('type'),
+                                'attendance' => request('attendance'),
+                            ])->links('pagination::bootstrap-4') }}
                     </div>
                 </div>
             </div>
@@ -169,29 +187,51 @@
                             Adakah anda pasti ingin memadam rekod <span style="font-weight: 600;">
                                 {{ ucfirst($staff->name) }}</span>?
                         @else
-                            Tiada rekod
+                            Tiada maklumat staf.
                         @endisset
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                        @isset($staff)
-                            <form class="d-inline" method="POST" action="{{ route('staff.destroy', $staff->id) }}">
-                                {{ method_field('delete') }}
-                                {{ csrf_field() }}
-                                <button type="submit" class="btn btn-danger">Padam</button>
-                            </form>
-                        @endisset
+                        <form action="{{ route('staff.destroy', $staff->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                            <button type="submit" class="btn btn-danger">Padam</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     @endforeach
-    <!--end page wrapper -->
 
     <script>
-        document.querySelector('button[type="reset"]').addEventListener('click', function() {
-            // Redirect to another page or reload the page
-            window.location.href = "{{ route('staff') }}"; // Adjust the route as needed
+        document.addEventListener('DOMContentLoaded', function() {
+            // Auto-submit the form on input change
+            document.getElementById('searchInput').addEventListener('input', function() {
+                document.getElementById('searchForm').submit();
+            });
+            
+            document.getElementById('typeFilter').addEventListener('change', function() {
+                document.getElementById('searchForm').submit();
+            });
+            
+            document.getElementById('attendanceFilter').addEventListener('change', function() {
+                document.getElementById('searchForm').submit();
+            });
+            
+            document.getElementById('statusFilter').addEventListener('change', function() {
+                document.getElementById('searchForm').submit();
+            });
+            
+            // Reset form
+            document.getElementById('resetButton').addEventListener('click', function() {
+                document.getElementById('searchForm').reset();
+                // Clear hidden fields to reset pagination and filters
+                document.getElementById('searchForm').querySelector('input[name="search"]').value = '';
+                document.getElementById('searchForm').querySelector('select[name="type"]').value = '';
+                document.getElementById('searchForm').querySelector('select[name="attendance"]').value = '';
+                document.getElementById('searchForm').querySelector('select[name="status"]').value = '';
+                document.getElementById('searchForm').submit();
+            });
         });
     </script>
 @endsection
