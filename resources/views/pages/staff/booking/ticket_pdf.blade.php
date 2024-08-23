@@ -94,12 +94,14 @@
     <div class="wrapper-main">
         <div class="ticket-card">
             <div class="ticket-header">
-               <h4>TIKET MALAM GALA</h4>
-
-                <h5>NO. MEJA: {{ $booking->table->table_no }}</h5>
+               <h3>TIKET MALAM GALA</h3>
             </div>
             <div class="ticket-info">
                 <table class="table table-borderless mb-0">
+                    <tr>
+                        <th>NO. MEJA</th>
+                        <td style="font-weight:bold">{{ $booking->table->table_no }}</td>
+                    </tr>
                     <tr>
                         <th>NAMA</th>
                         <td>{{ $booking->staff->name }}</td>
@@ -112,14 +114,10 @@
                         <th>NO. TEMPAHAN</th>
                         <td>{{ $booking->booking_no }}</td>
                     </tr>
-                    <tr>
-                        <th>TARIKH TEMPAHAN</th>
-                        <td>{{ $booking->created_at->format('d-m-Y H:i') }}</td>
-                    </tr>
                 </table>
             </div>
             <div class="ticket-footer">
-                <em>Sila imbas kod QR ini kepada urusetia semasa hadir ke Malam Gala.</em>
+                <em>Sila imbas kod QR ini kepada urusetia semasa hadir ke Malam Gala 25 Tahun UiTM</em>
             </div>
             <div class="qr-code-container">
                 <img src="{{ $booking->qr_code }}" alt="QR Code">
