@@ -11,18 +11,22 @@
                         <div class="card ticket-card shadow-lg">
                             <div class="row">
                                 <!-- Left Section: Ticket Info -->
-                                <div class="col-8">
+                                <div class="col-12 col-md-8">
                                     <div class="ticket-info">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <img src="{{ asset('public/assets/images/logo-malam-gala.png') }}"
-                                                    alt="Logo Malam Gala" class="img-fluid" style="max-height: 70px;">
-                                            </div>
-                                            <div>
-                                                <h5 class="text-uppercase">No. Meja: {{ $booking->table->table_no }}</h5>
+                                        <div class="ticket-header mb-4">
+                                            <div
+                                                class="d-flex justify-content-between align-items-center flex-column flex-md-row text-center text-md-start mb-2">
+                                                <div class="mb-2 mb-md-0">
+                                                    <img src="{{ asset('public/assets/images/logo-malam-gala.png') }}"
+                                                        alt="Logo Malam Gala" class="img-fluid mx-auto d-block"
+                                                        style="max-height: 90px; width: auto;">
+                                                </div>
+                                                <div>
+                                                    <h5 class="text-uppercase">No. Meja: {{ $booking->table->table_no }}
+                                                    </h5>
+                                                </div>
                                             </div>
                                         </div>
-                                        <hr>
                                         <table class="table table-borderless mb-0">
                                             <tr>
                                                 <th class="text-uppercase">Nama</th>
@@ -43,25 +47,26 @@
                                         </table>
 
                                         <!-- Footer: Notes and Download Button -->
-                                        <div class="ticket-footer mt-3">
-                                            <div class="alert text-center">
-                                                <strong>Nota:</strong> <em>Sila tunjukkan tiket ini kepada urusetia ketika
-                                                    hadir ke Malam Gala.</em>
+                                        <div class="ticket-footer mt-4">
+                                            <div class="text-center mt-2">
+                                                <em>Sila imbas kod QR ini kepada urusetia semasa hadir ke Malam Gala.</em>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
+
                                 <!-- Right Section: QR Code or Logo -->
-                                <div class="col-4 text-center">
-                                    <div class="qr-code-container">
-                                        {!! $booking->qr_code !!}
+                                <div class="col-12 col-md-6 col-lg-4 d-flex justify-content-center align-items-center">
+                                    <div
+                                        class="qr-code-container d-flex justify-content-center align-items-center text-center">
+                                         <img src="{{ $booking->qr_code }}" alt="QR Code">
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="text-center">
+                        <div class="text-center mt-4">
                             <a href="{{ route('staff.booking.print', $booking->id) }}" class="btn btn-primary w-100"
                                 target="_blank">
                                 <i class="fas fa-download"></i> Muat Turun Tiket
@@ -133,4 +138,55 @@
         </div>
     </div>
     <!--end wrapper-->
+    <style>
+    .qr-code-container {
+    width: 300px; /* Increased width */
+    margin: 0 auto;
+}
+
+.qr-code-container img {
+    width: 100%; /* Ensure the QR code image fits the container */
+    height: auto;
+}
+
+.ticket-card {
+	border-radius: 15px;
+	background-color: #000; /* Black background */
+	padding: 15px;
+	color: #fff; /* White text color */
+}
+
+.ticket-info h4, .ticket-info h5 {
+	color: #fff; /* White text color */
+	margin-bottom: 10px;
+}
+
+.ticket-info th {
+	width: 40%;
+	color: #ccc; /* Silver text color */
+}
+
+.ticket-info td {
+	color: #fff; /* White text color */
+}
+
+.ticket-logo img, .ticket-barcode img {
+	border-radius: 10px;
+	margin-top: 20px;
+}
+
+.ticket-footer {
+	padding: 10px 0;
+	border-top: 1px solid #ccc; /* Silver border color */
+	margin-top: 20px;
+	color: #fff; /* White text color */
+}
+
+.ticket-header {
+	padding: 10px 0;
+	border-bottom: 1px solid #ccc; /* Silver border color */
+	color: #fff; /* White text color */
+}
+
+</style>
 @endsection

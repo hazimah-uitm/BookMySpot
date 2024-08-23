@@ -8,78 +8,123 @@
         body {
             font-family: Arial, sans-serif;
             margin: 30px;
-            color: #333;
+            color: #fff;
+            background-color: #000;
         }
 
-        .card {
-            border: 1px solid #ccc;
-            padding: 20px;
-            border-radius: 8px;
-            background-color: #fff;
+        .wrapper-main {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .ticket-card {
+            border-radius: 15px;
+            background-color: #000;
+            padding: 15px;
+            color: #fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .card-title {
-            margin-bottom: 20px;
-            font-size: 24px;
-            color: #007bff;
+        .ticket-header {
+            padding: 10px 0;
+            border-bottom: 1px solid #ccc;
+            color: #fff;
+            text-align: center;
         }
 
-        .table {
+        .ticket-info h5 {
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .ticket-info th {
+            width: 40%;
+            color: #ccc;
+        }
+
+        .ticket-info td {
+            color: #fff;
+        }
+
+        .ticket-footer {
+            padding: 10px 0;
+            border-top: 1px solid #ccc;
+            margin-top: 20px;
+            color: #fff;
+            text-align: center;
+        }
+
+        .qr-code-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .qr-code-container img {
+            width: 300px;
+            /* Increased width */
+            height: auto;
+        }
+
+        table {
             width: 100%;
             margin-bottom: 20px;
             border-collapse: collapse;
         }
 
-        .table th,
-        .table td {
+        table th,
+        table td {
             padding: 10px;
             vertical-align: top;
             text-align: left;
             font-size: 16px;
         }
 
-        .table th {
-            width: 30%;
-            color: #000;
+        table th {
+            color: #ccc;
         }
 
-        .note {
-            padding: 15px;
-            background-color: #e9f7ff;
-            border-left: 4px solid #007bff;
-            font-size: 16px;
+        table td {
+            color: #fff;
         }
     </style>
 </head>
 
 <body>
-    <div class="card">
-        <h4 class="card-title">Maklumat Tempahan</h4>
-        <table class="table table-borderless">
-            <tr>
-            <th>NO. MEJA</th>
-            <td>{{ $booking->table->table_no }}</td>
-            </tr>
-            <tr>
-                <th>NAMA</th>
-                <td>{{ $booking->staff->name }}</td>
-            </tr>
-            <tr>
-                <th>NO. PEKERJA</th>
-                <td>{{ $booking->staff->no_pekerja }}</td>
-            </tr>
-            <tr>
-                <th>NO. TEMPAHAN</th>
-                <td>{{ $booking->booking_no }}</td>
-            </tr>
-            <tr>
-                <th>TARIKH TEMPAHAN</th>
-                <td>{{ $booking->created_at->format('d-m-Y H:i') }}</td>
-            </tr>
-        </table>
-        <div class="note">
-            <p><strong>Nota:</strong> Sila tunjukkan tiket ini kepada urusetia ketika hadir ke Malam Gala.</p>
+    <div class="wrapper-main">
+        <div class="ticket-card">
+            <div class="ticket-header">
+                <img src="data:image/png;base64,{{ $logoBase64 }}" alt="Logo Malam Gala"
+                    style="max-height: 90px; width: auto;">
+
+                <h5>NO. MEJA: {{ $booking->table->table_no }}</h5>
+            </div>
+            <div class="ticket-info">
+                <table class="table table-borderless mb-0">
+                    <tr>
+                        <th>NAMA</th>
+                        <td>{{ $booking->staff->name }}</td>
+                    </tr>
+                    <tr>
+                        <th>NO. PEKERJA</th>
+                        <td>{{ $booking->staff->no_pekerja }}</td>
+                    </tr>
+                    <tr>
+                        <th>NO. TEMPAHAN</th>
+                        <td>{{ $booking->booking_no }}</td>
+                    </tr>
+                    <tr>
+                        <th>TARIKH TEMPAHAN</th>
+                        <td>{{ $booking->created_at->format('d-m-Y H:i') }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="ticket-footer">
+                <em>Sila imbas kod QR ini kepada urusetia semasa hadir ke Malam Gala.</em>
+            </div>
+            <div class="qr-code-container">
+                <img src="{{ $booking->qr_code }}" alt="QR Code">
+            </div>
         </div>
     </div>
 </body>

@@ -6,6 +6,7 @@ use App\Models\Booking;
 use App\Models\Staff;
 use App\Models\Table;
 use Illuminate\Http\Request;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class BookingController extends Controller
 {
@@ -67,6 +68,12 @@ class BookingController extends Controller
         $staff->status = 'Selesai Tempah';
         $staff->save();
 
+        // Generate QR Code and store it as Base64
+        $qrCode = QrCode::format('png')->size(220)->generate($staff->no_pekerja);
+        $qrCodeDataUri = 'data:image/png;base64,' . base64_encode($qrCode);
+        $booking->qr_code = $qrCodeDataUri;
+        $booking->save();
+
         return redirect()->route('booking')->with('success', 'Tempahan berjaya disimpan');
     }
 
@@ -82,22 +89,19 @@ class BookingController extends Controller
     public function edit(Request $request, $id)
     {
         $booking = Booking::findOrFail($id);
-        $currentStaffId = $booking->staff_id;
 
-        $staffs = Staff::where('attendance', 'Hadir')
-            ->where('status', 'Belum Tempah')
-            ->where('id', '!=', $currentStaffId)
-            ->get();
+        $staffs = Staff::all();
 
+        // Fetch available tables
         $tables = Table::where('status', 'Tersedia')->get();
 
+        // Return the view with the necessary data
         return view('pages.booking.edit', [
             'save_route' => route('booking.update', $id),
             'str_mode' => 'Kemas Kini',
             'booking' => $booking,
             'tables' => $tables,
             'staffs' => $staffs,
-            'currentStaffId' => $currentStaffId,
         ]);
     }
 
@@ -107,23 +111,31 @@ class BookingController extends Controller
             'staff_id' => 'required|exists:staff,id',
             'table_id' => 'required|exists:tables,id',
         ]);
-
+    
         $booking = Booking::findOrFail($id);
-
+    
         // Retrieve old and new table information
         $oldTable = Table::findOrFail($booking->table_id);
         $newTable = Table::findOrFail($request->input('table_id'));
-
+    
         // Update booking details
         $booking->staff_id = $request->input('staff_id');
         $booking->table_id = $request->input('table_id');
+    
+        // Generate QR Code and store it as Base64
+        $staff = Staff::findOrFail($request->input('staff_id')); // Ensure staff is loaded
+        $qrCode = QrCode::format('png')->size(220)->generate($staff->no_pekerja);
+        $qrCodeDataUri = 'data:image/png;base64,' . base64_encode($qrCode);
+        $booking->qr_code = $qrCodeDataUri;
+    
+        // Save the updated booking with QR code
         $booking->save();
-
+    
         // Update old table's available seats
         $oldTable->available_seat += 1; // Restore seat
         $oldTable->status = 'Tersedia'; // Ensure status reflects available seats
         $oldTable->save();
-
+    
         // Update new table's available seats
         if ($newTable->available_seat <= 0) {
             return redirect()->back()->withErrors(['table_id' => 'Meja telah penuh'])->withInput();
@@ -131,14 +143,14 @@ class BookingController extends Controller
         $newTable->available_seat -= 1; // Deduct seat
         $newTable->status = $newTable->available_seat > 0 ? 'Tersedia' : 'Penuh'; // Update status if no seats are available
         $newTable->save();
-
+    
         // Update staff status to 'Penuh'
-        $staff = Staff::findOrFail($request->input('staff_id'));
         $staff->status = 'Selesai Tempah';
         $staff->save();
-
+    
         return redirect()->route('booking')->with('success', 'Tempahan berjaya dikemaskini');
     }
+    
 
     public function search(Request $request)
     {

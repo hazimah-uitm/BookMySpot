@@ -24,9 +24,9 @@ class StaffBookingController extends Controller
             'no_pekerja.required' => 'Mohon isi No. Pekerja.',
             'no_pekerja.exists' => 'Harap maaf. Anda tiada dalam senarai pengesahan RSVP.',
         ]);
-    
+
         $staff = Staff::where('no_pekerja', $request->input('no_pekerja'))->firstOrFail();
-    
+
         if ($staff->attendance === 'Hadir' && $staff->status === 'Belum Tempah') {
             $tables = Table::orderBy('table_no', 'asc')->where('type', 'Terbuka')->get(); // Fetch all tables
             return view('pages.staff.booking.create', [
@@ -34,50 +34,67 @@ class StaffBookingController extends Controller
                 'tables' => $tables,
             ]);
         }
-    
+
         if ($staff->attendance === 'Hadir' && $staff->status === 'Selesai Tempah') {
             $booking = Booking::where('staff_id', $staff->id)->first();
             if (!$booking) {
                 return redirect()->back()->withErrors(['no_pekerja' => 'Tiada tempahan untuk No. Pekerja tersebut.'])->withInput();
             }
-    
+
             $tables = Table::orderBy('table_no', 'asc')->where('type', 'Terbuka')->get();
             return view('pages.staff.booking.ticket', [
                 'booking' => $booking,
-                'tables' => $tables, 
+                'tables' => $tables,
             ]);
         }
-    
+
         return redirect()->back()->withErrors(['no_pekerja' => 'Harap maaf. Status kehadiran RSVP anda adalah tidak hadir.'])->withInput();
     }
-     
-    
-    
+
     public function printTicket($id)
     {
+        // Function to convert image to Base64
+        function imageToBase64($imagePath) {
+            $imageData = file_get_contents($imagePath);
+            $base64 = base64_encode($imageData);
+            $mimeType = mime_content_type($imagePath);
+            return 'data:' . $mimeType . ';base64,' . $base64;
+        }
+    
         // Fetch the booking from the database
         $booking = Booking::findOrFail($id);
-
+    
+        // Convert the logo image to Base64
+        $logoBase64 = imageToBase64(public_path('public/assets/images/logo-malam-gala.png'));
+    
+        // Check if the QR code exists, and generate it if not
+        if (empty($booking->qr_code)) {
+            $qrCode = QrCode::size(220)->generate($booking->staff->id);
+            $booking->qr_code = $qrCode;
+            $booking->save();
+        }
+    
         // Initialize Dompdf
         $dompdf = new Dompdf();
-
+    
         // Load the view and pass the booking data
-        $view = view('pages.staff.booking.ticket_pdf', compact('booking'))->render();
-
+        $view = view('pages.staff.booking.ticket_pdf', compact('booking', 'logoBase64'))->render();
+    
         // Load HTML content into Dompdf
         $dompdf->loadHtml($view);
-
+    
         // Set paper size and orientation
         $dompdf->setPaper('A4', 'portrait');
-
+    
         // Render the PDF
         $dompdf->render();
-
+    
         // Stream the PDF to the browser
         return $dompdf->stream('Tiket-' . $booking->booking_no . '.pdf', [
             'Attachment' => 0 // 0 to view in browser, 1 to download
         ]);
     }
+    
 
     public function store(Request $request)
     {
@@ -112,9 +129,10 @@ class StaffBookingController extends Controller
         $staff->status = 'Selesai Tempah';
         $staff->save();
     
-        // Generate QR Code and store it
-        $qrCode = QrCode::size(200)->generate($staff->no_pekerja);
-        $booking->qr_code = $qrCode; 
+        // Generate QR Code and store it as Base64
+        $qrCode = QrCode::format('png')->size(220)->generate($staff->no_pekerja);
+        $qrCodeDataUri = 'data:image/png;base64,' . base64_encode($qrCode);
+        $booking->qr_code = $qrCodeDataUri; 
         $booking->save();
     
         return redirect()->route('staff.booking.view', ['id' => $booking->id])->with('success', 'Tempahan berjaya dihantar!');
@@ -137,20 +155,19 @@ class StaffBookingController extends Controller
     public function show($id)
     {
         $booking = Booking::findOrFail($id);
-    
+
         // Check if the QR code exists, and generate it if not
         if (empty($booking->qr_code)) {
-            $qrCode = QrCode::size(200)->generate($booking->staff->id);
+            $qrCode = QrCode::size(220)->generate($booking->staff->id);
             $booking->qr_code = $qrCode;
             $booking->save();
         }
-    
+
         $tables = Table::orderBy('table_no', 'asc')->where('type', 'Terbuka')->get();
-    
+
         return view('pages.staff.booking.ticket', [
             'booking' => $booking,
             'tables' => $tables,
         ]);
     }
-    
 }
