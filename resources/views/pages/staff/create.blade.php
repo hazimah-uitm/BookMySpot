@@ -40,7 +40,7 @@
 
                 <div class="mb-3">
                     <label for="no_pekerja" class="form-label">No. Pekerja</label>
-                    <input type="number" class="form-control {{ $errors->has('no_pekerja') ? 'is-invalid' : '' }}"
+                    <input type="string" class="form-control {{ $errors->has('no_pekerja') ? 'is-invalid' : '' }}"
                         id="no_pekerja" name="no_pekerja" value="{{ old('no_pekerja') }}">
                     @if ($errors->has('no_pekerja'))
                         <div class="invalid-feedback">
@@ -51,13 +51,28 @@
                     @endif
                 </div>
 
+                
                 <div class="mb-3">
-                    <label for="email" class="form-label">Alamat Emel</label>
-                    <input type="text" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
-                        id="email" name="email" value="{{ old('email') }}">
-                    @if ($errors->has('email'))
+                    <label class="form-label">Jenis Pengguna</label>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input {{ $errors->has('type') ? 'is-invalid' : '' }}"
+                            id="typeStaf" name="type" value="Staf"
+                            {{ old('type', $staff->type ?? '') == 'Staf' ? 'checked' : '' }} required>
+                        <label class="form-check-label" for="typeStaf">
+                            Staf
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input {{ $errors->has('type') ? 'is-invalid' : '' }}"
+                            id="typeBukanStaf" name="type" value="Bukan Staf"
+                            {{ old('type', $staff->type ?? '') == 'Bukan Staf' ? 'checked' : '' }}>
+                        <label class="form-check-label" for="typeBukanStaf">
+                            Bukan Staf
+                        </label>
+                    </div>
+                    @if ($errors->has('type'))
                         <div class="invalid-feedback">
-                            @foreach ($errors->get('email') as $error)
+                            @foreach ($errors->get('type') as $error)
                                 {{ $error }}
                             @endforeach
                         </div>
@@ -92,11 +107,24 @@
                 </div>
 
                 <div class="mb-3">
+                    <label for="email" class="form-label">Alamat Emel</label>
+                    <input type="text" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
+                        id="email" name="email" value="{{ old('email') }}">
+                    @if ($errors->has('email'))
+                        <div class="invalid-feedback">
+                            @foreach ($errors->get('email') as $error)
+                                {{ $error }}
+                            @endforeach
+                        </div>
+                    @endif
+                </div>
+
+                <div class="mb-3">
                     <label class="form-label">Kategori</label>
                     <div class="form-check">
                         <input type="radio" class="form-check-input {{ $errors->has('category') ? 'is-invalid' : '' }}"
                             id="categoryAcademic" name="category" value="Staf Akademik"
-                            {{ old('category', $staff->category ?? '') == 'Staf Akademik' ? 'checked' : '' }} required>
+                            {{ old('category', $staff->category ?? '') == 'Staf Akademik' ? 'checked' : '' }}>
                         <label class="form-check-label" for="categoryAcademic">
                             Staf Akademik
                         </label>
@@ -161,7 +189,7 @@
                 <div class="mb-3">
                     <label for="club" class="form-label">Keahlian Kelab</label>
                     <select class="form-select {{ $errors->has('club') ? 'is-invalid' : '' }}" id="club"
-                        name="club" required>
+                        name="club">
                         <option value="">Pilih Keahlian Kelab</option>
                         <option value="Ahli KEKiTA"
                             {{ old('club', $staff->club ?? '') == 'Ahli KEKiTA' ? 'selected' : '' }}>Ahli KEKiTA</option>

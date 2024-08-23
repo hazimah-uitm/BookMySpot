@@ -18,15 +18,16 @@ class StaffImport implements ToModel, WithHeadingRow
         return new Staff([
             'name'       => strtoupper($row['name']),
             'no_pekerja' => $row['no_pekerja'],
-            'email'      => $row['email'],
+            'email'      => $row['email'] ?? null,
             'attendance' => $row['attendance'],
-            'category'   => $row['category'],
-            'department' => $row['department'],
-            'campus'     => $row['campus'],
-            'club'       => $row['club'],
+            'category'   => $row['category'] ?? null,
+            'department' => $row['department'] ?? null,
+            'campus'     => $row['campus'] ?? null,
+            'club'       => $row['club'] ?? null,
             'payment' => $row['payment'] ?? null,
+            'type'     => $row['type'],
             'status'     => $row['status'] ?? "Belum Tempah",
-            'created_at' => $row['created_at'], // Ensure this matches your Excel file column
+            'created_at' => $row['created_at'],
         ]);
     }
 }

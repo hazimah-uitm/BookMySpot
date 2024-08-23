@@ -16,13 +16,13 @@ class CreateStaffTable extends Migration
         Schema::create('staff', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->integer('no_pekerja')->unique();
-            $table->string('email')->unique();
+            $table->string('no_pekerja')->unique();
+            $table->string('email')->nullable();
             $table->enum('attendance', ['Hadir', 'Tidak Hadir']);
             $table->enum('category', ['Staf Akademik', 'Staf Pentadbiran'])->nullable();
-            $table->string('department');
-            $table->string('campus');
-            $table->enum('club', ['Ahli KEKiTA', 'Ahli PEWANI', 'Bukan Ahli  (Bayaran RM20 dikenakan)']);
+            $table->string('department')->nullable();
+            $table->string('campus')->nullable();
+            $table->enum('club', ['Ahli KEKiTA', 'Ahli PEWANI', 'Bukan Ahli  (Bayaran RM20 dikenakan)'])->nullable();
             $table->string('payment')->nullable();
             $table->enum('type', ['Staf', 'Bukan Staf']);
             $table->enum('status', ['Belum Tempah', 'Selesai Tempah'])->default('Belum Tempah');

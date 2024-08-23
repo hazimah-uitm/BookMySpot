@@ -73,6 +73,10 @@
                             </td>
                         </tr>
                         <tr>
+                            <th>Jenis Pengguna</th>
+                            <td>{{ $staff->type }}</td>
+                        </tr>
+                        <tr>
                             <th>Status</th>
                             <td>
                                 @if ($staff->status == 'Belum Tempah')

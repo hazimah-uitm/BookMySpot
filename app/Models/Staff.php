@@ -31,6 +31,7 @@ class Staff extends Model
         'campus',
         'club',
         'payment',
+        'type',
         'status',
         'created_at',
     ];

@@ -80,7 +80,7 @@
                             <th>Nama</th>
                             <th>No. Pekerja</th>
                             <th>Kehadiran</th>
-                            <th>Kampus</th>
+                            <th>Jenis Pengguna</th>
                             <th>Status</th>
                             <th>Tindakan</th>
                         </tr>
@@ -94,7 +94,7 @@
                                     <td>{{ ucfirst($staff->name) }}</td>
                                     <td>{{ $staff->no_pekerja }}</td>
                                     <td>{{ $staff->attendance }}</td>
-                                    <td>{{ $staff->campus }}</td>
+                                    <td>{{ $staff->type }}</td>
                                     <td>
                                         @if ($staff->status == 'Belum Tempah')
                                             <span class="badge bg-warning">Belum Tempah</span>

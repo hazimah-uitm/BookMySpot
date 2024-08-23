@@ -49,25 +49,22 @@ class StaffController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'email' => 'required|unique:staff,email',
+            'email' => 'nullable',
             'name' => 'required',
             'no_pekerja' => 'required|unique:staff,no_pekerja',
             'attendance' => 'required|in:Hadir,Tidak Hadir',
             'category' => 'nullable|in:Staf Akademik,Staf Pentadbiran',
-            'department' => 'required',
-            'campus' => 'required',
-            'club' => 'required|in:Ahli KEKiTA,Ahli PEWANI,Bukan Ahli  (Bayaran RM20 dikenakan)',
+            'department' => 'nullable',
+            'campus' => 'nullable',
+            'club' => 'nullable|in:Ahli KEKiTA,Ahli PEWANI,Bukan Ahli  (Bayaran RM20 dikenakan)',
             'payment' => 'nullable',
+            'type' => 'required|in:Staf,Bukan Staf',
             'status' => 'required|in:Belum Tempah,Selesai Tempah',
         ],[
-            'email.unique' => 'Emel sudah wujud',
             'name.required' => 'Sila isi Nama',
             'no_pekerja.unique' => 'No. Pekerja telah wujud',
             'attendance.required' => 'Sila sahkan kehadiran',
-            'category.required' => 'Sila isi kategori staf',
-            'department.required' => 'Sila isi unit/bahagian staf',
-            'campus.required' => 'Sila isi kampus staf',
-            'club.required' => 'Sila isi keahlian kelab',
+            'type.required' => 'Sila isi jenis pengguna',
             'status.required' => 'Sila pilih Status',
         ]);
 
@@ -103,25 +100,22 @@ class StaffController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'email' => ['required', Rule::unique('staff', 'email')->ignore($id)],
+            'email' => 'nullable',
             'name' => 'required',
             'no_pekerja' => ['required', Rule::unique('staff', 'no_pekerja')->ignore($id)],
             'attendance' => 'required|in:Hadir,Tidak Hadir',
-            'category' => 'required|in:Staf Akademik,Staf Pentadbiran',
-            'department' => 'required',
-            'campus' => 'required',
-            'club' => 'required|in:Ahli KEKiTA,Ahli PEWANI,Bukan Ahli  (Bayaran RM20 dikenakan)',
+            'category' => 'nullable|in:Staf Akademik,Staf Pentadbiran',
+            'department' => 'nullable',
+            'campus' => 'nullable',
+            'club' => 'nullable|in:Ahli KEKiTA,Ahli PEWANI,Bukan Ahli  (Bayaran RM20 dikenakan)',
             'payment' => 'nullable',
+            'type' => 'required|in:Staf,Bukan Staf',
             'status' => 'required|in:Belum Tempah,Selesai Tempah',
         ],[
-            'email.unique' => 'Emel sudah wujud',
             'name.required' => 'Sila isi Nama',
             'no_pekerja.unique' => 'No. Pekerja telah wujud',
             'attendance.required' => 'Sila sahkan kehadiran',
-            'category.required' => 'Sila isi kategori staf',
-            'department.required' => 'Sila isi unit/bahagian staf',
-            'campus.required' => 'Sila isi kampus staf',
-            'club.required' => 'Sila isi keahlian kelab',
+            'type.required' => 'Sila isi jenis pengguna',
             'status.required' => 'Sila pilih Status',
         ]);
     
