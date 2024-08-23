@@ -74,7 +74,7 @@
                     <option value="">Sila pilih No. Meja</option>
                     @foreach ($tables as $table)
                         <option value="{{ $table->id }}" {{ old('table_id') == $table->id ? 'selected' : '' }}>
-                            {{ $table->table_no }} <!-- or any attribute that represents the table -->
+                            {{ $table->table_no }}
                         </option>
                     @endforeach
                 </select>

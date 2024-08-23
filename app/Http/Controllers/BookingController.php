@@ -28,7 +28,7 @@ class BookingController extends Controller
             ->where('status', 'Belum Tempah')
             ->get();
 
-        $tables = Table::where('status', 'Tersedia');
+        $tables = Table::where('status', 'Tersedia')->get();
         return view('pages.booking.create', [
             'save_route' => route('booking.store'),
             'str_mode' => 'Tambah',

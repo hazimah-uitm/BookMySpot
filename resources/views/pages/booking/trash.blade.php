@@ -8,7 +8,7 @@
             <ol class="breadcrumb mb-0 p-0">
                 <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="bx bx-home-alt"></i></a>
                 </li>
-                <li class="breadcrumb-item"><a href="{{ route('staff') }}"></i>Senarai Pengguna</a>
+                <li class="breadcrumb-item"><a href="{{ route('booking') }}"></i>Senarai Pengguna</a>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">Senarai Pengguna Dipadam</li>
             </ol>
@@ -32,26 +32,26 @@
                 </thead>
                 <tbody>
                     @if (count($trashList) > 0)
-                    @foreach ($trashList as $staff)
+                    @foreach ($trashList as $booking)
                     <tr>
-                        <td>{{ ucfirst($staff->name) }}</td>
-                        <td>{{ $staff->no_pekerja }}</td>
+                        <td>{{ ucfirst($booking->staff->name) }}</td>
+                        <td>{{ $booking->staff->no_pekerja }}</td>
                         <td>
-                            @if ($staff->status == 'Belum Tempah')
+                            @if ($booking->status == 'Belum Tempah')
                             <span class="badge bg-warning">Belum Tempah</span>
                             @else
                             <span class="badge bg-success">Selesai Tempah</span>
                             @endif
                         </td>
                         <td>
-                            <a href="{{ route('staff.restore', $staff->id) }}" class="btn btn-success btn-sm"
+                            <a href="{{ route('booking.restore', $booking->id) }}" class="btn btn-success btn-sm"
                                 data-bs-toggle="tooltip" data-bs-placement="bottom" title="Kembalikan">
                                 <i class="bx bx-undo"></i>
                             </a>
                             <a type="button" data-bs-toggle="tooltip" data-bs-placement="bottom"
                                 data-bs-title="Padam">
                                 <span class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#deleteModal{{ $staff->id }}"><i
+                                    data-bs-target="#deleteModal{{ $booking->id }}"><i
                                         class="bx bx-trash"></i></span>
                             </a>
                         </td>
@@ -66,7 +66,7 @@
         <div class="mt-3 d-flex justify-content-between">
             <div class="d-flex align-items-center">
                 <span class="mr-2 mx-1">Jumlah rekod per halaman</span>
-                <form action="{{ route('staff') }}" method="GET" id="perPageForm">
+                <form action="{{ route('booking') }}" method="GET" id="perPageForm">
                     <select name="perPage" id="perPage" class="form-select"
                         onchange="document.getElementById('perPageForm').submit()">
                         <option value="10" {{ Request::get('perPage') == '10' ? 'selected' : '' }}>10</option>
@@ -87,8 +87,8 @@
 </div>
 
 <!-- Delete Confirmation Modal -->
-@foreach ($trashList as $staff)
-<div class="modal fade" id="deleteModal{{ $staff->id }}" tabindex="-1" aria-labelledby="deleteModalLabel"
+@foreach ($trashList as $booking)
+<div class="modal fade" id="deleteModal{{ $booking->id }}" tabindex="-1" aria-labelledby="deleteModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -97,17 +97,17 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                @isset($staff)
+                @isset($booking)
                 Adakah anda pasti ingin memadam rekod <span style="font-weight: 600;">
-                    {{ ucfirst($staff->name) }}</span>?
+                    {{ ucfirst($booking->name) }}</span>?
                 @else
                 Tiada rekod
                 @endisset
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                @isset($staff)
-                <form class="d-inline" method="POST" action="{{ route('staff.forceDelete', $staff->id) }}">
+                @isset($booking)
+                <form class="d-inline" method="POST" action="{{ route('booking.forceDelete', $booking->id) }}">
                     {{ method_field('delete') }}
                     {{ csrf_field() }}
                     <button type="submit" class="btn btn-danger">Padam</button>
