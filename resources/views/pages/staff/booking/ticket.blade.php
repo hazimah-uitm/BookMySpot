@@ -54,7 +54,7 @@
                                 <div class="col-12 col-md-6 col-lg-4 d-flex justify-content-center align-items-center">
                                     <div
                                         class="qr-code-container d-flex justify-content-center align-items-center text-center">
-                                        <img src="{{ $booking->qr_code }}" alt="QR Code">
+                                        <img src="{{ $booking->qr_code }}" alt="QR Code" class="qr-code">
                                     </div>
                                 </div>
                             </div>

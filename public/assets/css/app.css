@@ -5,13 +5,20 @@ Email: codervent@gmail.com
 File: app.css
 */
 .qr-code-container {
-    width: 300px; /* Increased width */
-    margin: 0 auto;
+    width: 100%;
+    max-width: 300px; /* Adjust as needed */
+}
+
+.qr-code {
+	border: 2px solid #fff;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .qr-code-container img {
-    width: 100%; /* Ensure the QR code image fits the container */
-    height: auto;
+    width: 100%; /* Make image responsive to container width */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Remove any extra space below the image */
 }
 
 .ticket-card {

@@ -56,39 +56,44 @@ class StaffBookingController extends Controller
 
         // Fetch the booking from the database
         $booking = Booking::findOrFail($id);
-    
+
         // Convert the logo image to Base64
         $logoBase64 = $this->imageToBase64(public_path('assets/images/logo-malam-gala.png'));
-    
+
         // Check if the QR code exists, and generate it if not
         if (empty($booking->qr_code)) {
-            $qrCode = QrCode::size(220)->generate($booking->staff->id);
+            $qrCode = QrCode::size(250)
+                ->backgroundColor(0, 0, 0)
+                ->color(255, 255, 255)
+                ->margin(0)
+                ->generate($booking->staff->id);
             $booking->qr_code = $qrCode;
             $booking->save();
         }
-    
+
         // Initialize Dompdf
         $dompdf = new Dompdf();
-    
+
         // Load the view and pass the booking data
         $view = view('pages.staff.booking.ticket_pdf', compact('booking', 'logoBase64'))->render();
-    
+
         // Load HTML content into Dompdf
         $dompdf->loadHtml($view);
-    
+
         // Set paper size and orientation
         $dompdf->setPaper('A4', 'portrait');
-    
+
         // Render the PDF
         $dompdf->render();
-    
+
         // Stream the PDF to the browser
         return $dompdf->stream('Tiket-' . $booking->booking_no . '.pdf', [
             'Attachment' => 0 // 0 to view in browser, 1 to download
         ]);
     }
-    
-    protected function imageToBase64($imagePath) {
+
+    protected function imageToBase64($imagePath)
+    {
         $imageData = file_get_contents($imagePath);
         $base64 = base64_encode($imageData);
         $mimeType = mime_content_type($imagePath);
@@ -104,39 +109,44 @@ class StaffBookingController extends Controller
             'table_id.required' => 'Sila pilih meja untuk tempahan.',
             'table_id.exists' => 'Meja yang dipilih tidak wujud.',
         ]);
-        
+
         $table = Table::findOrFail($request->input('table_id'));
-    
+
         if ($table->available_seat <= 0) {
             return redirect()->back()->withErrors(['table_id' => 'Tiada kekosongan bagi meja ini'])->withInput();
         }
-    
+
         $booking = new Booking();
         $booking->booking_no = $this->generateBookingNumber();
         $booking->staff_id = $request->input('staff_id');
         $booking->table_id = $request->input('table_id');
-    
+
         $booking->save();
-    
+
         // Update table availability
         $table->available_seat -= 1;
         $table->status = $table->available_seat > 0 ? 'Tersedia' : 'Penuh';
         $table->save();
-    
+
         // Update staff booking status
         $staff = Staff::findOrFail($request->input('staff_id'));
         $staff->status = 'Selesai Tempah';
         $staff->save();
-    
+
         // Generate QR Code and store it as Base64
-        $qrCode = QrCode::format('png')->size(220)->generate($staff->no_pekerja);
+        $qrCode = QrCode::format('png')
+            ->size(250)
+            ->backgroundColor(0, 0, 0)
+            ->color(255, 255, 255)
+            ->margin(0)
+            ->generate($staff->no_pekerja);
         $qrCodeDataUri = 'data:image/png;base64,' . base64_encode($qrCode);
-        $booking->qr_code = $qrCodeDataUri; 
+        $booking->qr_code = $qrCodeDataUri;
         $booking->save();
-    
+
         return redirect()->route('staff.booking.view', ['id' => $booking->id])->with('success', 'Tempahan berjaya dihantar!');
     }
-    
+
 
     protected function generateBookingNumber()
     {
@@ -157,7 +167,11 @@ class StaffBookingController extends Controller
 
         // Check if the QR code exists, and generate it if not
         if (empty($booking->qr_code)) {
-            $qrCode = QrCode::size(220)->generate($booking->staff->id);
+            $qrCode = QrCode::size(250)
+            ->backgroundColor(0, 0, 0)
+            ->color(255, 255, 255)
+            ->margin(0)
+            ->generate($booking->staff->id);
             $booking->qr_code = $qrCode;
             $booking->save();
         }
