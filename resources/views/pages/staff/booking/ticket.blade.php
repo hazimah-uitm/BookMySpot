@@ -14,20 +14,18 @@
                                 <div class="col-12 col-md-8">
                                     <div class="ticket-info">
                                         <div class="ticket-header mb-4">
-                                            <div
-                                                class="d-flex justify-content-between align-items-center flex-column flex-md-row text-center text-md-start mb-2">
-                                                <div class="mb-2 mb-md-0">
-                                                    <img src="{{ asset('public/assets/images/logo-malam-gala.png') }}"
-                                                        alt="Logo Malam Gala" class="img-fluid mx-auto d-block"
-                                                        style="max-height: 90px; width: auto;">
-                                                </div>
-                                                <div>
-                                                    <h5 class="text-uppercase">No. Meja: {{ $booking->table->table_no }}
-                                                    </h5>
-                                                </div>
+                                            <div class="text-center">
+                                                <!-- Center the logo within the parent container -->
+                                                <img src="{{ asset('public/assets/images/logo-malam-gala.png') }}"
+                                                    alt="Logo Malam Gala" class="img-fluid mx-auto d-block mb-2"
+                                                    style="max-height: 90px; width: auto;">
                                             </div>
                                         </div>
                                         <table class="table table-borderless mb-0">
+                                            <tr>
+                                                <th class="text-uppercase">No. Meja</th>
+                                                <td>{{ $booking->table->table_no }}</td>
+                                            </tr>
                                             <tr>
                                                 <th class="text-uppercase">Nama</th>
                                                 <td>{{ $booking->staff->name }}</td>
@@ -60,7 +58,7 @@
                                 <div class="col-12 col-md-6 col-lg-4 d-flex justify-content-center align-items-center">
                                     <div
                                         class="qr-code-container d-flex justify-content-center align-items-center text-center">
-                                         <img src="{{ $booking->qr_code }}" alt="QR Code">
+                                        <img src="{{ $booking->qr_code }}" alt="QR Code">
                                     </div>
                                 </div>
                             </div>
@@ -139,54 +137,66 @@
     </div>
     <!--end wrapper-->
     <style>
-    .qr-code-container {
-    width: 300px; /* Increased width */
-    margin: 0 auto;
-}
+        .qr-code-container {
+            width: 300px;
+            /* Increased width */
+            margin: 0 auto;
+        }
 
-.qr-code-container img {
-    width: 100%; /* Ensure the QR code image fits the container */
-    height: auto;
-}
+        .qr-code-container img {
+            width: 100%;
+            /* Ensure the QR code image fits the container */
+            height: auto;
+        }
 
-.ticket-card {
-	border-radius: 15px;
-	background-color: #000; /* Black background */
-	padding: 15px;
-	color: #fff; /* White text color */
-}
+        .ticket-card {
+            border-radius: 15px;
+            background-color: #000;
+            /* Black background */
+            padding: 15px;
+            color: #fff;
+            /* White text color */
+        }
 
-.ticket-info h4, .ticket-info h5 {
-	color: #fff; /* White text color */
-	margin-bottom: 10px;
-}
+        .ticket-info h4,
+        .ticket-info h5 {
+            color: #fff;
+            /* White text color */
+            margin-bottom: 10px;
+        }
 
-.ticket-info th {
-	width: 40%;
-	color: #ccc; /* Silver text color */
-}
+        .ticket-info th {
+            width: 40%;
+            color: #ccc;
+            /* Silver text color */
+        }
 
-.ticket-info td {
-	color: #fff; /* White text color */
-}
+        .ticket-info td {
+            color: #fff;
+            /* White text color */
+        }
 
-.ticket-logo img, .ticket-barcode img {
-	border-radius: 10px;
-	margin-top: 20px;
-}
+        .ticket-logo img,
+        .ticket-barcode img {
+            border-radius: 10px;
+            margin-top: 20px;
+        }
 
-.ticket-footer {
-	padding: 10px 0;
-	border-top: 1px solid #ccc; /* Silver border color */
-	margin-top: 20px;
-	color: #fff; /* White text color */
-}
+        .ticket-footer {
+            padding: 10px 0;
+            border-top: 1px solid #ccc;
+            /* Silver border color */
+            margin-top: 20px;
+            color: #fff;
+            /* White text color */
+        }
 
-.ticket-header {
-	padding: 10px 0;
-	border-bottom: 1px solid #ccc; /* Silver border color */
-	color: #fff; /* White text color */
-}
-
-</style>
+        .ticket-header {
+            padding: 10px 0;
+            border-bottom: 1px solid #ccc;
+            /* Silver border color */
+            color: #fff;
+            /* White text color */
+        }
+    </style>
 @endsection
