@@ -62,8 +62,6 @@ class StaffBookingController extends Controller
         // Generate QR code if it doesn't exist
         if (empty($booking->qr_code)) {
             $qrCode = QrCode::size(250)
-                ->backgroundColor(0, 0, 0)
-                ->color(255, 255, 255)
                 ->margin(0)
                 ->generate($booking->staff->id);
             $booking->qr_code = $qrCode;
@@ -83,8 +81,7 @@ class StaffBookingController extends Controller
         return $dompdf->stream('Tiket-' . $booking->booking_no . '.pdf', [
             'Attachment' => 0
         ]);
-    }
-    
+    }  
 
     protected function imageToBase64($imagePath)
     {
@@ -130,8 +127,6 @@ class StaffBookingController extends Controller
         // Generate QR Code and store it as Base64
         $qrCode = QrCode::format('png')
             ->size(250)
-            ->backgroundColor(0, 0, 0)
-            ->color(255, 255, 255)
             ->margin(0)
             ->generate($staff->no_pekerja);
         $qrCodeDataUri = 'data:image/png;base64,' . base64_encode($qrCode);
@@ -162,8 +157,6 @@ class StaffBookingController extends Controller
         // Check if the QR code exists, and generate it if not
         if (empty($booking->qr_code)) {
             $qrCode = QrCode::size(250)
-            ->backgroundColor(0, 0, 0)
-            ->color(255, 255, 255)
             ->margin(0)
             ->generate($booking->staff->id);
             $booking->qr_code = $qrCode;
