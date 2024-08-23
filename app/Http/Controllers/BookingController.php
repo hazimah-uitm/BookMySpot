@@ -71,8 +71,6 @@ class BookingController extends Controller
         // Generate QR Code and store it as Base64
         $qrCode = QrCode::format('png')
         ->size(250)
-        ->backgroundColor(0, 0, 0)
-        ->color(255, 255, 255)
         ->margin(0)
         ->generate($staff->no_pekerja);
         $qrCodeDataUri = 'data:image/png;base64,' . base64_encode($qrCode);
@@ -131,8 +129,6 @@ class BookingController extends Controller
         $staff = Staff::findOrFail($request->input('staff_id')); // Ensure staff is loaded
         $qrCode = QrCode::format('png')
         ->size(250)
-        ->backgroundColor(0, 0, 0)
-        ->color(255, 255, 255)
         ->margin(0)
         ->generate($staff->no_pekerja);
         $qrCodeDataUri = 'data:image/png;base64,' . base64_encode($qrCode);

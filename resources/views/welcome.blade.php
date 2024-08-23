@@ -23,7 +23,7 @@
                                 id="no_pekerja" name="no_pekerja" placeholder="Sila Masukkan No. Pekerja Anda"
                                 value="{{ old('no_pekerja') }}">
                         </div>
-                        <button type="submit" class="btn btn-primary">Semak</button>
+                        <button type="submit" class="btn btn-info">SEMAK</button>
                     </form>
 
                     @if ($errors->any())

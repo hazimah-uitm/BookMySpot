@@ -83,7 +83,7 @@
         }
 
         .qr-code-container img {
-            width: 300px;
+            width: 330px;
             height: auto;
             display: block;
             margin: 0 auto;
