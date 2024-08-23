@@ -26,7 +26,7 @@
                                     name="no_pekerja" placeholder="Sila Masukkan No. Pekerja Anda"
                                     value="{{ old('no_pekerja') }}" autofocus>
                             </div>
-                            <button type="submit" class="btn btn-primary">Hantar</button>
+                            <button type="submit" class="btn btn-primary">HANTAR</button>
                         </form>
 
                         @if ($errors->any())
