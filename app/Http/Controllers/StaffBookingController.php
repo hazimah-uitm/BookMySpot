@@ -53,19 +53,12 @@ class StaffBookingController extends Controller
 
     public function printTicket($id)
     {
-        // Function to convert image to Base64
-        function imageToBase64($imagePath) {
-            $imageData = file_get_contents($imagePath);
-            $base64 = base64_encode($imageData);
-            $mimeType = mime_content_type($imagePath);
-            return 'data:' . $mimeType . ';base64,' . $base64;
-        }
-    
+
         // Fetch the booking from the database
         $booking = Booking::findOrFail($id);
     
         // Convert the logo image to Base64
-        $logoBase64 = imageToBase64(public_path('public/assets/images/logo-malam-gala.png'));
+        $logoBase64 = $this->imageToBase64(public_path('public/assets/images/logo-malam-gala.png'));
     
         // Check if the QR code exists, and generate it if not
         if (empty($booking->qr_code)) {
@@ -95,6 +88,12 @@ class StaffBookingController extends Controller
         ]);
     }
     
+    protected function imageToBase64($imagePath) {
+        $imageData = file_get_contents($imagePath);
+        $base64 = base64_encode($imageData);
+        $mimeType = mime_content_type($imagePath);
+        return 'data:' . $mimeType . ';base64,' . $base64;
+    }
 
     public function store(Request $request)
     {
