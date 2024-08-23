@@ -6,7 +6,6 @@ File: app.css
 */
 
 .ticket-card {
-	border: 2px dashed #ccc;
 	border-radius: 15px;
 	background-color: #000; /* Black background */
 	padding: 15px;
@@ -34,7 +33,7 @@ File: app.css
 
 .ticket-footer {
 	padding: 10px 0;
-	border-top: 2px dashed #ccc; /* Silver border color */
+	border-top: 1px solid #ccc; /* Silver border color */
 	margin-top: 20px;
 	color: #fff; /* White text color */
 }
@@ -52,13 +51,6 @@ File: app.css
 	padding: 5px;
 	border-radius: 10px;
 	width: 100%;
-}
-
-.ticket-barcode img {
-	border-radius: 10px;
-	margin-top: 20px;
-	max-width: 120px;
-	height: auto;
 }
 
 .hall-layout {

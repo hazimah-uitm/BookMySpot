@@ -18,6 +18,7 @@ class CreateBookingsTable extends Migration
             $table->string('booking_no')->unique();
             $table->unsignedBigInteger('staff_id')->unique();
             $table->unsignedBigInteger('table_id');
+            $table->text('qr_code')->nullable();
             $table->softDeletes();
             $table->timestamps();
 

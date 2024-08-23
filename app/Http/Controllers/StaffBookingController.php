@@ -7,6 +7,8 @@ use App\Models\Staff;
 use App\Models\Table;
 use Illuminate\Http\Request;
 use Dompdf\Dompdf;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
 class StaffBookingController extends Controller
 {
     public function showForm()
@@ -42,7 +44,7 @@ class StaffBookingController extends Controller
             $tables = Table::orderBy('table_no', 'asc')->where('type', 'Terbuka')->get();
             return view('pages.staff.booking.ticket', [
                 'booking' => $booking,
-                'tables' => $tables, // Ensure $tables is passed here
+                'tables' => $tables, 
             ]);
         }
     
@@ -87,7 +89,6 @@ class StaffBookingController extends Controller
             'table_id.exists' => 'Meja yang dipilih tidak wujud.',
         ]);
         
-    
         $table = Table::findOrFail($request->input('table_id'));
     
         if ($table->available_seat <= 0) {
@@ -101,13 +102,20 @@ class StaffBookingController extends Controller
     
         $booking->save();
     
+        // Update table availability
         $table->available_seat -= 1;
         $table->status = $table->available_seat > 0 ? 'Tersedia' : 'Penuh';
         $table->save();
     
+        // Update staff booking status
         $staff = Staff::findOrFail($request->input('staff_id'));
         $staff->status = 'Selesai Tempah';
         $staff->save();
+    
+        // Generate QR Code and store it
+        $qrCode = QrCode::size(200)->generate($staff->no_pekerja);
+        $booking->qr_code = $qrCode; 
+        $booking->save();
     
         return redirect()->route('staff.booking.view', ['id' => $booking->id])->with('success', 'Tempahan berjaya dihantar!');
     }
@@ -129,10 +137,20 @@ class StaffBookingController extends Controller
     public function show($id)
     {
         $booking = Booking::findOrFail($id);
+    
+        // Check if the QR code exists, and generate it if not
+        if (empty($booking->qr_code)) {
+            $qrCode = QrCode::size(200)->generate($booking->staff->id);
+            $booking->qr_code = $qrCode;
+            $booking->save();
+        }
+    
         $tables = Table::orderBy('table_no', 'asc')->where('type', 'Terbuka')->get();
+    
         return view('pages.staff.booking.ticket', [
             'booking' => $booking,
             'tables' => $tables,
         ]);
     }
+    
 }

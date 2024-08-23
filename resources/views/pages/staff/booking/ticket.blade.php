@@ -13,8 +13,15 @@
                                 <!-- Left Section: Ticket Info -->
                                 <div class="col-8">
                                     <div class="ticket-info">
-                                        <h4 class="text-uppercase">Malam Gala</h4>
-                                        <h5 class="text-uppercase">No. Meja: {{ $booking->table->table_no }}</h5>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <img src="{{ asset('public/assets/images/logo-malam-gala.png') }}"
+                                                    alt="Logo Malam Gala" class="img-fluid" style="max-height: 70px;">
+                                            </div>
+                                            <div>
+                                                <h5 class="text-uppercase">No. Meja: {{ $booking->table->table_no }}</h5>
+                                            </div>
+                                        </div>
                                         <hr>
                                         <table class="table table-borderless mb-0">
                                             <tr>
@@ -53,14 +60,8 @@
 
                                 <!-- Right Section: QR Code or Logo -->
                                 <div class="col-4 text-center">
-                                    <div class="ticket-logo">
-                                        <img src="{{ asset('public/assets/images/25tahun.png') }}"
-                                            style="max-width: 100px; height: auto;" alt="25" class="img-fluid mb-2">
-                                    </div>
-                                    <div class="ticket-barcode">
-                                        <!-- QR Code Image -->
-                                        <img src="{{ asset('public/assets/images/putih.png') }}" alt="QR Code"
-                                            class="img-fluid">
+                                    <div class="qr-code-container">
+                                        {!! $booking->qr_code !!}
                                     </div>
                                 </div>
                             </div>

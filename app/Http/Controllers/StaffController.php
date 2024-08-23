@@ -53,7 +53,7 @@ class StaffController extends Controller
             'name' => 'required',
             'no_pekerja' => 'required|unique:staff,no_pekerja',
             'attendance' => 'required|in:Hadir,Tidak Hadir',
-            'category' => 'required|in:Staf Akademik,Staf Pentadbiran',
+            'category' => 'nullable|in:Staf Akademik,Staf Pentadbiran',
             'department' => 'required',
             'campus' => 'required',
             'club' => 'required|in:Ahli KEKiTA,Ahli PEWANI,Bukan Ahli  (Bayaran RM20 dikenakan)',
