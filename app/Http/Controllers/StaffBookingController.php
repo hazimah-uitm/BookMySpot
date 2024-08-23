@@ -58,7 +58,7 @@ class StaffBookingController extends Controller
         $booking = Booking::findOrFail($id);
     
         // Convert the logo image to Base64
-        $logoBase64 = $this->imageToBase64(public_path('public/assets/images/logo-malam-gala.png'));
+        $logoBase64 = $this->imageToBase64(public_path('assets/images/logo-malam-gala.png'));
     
         // Check if the QR code exists, and generate it if not
         if (empty($booking->qr_code)) {

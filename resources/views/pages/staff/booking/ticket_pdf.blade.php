@@ -94,8 +94,7 @@
     <div class="wrapper-main">
         <div class="ticket-card">
             <div class="ticket-header">
-                <img src="data:image/png;base64,{{ $logoBase64 }}" alt="Logo Malam Gala"
-                    style="max-height: 90px; width: auto;">
+               <h4>TIKET MALAM GALA</h4>
 
                 <h5>NO. MEJA: {{ $booking->table->table_no }}</h5>
             </div>
