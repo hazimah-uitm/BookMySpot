@@ -21,7 +21,26 @@
 
     <div class="card">
         <div class="card-body">
-            <form method="POST" action="{{ $save_route }}">
+            <!-- Layout Plan Accordion -->
+            <div class="accordion" id="layoutAccordion">
+                <div class="accordion-item">
+                    <h4 class="accordion-header" id="headingOne">
+                        <button class="accordion-button text-uppercase" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#collapseLayout"
+                            aria-expanded="true" aria-controls="collapseLayout">
+                            Paparan Pelan Meja Sebenar
+                        </button>
+                    </h4>
+                    <div id="collapseLayout" class="accordion-collapse collapse"
+                        aria-labelledby="headingOne" data-bs-parent="#layoutAccordion">
+                        <div class="accordion-body">
+                            <img src="{{ asset('public/assets/images/layout.jpg') }}"
+                                alt="Pelan Meja" class="img-fluid">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form method="POST" action="{{ $save_route }}" class="mt-3">
                 {{ csrf_field() }}
 
                 <div class="mb-3">
