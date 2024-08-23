@@ -33,52 +33,66 @@
     @endif
     <div class="card">
         <div class="card-body">
-            <div class="d-lg-flex align-items-center mb-4 gap-3">
-                <div class="position-relative">
+            <div class="row mb-4">
+                <div class="col-lg-6">
                     <form action="{{ route('staff.search') }}" method="GET" id="searchForm"
-                        class="d-lg-flex align-items-center mb-4 gap-3">
-                        <div class="position-relative">
-                            <div class="input-group">
-                                <input type="text" class="form-control rounded" placeholder="Carian..." name="search"
-                                    value="{{ request('search') }}" id="searchInput">
-                                <!-- Type Filter -->
-                                <select name="type" class="form-select form-select-sm ms-2" id="typeFilter">
-                                    <option value="">Pilih Jenis</option>
-                                    <option value="Staf" {{ request('type') == 'Staf' ? 'selected' : '' }}>Staf</option>
-                                    <option value="Bukan Staf" {{ request('type') == 'Bukan Staf' ? 'selected' : '' }}>Bukan
-                                        Staf
-                                    </option>
-                                </select>
+                        class="d-lg-flex align-items-center gap-3">
+                        <div class="input-group">
+                            <input type="text" class="form-control rounded" placeholder="Carian..." name="search"
+                                value="{{ request('search') }}" id="searchInput">
 
-                                <!-- Attendance Filter -->
-                                <select name="attendance" class="form-select form-select-sm ms-2" id="attendanceFilter">
-                                    <option value="">Pilih Kehadiran</option>
-                                    <option value="Hadir" {{ request('attendance') == 'Hadir' ? 'selected' : '' }}>Hadir
-                                    </option>
-                                    <option value="Tidak Hadir"
-                                        {{ request('attendance') == 'Tidak Hadir' ? 'selected' : '' }}>Tidak
-                                        Hadir</option>
-                                </select>
+                            <!-- Type Filter -->
+                            <select name="type" class="form-select form-select-sm ms-2" id="typeFilter">
+                                <option value="">Pilih Jenis</option>
+                                <option value="Staf" {{ request('type') == 'Staf' ? 'selected' : '' }}>Staf</option>
+                                <option value="Bukan Staf" {{ request('type') == 'Bukan Staf' ? 'selected' : '' }}>Bukan
+                                    Staf</option>
+                            </select>
 
-                                <!-- status Filter -->
-                                <select name="status" class="form-select form-select-sm ms-2" id="statusFilter">
-                                    <option value="">Pilih Status</option>
-                                    <option value="Selesai Tempah" {{ request('status') == 'Selesai Tempah' ? 'selected' : '' }}>Selesai Tempah
-                                    </option>
-                                    <option value="Belum Tempah"
-                                        {{ request('status') == 'Belum Tempah' ? 'selected' : '' }}>Belum Tempah</option>
-                                </select>
+                            <!-- Attendance Filter -->
+                            <select name="attendance" class="form-select form-select-sm ms-2" id="attendanceFilter">
+                                <option value="">Pilih Kehadiran</option>
+                                <option value="Hadir" {{ request('attendance') == 'Hadir' ? 'selected' : '' }}>Hadir
+                                </option>
+                                <option value="Tidak Hadir" {{ request('attendance') == 'Tidak Hadir' ? 'selected' : '' }}>
+                                    Tidak Hadir</option>
+                            </select>
 
-                                <input type="hidden" name="perPage" value="{{ request('perPage', 10) }}">
-                                <button type="submit" class="btn btn-primary ms-1 rounded" id="searchButton">
-                                    <i class="bx bx-search"></i>
-                                </button>
-                                <button type="button" class="btn btn-secondary ms-1 rounded" id="resetButton">
-                                    Reset
-                                </button>
-                            </div>
+                            <!-- Status Filter -->
+                            <select name="status" class="form-select form-select-sm ms-2" id="statusFilter">
+                                <option value="">Pilih Status</option>
+                                <option value="Selesai Tempah"
+                                    {{ request('status') == 'Selesai Tempah' ? 'selected' : '' }}>Selesai Tempah</option>
+                                <option value="Belum Tempah" {{ request('status') == 'Belum Tempah' ? 'selected' : '' }}>
+                                    Belum Tempah</option>
+                            </select>
+
+                            <input type="hidden" name="perPage" value="{{ request('perPage', 10) }}">
+                            <button type="submit" class="btn btn-primary ms-1 rounded" id="searchButton">
+                                <i class="bx bx-search"></i>
+                            </button>
+                            <button type="button" class="btn btn-secondary ms-1 rounded" id="resetButton">
+                                Reset
+                            </button>
                         </div>
                     </form>
+                </div>
+
+                <div class="col-lg-6 d-flex justify-content-end align-items-center gap-2">
+                    <!-- Import Button and Form -->
+                    <form action="{{ route('staff.import') }}" method="POST" enctype="multipart/form-data"
+                        class="d-flex align-items-center">
+                        {{ csrf_field() }}
+                        <div class="form-group mb-0">
+                            <input type="file" name="file" class="form-control form-control-sm" required>
+                        </div>
+                        <button type="submit" class="btn btn-info ms-2">Import</button>
+                    </form>
+
+                    <!-- Tambah Button -->
+                    <a href="{{ route('staff.create') }}" class="btn btn-primary">
+                        Tambah Staf
+                    </a>
                 </div>
             </div>
 
@@ -209,19 +223,19 @@
             document.getElementById('searchInput').addEventListener('input', function() {
                 document.getElementById('searchForm').submit();
             });
-            
+
             document.getElementById('typeFilter').addEventListener('change', function() {
                 document.getElementById('searchForm').submit();
             });
-            
+
             document.getElementById('attendanceFilter').addEventListener('change', function() {
                 document.getElementById('searchForm').submit();
             });
-            
+
             document.getElementById('statusFilter').addEventListener('change', function() {
                 document.getElementById('searchForm').submit();
             });
-            
+
             // Reset form
             document.getElementById('resetButton').addEventListener('click', function() {
                 document.getElementById('searchForm').reset();
