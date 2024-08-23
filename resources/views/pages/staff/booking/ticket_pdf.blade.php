@@ -7,37 +7,58 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 30px;
-            color: #fff;
-            background-color: #000;
-            border: 2px solid #000;
-            border-radius: 10px;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            color: #000;
         }
 
-        .wrapper-main {
-            width: 100%;
-            max-width: 1000px;
+        .ticket-wrapper {
+            max-width: 800px;
             margin: 0 auto;
-        }
-
-        .ticket-card {
-            border-radius: 15px;
+            padding: 40px;
             background-color: #000;
-            padding: 15px;
             color: #fff;
+            border-radius: 15px;
+            border: 3px solid #fff;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
         }
 
         .ticket-header {
-            padding: 10px 0;
-            border-bottom: 1px solid #ccc;
-            color: #fff;
             text-align: center;
+            border-bottom: 2px groove #fff;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
         }
 
-        .ticket-info h5 {
-            color: #fff;
+        .ticket-header img {
+            width: 100px;
+            height: auto;
             margin-bottom: 10px;
+        }
+
+        .ticket-header h3 {
+            font-size: 24px;
+            margin: 0;
+            color: #fff;
+        }
+
+        .ticket-info {
+            margin-bottom: 20px;
+        }
+
+        .ticket-info table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .ticket-info th,
+        .ticket-info td {
+            padding: 10px;
+            text-align: left;
+            font-size: 18px;
         }
 
         .ticket-info th {
@@ -46,92 +67,74 @@
         }
 
         .ticket-info td {
+            font-weight: bold;
             color: #fff;
         }
 
         .ticket-footer {
-            padding: 10px 0;
-            border-top: 1px solid #ccc;
-            margin-top: 20px;
-            color: #fff;
             text-align: center;
-            margin-bottom: 3px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #ccc;
         }
 
         .qr-code-container {
             text-align: center;
-            margin: 5px 0;
-            border-radius: 10px;
         }
 
-        .qr-code {
+        .qr-code-container img {
+            width: 300px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
             border: 2px solid #fff;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
-        .qr-code-container img {
-            width: 300px;
-            /* Increased width */
-            height: auto;
-        }
-
-        table {
+        .perforated-line {
             width: 100%;
-            margin-bottom: 20px;
-            border-collapse: collapse;
-        }
-
-        table th,
-        table td {
-            padding: 10px;
-            vertical-align: top;
-            text-align: left;
-            font-size: 16px;
-        }
-
-        table th {
-            color: #ccc;
-        }
-
-        table td {
-            color: #fff;
+            border-bottom: 2px groove #fff;
+            margin: 20px 0;
         }
     </style>
 </head>
 
 <body>
-    <div class="wrapper-main">
-        <div class="ticket-card">
-            <div class="ticket-header">
-                <h3>TIKET MALAM GALA</h3>
-            </div>
-            <div class="ticket-info">
-                <table class="table table-borderless mb-0">
-                    <tr>
-                        <th>NO. MEJA</th>
-                        <td style="font-weight:bold">{{ $booking->table->table_no }}</td>
-                    </tr>
-                    <tr>
-                        <th>NAMA</th>
-                        <td>{{ $booking->staff->name }}</td>
-                    </tr>
-                    <tr>
-                        <th>NO. PEKERJA</th>
-                        <td>{{ $booking->staff->no_pekerja }}</td>
-                    </tr>
-                    <tr>
-                        <th>NO. TEMPAHAN</th>
-                        <td>{{ $booking->booking_no }}</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="ticket-footer">
-                <em>Sila imbas kod QR ini kepada urusetia semasa hadir ke Malam Gala 25 Tahun UiTM</em>
-            </div>
-            <div class="qr-code-container">
-                <img src="{{ $booking->qr_code }}" alt="QR Code" class="qr-code">
-            </div>
+    <div class="ticket-wrapper">
+        <div class="ticket-header">
+            <img src="{{ $logoBase64 }}" alt="Logo Malam Gala" style="height: 110px; width: auto;">
+        </div>
+
+        <div class="ticket-info">
+            <table>
+                <tr>
+                    <th>NO. MEJA</th>
+                    <td>{{ $booking->table->table_no }}</td>
+                </tr>
+                <tr>
+                    <th>NAMA</th>
+                    <td>{{ $booking->staff->name }}</td>
+                </tr>
+                <tr>
+                    <th>NO. PEKERJA</th>
+                    <td>{{ $booking->staff->no_pekerja }}</td>
+                </tr>
+                <tr>
+                    <th>NO. TEMPAHAN</th>
+                    <td>{{ $booking->booking_no }}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="perforated-line"></div>
+        <div class="ticket-footer">
+            <em>Sila imbas kod QR ini kepada urusetia semasa hadir ke Malam Gala 25 Tahun UiTM</em>
+        </div>
+
+
+        <div class="qr-code-container">
+            <img src="{{ $booking->qr_code }}" alt="QR Code">
         </div>
     </div>
 </body>

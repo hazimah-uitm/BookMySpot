@@ -36,10 +36,12 @@ File: app.css
 .ticket-info th {
 	width: 40%;
 	color: #ccc; /* Silver text color */
+	font-size: 1rem;
 }
 
 .ticket-info td {
 	color: #fff; /* White text color */
+	font-size: 1rem;
 }
 
 .ticket-logo img, .ticket-barcode img {
@@ -49,14 +51,14 @@ File: app.css
 
 .ticket-footer {
 	padding: 10px 0;
-	border-top: 1px solid #ccc; /* Silver border color */
+	border-top: 2px groove #ccc; /* Silver border color */
 	margin-top: 20px;
 	color: #fff; /* White text color */
 }
 
 .ticket-header {
 	padding: 10px 0;
-	border-bottom: 1px solid #ccc; /* Silver border color */
+	border-bottom: 2px groove #ccc; /* Silver border color */
 	color: #fff; /* White text color */
 }
 

@@ -53,14 +53,13 @@ class StaffBookingController extends Controller
 
     public function printTicket($id)
     {
-
         // Fetch the booking from the database
         $booking = Booking::findOrFail($id);
-
+    
         // Convert the logo image to Base64
         $logoBase64 = $this->imageToBase64(public_path('assets/images/logo-malam-gala.png'));
-
-        // Check if the QR code exists, and generate it if not
+    
+        // Generate QR code if it doesn't exist
         if (empty($booking->qr_code)) {
             $qrCode = QrCode::size(250)
                 ->backgroundColor(0, 0, 0)
@@ -70,27 +69,22 @@ class StaffBookingController extends Controller
             $booking->qr_code = $qrCode;
             $booking->save();
         }
-
-        // Initialize Dompdf
-        $dompdf = new Dompdf();
-
+    
         // Load the view and pass the booking data
         $view = view('pages.staff.booking.ticket_pdf', compact('booking', 'logoBase64'))->render();
-
-        // Load HTML content into Dompdf
+    
+        // Initialize Dompdf
+        $dompdf = new Dompdf();
         $dompdf->loadHtml($view);
-
-        // Set paper size and orientation
-        $dompdf->setPaper('A4', 'portrait');
-
-        // Render the PDF
+        $dompdf->setPaper([0, 0, 650, 690]);
         $dompdf->render();
-
+    
         // Stream the PDF to the browser
         return $dompdf->stream('Tiket-' . $booking->booking_no . '.pdf', [
-            'Attachment' => 0 // 0 to view in browser, 1 to download
+            'Attachment' => 0
         ]);
     }
+    
 
     protected function imageToBase64($imagePath)
     {

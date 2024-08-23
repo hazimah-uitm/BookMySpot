@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <div class="row justify-content-center">
                     <div class="col-12 col-lg-9">
-                        <h2 class="text-center text-uppercase mb-4">Maklumat Tempahan Meja</h2>
+                        <h2 class="text-center text-uppercase mb-4">Tiket Malam Gala</h2>
                         <div class="card ticket-card shadow-lg">
                             <div class="row">
                                 <!-- Left Section: Ticket Info -->
