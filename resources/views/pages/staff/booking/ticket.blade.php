@@ -28,15 +28,15 @@
                                             </tr>
                                             <tr>
                                                 <th class="text-uppercase">Nama</th>
-                                                <td>{{ $booking->staff->name }}</td>
+                                                <td style="font-weight:bold">{{ $booking->staff->name }}</td>
                                             </tr>
                                             <tr>
                                                 <th class="text-uppercase">No. Pekerja</th>
-                                                <td>{{ $booking->staff->no_pekerja }}</td>
+                                                <td style="font-weight:bold">{{ $booking->staff->no_pekerja }}</td>
                                             </tr>
                                             <tr>
                                                 <th class="text-uppercase">No. Tempahan</th>
-                                                <td>{{ $booking->booking_no }}</td>
+                                                <td style="font-weight:bold">{{ $booking->booking_no }}</td>
                                             </tr>
                                         </table>
 
