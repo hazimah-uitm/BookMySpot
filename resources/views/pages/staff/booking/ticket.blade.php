@@ -24,7 +24,7 @@
                                         <table class="table table-borderless mb-0">
                                             <tr>
                                                 <th class="text-uppercase">No. Meja</th>
-                                                <td>{{ $booking->table->table_no }}</td>
+                                                <td style="font-weight:bold">{{ $booking->table->table_no }}</td>
                                             </tr>
                                             <tr>
                                                 <th class="text-uppercase">Nama</th>
