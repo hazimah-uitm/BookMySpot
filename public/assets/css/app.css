@@ -4,6 +4,13 @@ Author: codervent
 Email: codervent@gmail.com
 File: app.css
 */
+.ticket-background {
+    background-image: url('../images/ticket.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 
 .hall-layout {
 	position: relative;
