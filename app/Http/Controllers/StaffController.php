@@ -63,6 +63,7 @@ class StaffController extends Controller
         ],[
             'name.required' => 'Sila isi Nama',
             'no_pekerja.unique' => 'No. Pekerja telah wujud',
+            'no_pekerja.required' => 'Sila isi No. Pekerja',
             'attendance.required' => 'Sila sahkan kehadiran',
             'type.required' => 'Sila isi jenis pengguna',
             'status.required' => 'Sila pilih Status',
@@ -70,7 +71,9 @@ class StaffController extends Controller
 
         $staff = new Staff();
 
-        $staff->fill($request->all());
+        $staff->fill($request->except(['name', 'no_pekerja']));
+        $staff->name = strtoupper($request->input('name'));
+        $staff->no_pekerja = strtoupper($request->input('no_pekerja'));
         $staff->save();
 
         return redirect()->route('staff')->with('success', 'Maklumat berjaya disimpan');
@@ -114,6 +117,7 @@ class StaffController extends Controller
         ],[
             'name.required' => 'Sila isi Nama',
             'no_pekerja.unique' => 'No. Pekerja telah wujud',
+            'no_pekerja.required' => 'Sila isi No. Pekerja',
             'attendance.required' => 'Sila sahkan kehadiran',
             'type.required' => 'Sila isi jenis pengguna',
             'status.required' => 'Sila pilih Status',
@@ -122,8 +126,9 @@ class StaffController extends Controller
         // Find the staff record by ID
         $staff = Staff::findOrFail($id);
     
-        // Update the staff record with new data
-        $staff->fill($request->all());
+        $staff->fill($request->except(['name', 'no_pekerja']));
+        $staff->name = strtoupper($request->input('name'));
+        $staff->no_pekerja = strtoupper($request->input('no_pekerja'));
         $staff->save();
     
         return redirect()->route('staff')->with('success', 'Maklumat berjaya dikemas kini');
