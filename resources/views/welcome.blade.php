@@ -31,12 +31,6 @@
                                 {{ $errors->first('no_pekerja') }}
                             </div>
                         @endif
-
-                        @if (session('success'))
-                            <div id="success-alert" class="alert alert-success mt-3 fade-out">
-                                {{ session('success') }}
-                            </div>
-                        @endif
                 </div>
             </div>
         </div>
@@ -57,7 +51,6 @@
         }
 
         fadeOut('error-alert');
-        fadeOut('success-alert');
     });
 </script>
 <!--end wrapper-->
