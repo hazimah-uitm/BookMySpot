@@ -47,24 +47,27 @@ class AttendanceController extends Controller
             'no_pekerja.required' => 'Sila isi No. Pekerja',
             'no_pekerja.exists' => 'No. Pekerja tiada padanan dalam sistem',
         ]);
-
+    
         $staff = Staff::where('no_pekerja', $request->input('no_pekerja'))->firstOrFail();
-
-        $existingAttendance = Attendance::where('no_pekerja', $staff->no_pekerja)->first();
-
-        if ($existingAttendance) {
+    
+        $existingAttendance = Attendance::withTrashed() 
+            ->where('no_pekerja', $staff->no_pekerja)
+            ->first();
+    
+        if ($existingAttendance && !$existingAttendance->trashed()) {
             return redirect()->back()->withErrors(['no_pekerja' => 'Rekod kehadiran untuk No. Pekerja ini sudah wujud']);
         }
-
+    
         $attendance = new Attendance();
         $attendance->no_pekerja = $staff->no_pekerja;
         $attendance->name = $staff->name;
         $attendance->check_in = now();
         $attendance->type = $staff->type;
         $attendance->save();
-
+    
         return redirect()->back()->with('success', 'Kehadiran berjaya direkod!');
     }
+    
 
     public function search(Request $request)
     {

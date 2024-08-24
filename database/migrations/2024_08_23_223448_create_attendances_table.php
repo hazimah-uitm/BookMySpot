@@ -15,7 +15,7 @@ class CreateAttendancesTable extends Migration
     {
         Schema::create('attendances', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('no_pekerja')->unique();
+            $table->string('no_pekerja');
             $table->string('name');
             $table->enum('type', ['Staf', 'Bukan Staf']);
             $table->dateTime('check_in');
