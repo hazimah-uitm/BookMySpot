@@ -135,7 +135,9 @@ class AttendanceController extends Controller
     public function export(Request $request)
     {
         $type = $request->input('type');
-
-        return Excel::download(new AttendanceExport($type), 'attendance.xlsx');
+        
+        $filename = 'Kehadiran-Malam-Gala-2024.xlsx';
+    
+        return Excel::download(new AttendanceExport($type), $filename);
     }
 }

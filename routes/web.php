@@ -143,7 +143,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/attendance/{id}/restore', 'AttendanceController@restore')->name('attendance.restore');
     Route::delete('/attendance/{id}/force-delete', 'AttendanceController@forceDelete')->name('attendance.forceDelete');
     Route::get('/attendance/export', function (Request $request) {
-        return Excel::download(new AttendanceExport($request->input('type')), 'attendance.xlsx');
+        return Excel::download(new AttendanceExport($request->input('type')), 'Kehadiran-Malam-Gala-2024.xlsx');
     })->name('attendance.export');
 
 });
