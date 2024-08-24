@@ -14,14 +14,14 @@
         <a href="{{ url('/') }}" target="_blank">
             <div class="parent-icon"><i class='bx bx-home'></i>
             </div>
-            <div class="menu-title">Laman Utama</div>
+            <div class="menu-title text-uppercase text-uppercase">Laman Utama</div>
         </a>
     </li>
     <li>
         <a href="{{ route('home') }}">
             <div class="parent-icon"><i class='bx bxs-dashboard' ></i>
             </div>
-            <div class="menu-title">Dashboard</div>
+            <div class="menu-title text-uppercase">Dashboard</div>
         </a>
     </li>
 
@@ -29,7 +29,7 @@
     <li>
         <a href="{{ route('activity-log') }}">
             <div class="parent-icon"><i class='bx bx-history'></i></div>
-            <div class="menu-title">Log Aktiviti</div>
+            <div class="menu-title text-uppercase">Log Aktiviti</div>
         </a>
     </li>
     <li class="menu-label">Pengurusan Pengguna</li>
@@ -37,14 +37,14 @@
         <a href="{{ route('user') }}">
             <div class="parent-icon"><i class='bx bx-user-circle'></i>
             </div>
-            <div class="menu-title">Pengguna</div>
+            <div class="menu-title text-uppercase">Pengguna</div>
         </a>
     </li>
     <li>
         <a href="{{ route('user-role') }}">
             <div class="parent-icon"><i class='bx bx-shield'></i>
             </div>
-            <div class="menu-title">Peranan Pengguna</div>
+            <div class="menu-title text-uppercase">Peranan Pengguna</div>
         </a>
     </li>
     @endrole
@@ -54,7 +54,7 @@
         <a href="{{ route('attendance') }}">
             <div class="parent-icon"><i class='bx bx-check-circle'></i>
             </div>
-            <div class="menu-title">Senarai Kehadiran</div>
+            <div class="menu-title text-uppercase">Senarai Kehadiran</div>
         </a>
     </li>
 
@@ -62,7 +62,7 @@
         <a href="{{ route('staff') }}">
             <div class="parent-icon"><i class='bx bx-user-circle'></i>
             </div>
-            <div class="menu-title">Senarai Staf</div>
+            <div class="menu-title text-uppercase">Senarai Staf</div>
         </a>
     </li>
 
@@ -70,7 +70,7 @@
         <a href="{{ route('booking') }}">
             <div class="parent-icon"><i class='bx bx-calendar-check'></i>
             </div>
-            <div class="menu-title">Senarai Tempahan</div>
+            <div class="menu-title text-uppercase">Senarai Tempahan</div>
         </a>
     </li>
 
@@ -78,7 +78,7 @@
     <li>
         <a href="{{ route('table') }}">
             <div class="parent-icon"><i class='bx bx-table'></i> </div>
-            <div class="menu-title">Meja</div>
+            <div class="menu-title text-uppercase">Meja</div>
         </a>
     </li>
     @role('Superadmin')
@@ -86,7 +86,7 @@
         <a class="has-arrow">
             <div class="parent-icon"><i class='bx bx-location-plus'></i>
             </div>
-            <div class="menu-title">Lokasi</div>
+            <div class="menu-title text-uppercase">Lokasi</div>
         </a>
         <ul>
             <li>
@@ -98,7 +98,7 @@
         <a class="has-arrow">
             <div class="parent-icon"><i class="bx bx-cog"></i>
             </div>
-            <div class="menu-title">Tetapan Umum</div>
+            <div class="menu-title text-uppercase">Tetapan Umum</div>
         </a>
         <ul>
             <li>
@@ -109,7 +109,7 @@
     <li>
         <a href="{{ route('logs.debug') }}">
             <div class="parent-icon"><i class='bx bxs-bug'></i></div>
-            <div class="menu-title">Debug Log</div>
+            <div class="menu-title text-uppercase">Debug Log</div>
         </a>
     </li>
     @endrole
