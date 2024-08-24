@@ -72,15 +72,15 @@ class StaffBookingController extends Controller
                 ->where('type', 'Terbuka')
                 ->get();
     
+            // Add a success message
             return view('pages.staff.booking.ticket', [
                 'booking' => $booking,
                 'tables' => $tables,
-            ]);
+            ])->with('success', 'Tempahan anda telah berjaya disahkan.');
         }
     
         return redirect()->back()->withErrors(['no_pekerja' => 'Harap maaf. Status kehadiran RSVP anda adalah tidak hadir.'])->withInput();
     }
-    
     
 
     public function printTicket($id)

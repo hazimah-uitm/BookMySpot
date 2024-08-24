@@ -27,22 +27,22 @@
                         <a class="nav-link text-uppercase" href="{{ route('login') }}">Log Masuk Admin</a>
                     </li>
                     @role('Superadmin|Admin')
-                    <li class="nav-item">
-                        <form action="{{ route('attendance.create') }}" method="get" class="d-inline">
-                            <button type="submit" class="nav-link btn btn-link text-uppercase">Kehadiran</button>
-                        </form>
-                    </li>
-                    <li class="nav-item">
-                        <form action="{{ route('home') }}" method="get" class="d-inline">
-                            <button type="submit" class="nav-link btn btn-link text-uppercase">Dashboard</button>
-                        </form>
-                    </li>
-                    <li class="nav-item">
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-inline">
-                            {{ csrf_field() }}
-                            <button type="submit" class="nav-link btn btn-link text-uppercase">Log Keluar</button>
-                        </form>
-                    </li>
+                        <li class="nav-item">
+                            <form action="{{ route('attendance.create') }}" method="get" class="d-inline">
+                                <button type="submit" class="nav-link btn btn-link text-uppercase">Kehadiran</button>
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <form action="{{ route('home') }}" method="get" class="d-inline">
+                                <button type="submit" class="nav-link btn btn-link text-uppercase">Dashboard</button>
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-inline">
+                                {{ csrf_field() }}
+                                <button type="submit" class="nav-link btn btn-link text-uppercase">Log Keluar</button>
+                            </form>
+                        </li>
                     @endrole
                 </ul>
             </div>
@@ -61,12 +61,32 @@
 
         <!-- JavaScript to show the message after the page is loaded -->
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
+            document.addEventListener('DOMContentLoaded', function() {
                 var floatingMessage = document.getElementById('floating-success-message');
                 floatingMessage.style.display = 'block';
-                setTimeout(function () {
+                setTimeout(function() {
                     floatingMessage.style.display = 'none';
                 }, 4500); // Adjust the timeout (in milliseconds) based on how long you want the message to be visible
+            });
+        </script>
+    @endif
+    @if (session('error'))
+        <div id="floating-error-message" class="position-fixed top-0 start-50 translate-middle-x p-3"
+            style="z-index: 11; display: none; animation: fadeInUp 0.5s ease-out;">
+            <div class="alert alert-danger alert-dismissible fade show bg-light bg-opacity-75" role="alert">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>
+
+        <!-- JavaScript to show the message after the page is loaded -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var floatingMessage = document.getElementById('floating-error-message');
+                floatingMessage.style.display = 'block';
+                setTimeout(function() {
+                    floatingMessage.style.display = 'none';
+                }, 4500);
             });
         </script>
     @endif
@@ -82,8 +102,8 @@
     <script src="{{ asset('public/assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js') }}"></script>
     <!--Password show & hide js -->
     <script>
-        $(document).ready(function () {
-            $("#show_hide_password a").on('click', function (event) {
+        $(document).ready(function() {
+            $("#show_hide_password a").on('click', function(event) {
                 event.preventDefault();
                 if ($('#show_hide_password input').attr("type") == "text") {
                     $('#show_hide_password input').attr('type', 'password');
@@ -97,7 +117,7 @@
             });
         });
 
-        $("#show_hide_password_confirm a").on('click', function (event) {
+        $("#show_hide_password_confirm a").on('click', function(event) {
             event.preventDefault();
             if ($('#show_hide_password_confirm input').attr("type") == "text") {
                 $('#show_hide_password_confirm input').attr('type', 'password');
