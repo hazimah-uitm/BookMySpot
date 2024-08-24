@@ -10,35 +10,42 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg fixed-top custom-navbar">
         <div class="container">
-            <a class="navbar-brand fs-6 fs-sm-5 fs-md-4 fs-lg-2 text-uppercase" href="{{ url('/') }}">Tempahan Meja Malam Gala</a>
+            <a class="navbar-brand fs-6 fs-sm-5 fs-md-4 fs-lg-2 text-uppercase" href="{{ url('/') }}">Tempahan Meja
+                Malam Gala</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <form action="{{ url('/') }}" method="get" class="d-inline">
+                            <button type="submit" class="nav-link btn btn-link text-uppercase">Tempah Meja</button>
+                        </form>
+                    </li>
                     @guest
-                    <li class="nav-item">
-                        <a class="nav-link text-uppercase" href="{{ route('login') }}">Log Masuk Admin</a>
-                    </li>
-                    @else
-                    <li class="nav-item">
-                        <form action="{{ route('attendance.create') }}" method="get" class="d-inline">
-                            <button type="submit" class="nav-link btn btn-link text-uppercase">Kehadiran</button>
-                        </form>
-                    </li>
-                    <li class="nav-item">
-                        <form action="{{ route('home') }}" method="get" class="d-inline">
-                            <button type="submit" class="nav-link btn btn-link text-uppercase">Dashboard</button>
-                        </form>
-                    </li>
-                    <li class="nav-item">
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-inline">
-                            {{ csrf_field() }}
-                            <button type="submit" class="nav-link btn btn-link text-uppercase">Log Keluar</button>
-                        </form>
-                    </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-uppercase" href="{{ route('login') }}">Log Masuk Admin</a>
+                        </li>
                     @endguest
+                    @role('Superadmin|Admin')
+                        <li class="nav-item">
+                            <form action="{{ route('attendance.create') }}" method="get" class="d-inline">
+                                <button type="submit" class="nav-link btn btn-link text-uppercase">Kehadiran</button>
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <form action="{{ route('home') }}" method="get" class="d-inline">
+                                <button type="submit" class="nav-link btn btn-link text-uppercase">Dashboard</button>
+                            </form>
+                        </li>
+                        <li class="nav-item">
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-inline">
+                                {{ csrf_field() }}
+                                <button type="submit" class="nav-link btn btn-link text-uppercase">Log Keluar</button>
+                            </form>
+                        </li>
+                    @endrole
                 </ul>
             </div>
         </div>
@@ -47,23 +54,23 @@
 
     <!--wrapper-->
     @if (session('success'))
-    <div id="floating-success-message" class="position-fixed top-0 start-50 translate-middle-x p-3">
-        <div class="alert alert-success alert-dismissible fade show bg-light bg-opacity-75" role="alert">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <div id="floating-success-message" class="position-fixed top-0 start-50 translate-middle-x p-3">
+            <div class="alert alert-success alert-dismissible fade show bg-light bg-opacity-75" role="alert">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
         </div>
-    </div>
 
-    <!-- JavaScript to show the message after the page is loaded -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var floatingMessage = document.getElementById('floating-success-message');
-            floatingMessage.style.display = 'block';
-            setTimeout(function() {
-                floatingMessage.style.display = 'none';
-            }, 4500); // Adjust the timeout (in milliseconds) based on how long you want the message to be visible
-        });
-    </script>
+        <!-- JavaScript to show the message after the page is loaded -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                var floatingMessage = document.getElementById('floating-success-message');
+                floatingMessage.style.display = 'block';
+                setTimeout(function() {
+                    floatingMessage.style.display = 'none';
+                }, 4500); // Adjust the timeout (in milliseconds) based on how long you want the message to be visible
+            });
+        </script>
     @endif
 
     @yield('content')
@@ -105,7 +112,7 @@
             }
         });
     </script>
-     <script>
+    <script>
         // Get the current year
         var currentYear = new Date().getFullYear();
 
