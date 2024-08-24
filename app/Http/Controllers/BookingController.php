@@ -24,11 +24,15 @@ class BookingController extends Controller
 
     public function create()
     {
-        $staffs = Staff::where('attendance', 'Hadir')
+        $staffs = Staff::whereNull('deleted_at') // Exclude soft-deleted records
+            ->where('attendance', 'Hadir')
             ->where('status', 'Belum Tempah')
             ->get();
-
-        $tables = Table::where('status', 'Tersedia')->get();
+    
+        $tables = Table::whereNull('deleted_at') // Exclude soft-deleted records
+            ->where('status', 'Tersedia')
+            ->get();
+    
         return view('pages.booking.create', [
             'save_route' => route('booking.store'),
             'str_mode' => 'Tambah',
@@ -36,6 +40,7 @@ class BookingController extends Controller
             'staffs' => $staffs,
         ]);
     }
+    
 
     public function store(Request $request)
     {
@@ -70,9 +75,9 @@ class BookingController extends Controller
 
         // Generate QR Code and store it as Base64
         $qrCode = QrCode::format('png')
-        ->size(250)
-        ->margin(0)
-        ->generate($staff->no_pekerja);
+            ->size(250)
+            ->margin(0)
+            ->generate($staff->no_pekerja);
         $qrCodeDataUri = 'data:image/png;base64,' . base64_encode($qrCode);
         $booking->qr_code = $qrCodeDataUri;
         $booking->save();
@@ -91,12 +96,11 @@ class BookingController extends Controller
 
     public function edit(Request $request, $id)
     {
-        $booking = Booking::findOrFail($id);
+        $booking = Booking::whereNull('deleted_at')->findOrFail($id);
 
-        $staffs = Staff::all();
-
-        // Fetch available tables
-        $tables = Table::where('status', 'Tersedia')->get();
+        $staffs = Staff::whereNull('deleted_at')->get();
+        
+        $tables = Table::whereNull('deleted_at')->where('status', 'Tersedia')->get();
 
         // Return the view with the necessary data
         return view('pages.booking.edit', [
@@ -114,34 +118,34 @@ class BookingController extends Controller
             'staff_id' => 'required|exists:staff,id',
             'table_id' => 'required|exists:tables,id',
         ]);
-    
+
         $booking = Booking::findOrFail($id);
-    
+
         // Retrieve old and new table information
         $oldTable = Table::findOrFail($booking->table_id);
         $newTable = Table::findOrFail($request->input('table_id'));
-    
+
         // Update booking details
         $booking->staff_id = $request->input('staff_id');
         $booking->table_id = $request->input('table_id');
-    
+
         // Generate QR Code and store it as Base64
         $staff = Staff::findOrFail($request->input('staff_id')); // Ensure staff is loaded
         $qrCode = QrCode::format('png')
-        ->size(250)
-        ->margin(0)
-        ->generate($staff->no_pekerja);
+            ->size(250)
+            ->margin(0)
+            ->generate($staff->no_pekerja);
         $qrCodeDataUri = 'data:image/png;base64,' . base64_encode($qrCode);
         $booking->qr_code = $qrCodeDataUri;
-    
+
         // Save the updated booking with QR code
         $booking->save();
-    
+
         // Update old table's available seats
         $oldTable->available_seat += 1; // Restore seat
         $oldTable->status = 'Tersedia'; // Ensure status reflects available seats
         $oldTable->save();
-    
+
         // Update new table's available seats
         if ($newTable->available_seat <= 0) {
             return redirect()->back()->withErrors(['table_id' => 'Meja telah penuh'])->withInput();
@@ -149,14 +153,14 @@ class BookingController extends Controller
         $newTable->available_seat -= 1; // Deduct seat
         $newTable->status = $newTable->available_seat > 0 ? 'Tersedia' : 'Penuh'; // Update status if no seats are available
         $newTable->save();
-    
+
         // Update staff status to 'Penuh'
         $staff->status = 'Selesai Tempah';
         $staff->save();
-    
+
         return redirect()->route('booking')->with('success', 'Tempahan berjaya dikemaskini');
     }
-    
+
 
     public function search(Request $request)
     {
@@ -189,6 +193,15 @@ class BookingController extends Controller
     public function destroy(Request $request, $id)
     {
         $booking = Booking::findOrFail($id);
+
+        $table = Table::findOrFail($booking->table_id);
+        $table->available_seat += 1;
+        $table->status = 'Tersedia'; 
+        $table->save();
+
+        $staff = Staff::findOrFail($booking->staff_id);
+        $staff->status = 'Belum Tempah';
+        $staff->save();
 
         $booking->delete();
 

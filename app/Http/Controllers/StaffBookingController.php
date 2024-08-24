@@ -20,37 +20,68 @@ class StaffBookingController extends Controller
     public function checkStaffId(Request $request)
     {
         $request->validate([
-            'no_pekerja' => 'required|exists:staff,no_pekerja',
+            'no_pekerja' => 'required',
         ], [
             'no_pekerja.required' => 'Mohon isi No. Pekerja.',
-            'no_pekerja.exists' => 'Harap maaf. Anda tiada dalam senarai pengesahan RSVP.',
         ]);
-
-        $staff = Staff::where('no_pekerja', $request->input('no_pekerja'))->firstOrFail();
-
+    
+        // Check if the staff exists but is soft deleted
+        $staffDeleted = Staff::onlyTrashed()
+            ->where('no_pekerja', $request->input('no_pekerja'))
+            ->exists();
+    
+        if ($staffDeleted) {
+            return redirect()->back()->withErrors(['no_pekerja' => 'Harap maaf. Anda tiada dalam senarai pengesahan RSVP.'])->withInput();
+        }
+    
+        // Check if the staff exists and is not deleted
+        $staff = Staff::whereNull('deleted_at')
+            ->where('no_pekerja', $request->input('no_pekerja'))
+            ->first();
+    
+        if (!$staff) {
+            return redirect()->back()->withErrors(['no_pekerja' => 'Harap maaf. Anda tiada dalam senarai pengesahan RSVP.'])->withInput();
+        }
+    
         if ($staff->attendance === 'Hadir' && $staff->status === 'Belum Tempah') {
-            $tables = Table::orderBy('table_no', 'asc')->where('type', 'Terbuka')->get(); // Fetch all tables
+            // Fetch all non-deleted tables
+            $tables = Table::whereNull('deleted_at')
+                ->orderBy('table_no', 'asc')
+                ->where('type', 'Terbuka')
+                ->get();
+    
             return view('pages.staff.booking.create', [
                 'staff' => $staff,
                 'tables' => $tables,
             ]);
         }
-
+    
         if ($staff->attendance === 'Hadir' && $staff->status === 'Selesai Tempah') {
-            $booking = Booking::where('staff_id', $staff->id)->first();
+            // Fetch the booking for the staff and ensure it's not deleted
+            $booking = Booking::whereNull('deleted_at')
+                ->where('staff_id', $staff->id)
+                ->first();
+    
             if (!$booking) {
                 return redirect()->back()->withErrors(['no_pekerja' => 'Tiada tempahan untuk No. Pekerja tersebut.'])->withInput();
             }
-
-            $tables = Table::orderBy('table_no', 'asc')->where('type', 'Terbuka')->get();
+    
+            // Fetch all non-deleted tables
+            $tables = Table::whereNull('deleted_at')
+                ->orderBy('table_no', 'asc')
+                ->where('type', 'Terbuka')
+                ->get();
+    
             return view('pages.staff.booking.ticket', [
                 'booking' => $booking,
                 'tables' => $tables,
             ]);
         }
-
+    
         return redirect()->back()->withErrors(['no_pekerja' => 'Harap maaf. Status kehadiran RSVP anda adalah tidak hadir.'])->withInput();
     }
+    
+    
 
     public function printTicket($id)
     {
