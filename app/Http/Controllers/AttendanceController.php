@@ -11,11 +11,20 @@ class AttendanceController extends Controller
     public function index(Request $request)
     {
         $perPage = $request->input('perPage', 10);
+        $type = $request->input('type');
 
-        $attendanceList = Attendance::orderBy('check_in', 'asc')->paginate($perPage);
+        $query = Attendance::query();
+    
+        if ($type) {
+            $query->where('type', $type);
+        }
+
+        $attendanceList =  $query->orderBy('id', 'asc')->paginate($perPage);
+
 
         return view('pages.attendance.index', [
             'attendanceList' => $attendanceList,
+            'type' => $type,
             'perPage' => $perPage,
         ]);
     }
@@ -59,20 +68,29 @@ class AttendanceController extends Controller
     {
         $search = $request->input('search');
         $perPage = $request->input('perPage', 10);
+        $type = $request->input('type');
+
+        $query = Attendance::query();
 
         if ($search) {
-            $attendanceList = Attendance::where('no_pekerja', 'LIKE', "%$search%")
+            $query->where('no_pekerja', 'LIKE', "%$search%")
                 ->orWhere('name', 'LIKE', "%$search%")
+                ->orWhere('type', 'LIKE', "%$search%")
                 ->latest()
                 ->paginate($perPage);
-        } else {
-            $attendanceList = Attendance::latest()->paginate($perPage);
         }
+
+        if ($type) {
+            $query->where('type', $type);
+        }
+
+        $attendanceList = $query->latest()->paginate($perPage);
 
         return view('pages.attendance.index', [
             'attendanceList' => $attendanceList,
             'perPage' => $perPage,
             'search' => $search,
+            'type' => $type,
         ]);
     }
 

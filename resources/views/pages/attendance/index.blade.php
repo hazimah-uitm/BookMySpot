@@ -25,19 +25,25 @@
         <div class="card-body">
             <div class="d-lg-flex align-items-center mb-4 gap-3">
                 <div class="position_id-relative">
-                    <form action="{{ route('attendance.search') }}" method="GET">
+                    <form action="{{ route('attendance.search') }}" method="GET" id="searchForm"
+                        class="d-lg-flex align-items-center gap-3">
                         <div class="input-group">
-                            <!-- Search Input Field -->
                             <input type="text" class="form-control rounded" placeholder="Carian..." name="search"
-                                value="{{ request('search') }}">
+                                value="{{ request('search') }}" id="searchInput">
 
-                            <!-- Search Button -->
-                            <button type="submit" class="btn btn-primary ms-1 rounded">
+                            <!-- Type Filter -->
+                            <select name="type" class="form-select form-select-sm ms-2" id="typeFilter">
+                                <option value="">Pilih Jenis</option>
+                                <option value="Staf" {{ request('type') == 'Staf' ? 'selected' : '' }}>Staf</option>
+                                <option value="Bukan Staf" {{ request('type') == 'Bukan Staf' ? 'selected' : '' }}>Bukan
+                                    Staf</option>
+                            </select>
+
+                            <input type="hidden" name="perPage" value="{{ request('perPage', 10) }}">
+                            <button type="submit" class="btn btn-primary ms-1 rounded" id="searchButton">
                                 <i class="bx bx-search"></i>
                             </button>
-
-                            <!-- Reset Button -->
-                            <button type="reset" class="btn btn-secondary ms-1 rounded" onclick="resetForm()">
+                            <button type="button" class="btn btn-secondary ms-1 rounded" id="resetButton">
                                 Reset
                             </button>
                         </div>
@@ -93,6 +99,7 @@
                     <form action="{{ route('attendance.search') }}" method="GET" id="perPageForm"
                         class="d-flex align-items-center">
                         <input type="hidden" name="search" value="{{ request('search') }}">
+                        <input type="hidden" name="type" value="{{ request('type') }}">
                         <select name="perPage" id="perPage" class="form-select form-select-sm"
                             onchange="document.getElementById('perPageForm').submit()">
                             <option value="10" {{ Request::get('perPage') == '10' ? 'selected' : '' }}>10</option>
@@ -108,8 +115,12 @@
                         {{ $attendanceList->total() }} rekod
                     </span>
                     <div class="pagination-wrapper">
-                        {{ $attendanceList->appends(['search' => request('search'), 'perPage' => $perPage])->links('pagination::bootstrap-4') }}
-                    </div>
+                    {{ $attendanceList->appends([
+    'search' => request('search'),
+    'perPage' => request('perPage'),
+    'type' => request('type'),
+])->links('pagination::bootstrap-4') }}
+                </div>
                 </div>
             </div>
         </div>
@@ -136,7 +147,8 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                         @isset($attendance)
-                            <form class="d-inline" method="POST" action="{{ route('attendance.destroy', $attendance->id) }}">
+                            <form class="d-inline" method="POST"
+                                action="{{ route('attendance.destroy', $attendance->id) }}">
                                 {{ method_field('delete') }}
                                 {{ csrf_field() }}
                                 <button type="submit" class="btn btn-danger">Padam</button>
@@ -148,10 +160,25 @@
         </div>
     @endforeach
     <!--end page wrapper -->
-    <script>
-        document.querySelector('button[type="reset"]').addEventListener('click', function() {
-            // Redirect to another page or reload the page
-            window.location.href = "{{ route('attendance') }}"; // Adjust the route as needed
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Auto-submit the form on input change
+        document.getElementById('searchInput').addEventListener('input', function () {
+            document.getElementById('searchForm').submit();
         });
-    </script>
+
+        document.getElementById('typeFilter').addEventListener('change', function () {
+            document.getElementById('searchForm').submit();
+        });
+
+        // Reset form
+        document.getElementById('resetButton').addEventListener('click', function () {
+            document.getElementById('searchForm').reset();
+            // Clear hidden fields to reset pagination and filters
+            document.getElementById('searchForm').querySelector('input[name="search"]').value = '';
+            document.getElementById('searchForm').querySelector('select[name="type"]').value = '';
+            document.getElementById('searchForm').submit();
+        });
+    });
+</script>
 @endsection
