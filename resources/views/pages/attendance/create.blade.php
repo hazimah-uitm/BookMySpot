@@ -17,7 +17,7 @@
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-12 col-md-8 col-lg-6">
-                        <h2 class="text-center text-uppercase mb-4">REKOD KEHADIRAN</h2>
+                        <h3 class="text-center text-uppercase mb-4">REKOD KEHADIRAN</h3>
                         <!-- Form for Checking Staff ID -->
                         <form action="{{ route('attendance.store') }}" method="POST" class="d-flex">
                             {{ csrf_field() }}
