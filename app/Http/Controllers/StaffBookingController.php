@@ -7,6 +7,7 @@ use App\Models\Staff;
 use App\Models\Table;
 use Illuminate\Http\Request;
 use Dompdf\Dompdf;
+use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class StaffBookingController extends Controller
@@ -77,12 +78,23 @@ class StaffBookingController extends Controller
         $dompdf->setPaper([0, 0, 650, 690]);
         $dompdf->render();
     
-        // Stream the PDF to the browser
-        return $dompdf->stream('Tiket-' . $booking->staff->no_pekerja . '.pdf', [
-            'Attachment' => 0
-        ]);
-    }  
-
+        // Output the PDF to the browser for inline viewing
+        $pdf = $dompdf->output();
+    
+        // Create and return the response
+        return new SymfonyResponse
+        (
+            $pdf,
+            200,
+            [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline; filename="Tiket-' . $booking->staff->no_pekerja . '.pdf"'
+            ]
+        );
+    }
+    
+    
+    
     protected function imageToBase64($imagePath)
     {
         $imageData = file_get_contents($imagePath);
