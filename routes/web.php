@@ -12,6 +12,9 @@
 */
 
 use Illuminate\Support\Facades\Route;
+use App\Exports\AttendanceExport;
+use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 Route::get('/', function () {
     return view('welcome');
@@ -139,4 +142,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/attendance/trash', 'AttendanceController@trashList')->name('attendance.trash');
     Route::get('/attendance/{id}/restore', 'AttendanceController@restore')->name('attendance.restore');
     Route::delete('/attendance/{id}/force-delete', 'AttendanceController@forceDelete')->name('attendance.forceDelete');
+    Route::get('/attendance/export', function (Request $request) {
+        return Excel::download(new AttendanceExport($request->input('type')), 'attendance.xlsx');
+    })->name('attendance.export');
+
 });

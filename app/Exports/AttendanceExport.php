@@ -2,16 +2,47 @@
 
 namespace App\Exports;
 
-use App\Attendance;
-use Maatwebsite\Excel\Concerns\FromCollection;
+use App\Models\Attendance;
+use Maatwebsite\Excel\Concerns\FromQuery;
+use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithMapping;
 
-class AttendanceExport implements FromCollection
+class AttendanceExport implements FromQuery, WithHeadings, WithMapping
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function collection()
+    protected $type;
+    protected $rowNumber = 0; // To keep track of the row number
+
+    public function __construct($type = null)
     {
-        return Attendance::all();
+        $this->type = $type;
+    }
+
+    public function query()
+    {
+        $query = Attendance::query();
+
+        if ($this->type) {
+            $query->where('type', $this->type);
+        }
+
+        return $query->orderBy('check_in', 'asc');
+    }
+
+    public function map($attendance): array
+    {
+        $this->rowNumber++; // Increment the row number
+
+        return [
+            $this->rowNumber,
+            $attendance->name,
+        ];
+    }
+
+    public function headings(): array
+    {
+        return [
+            'No',
+            'Name',
+        ];
     }
 }

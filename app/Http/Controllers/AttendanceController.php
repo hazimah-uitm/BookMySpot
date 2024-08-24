@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Attendance;
 use App\Models\Staff;
 use Illuminate\Http\Request;
+use App\Exports\AttendanceExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AttendanceController extends Controller
 {
@@ -14,12 +16,12 @@ class AttendanceController extends Controller
         $type = $request->input('type');
 
         $query = Attendance::query();
-    
+
         if ($type) {
             $query->where('type', $type);
         }
 
-        $attendanceList =  $query->orderBy('id', 'asc')->paginate($perPage);
+        $attendanceList =  $query->orderBy('check_in', 'asc')->paginate($perPage);
 
 
         return view('pages.attendance.index', [
@@ -127,5 +129,13 @@ class AttendanceController extends Controller
         $attendance->forceDelete();
 
         return redirect()->route('attendance.trash')->with('success', 'Maklumat berjaya dihapuskan sepenuhnya');
+    }
+
+
+    public function export(Request $request)
+    {
+        $type = $request->input('type');
+
+        return Excel::download(new AttendanceExport($type), 'attendance.xlsx');
     }
 }

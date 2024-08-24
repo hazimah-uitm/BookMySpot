@@ -53,6 +53,8 @@
                     <a href="{{ route('attendance.create') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0">
                         <i class="bx bxs-plus-square"></i> Tambah Kehadiran
                     </a>
+                    <a href="{{ route('attendance.export', ['type' => $type]) }}" class="btn btn-success radius-30 mt-2 mt-lg-0">Export to
+                        Excel</a>
                 </div>
             </div>
             <div class="table-responsive">
@@ -115,12 +117,12 @@
                         {{ $attendanceList->total() }} rekod
                     </span>
                     <div class="pagination-wrapper">
-                    {{ $attendanceList->appends([
-    'search' => request('search'),
-    'perPage' => request('perPage'),
-    'type' => request('type'),
-])->links('pagination::bootstrap-4') }}
-                </div>
+                        {{ $attendanceList->appends([
+                                'search' => request('search'),
+                                'perPage' => request('perPage'),
+                                'type' => request('type'),
+                            ])->links('pagination::bootstrap-4') }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -160,25 +162,25 @@
         </div>
     @endforeach
     <!--end page wrapper -->
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Auto-submit the form on input change
-        document.getElementById('searchInput').addEventListener('input', function () {
-            document.getElementById('searchForm').submit();
-        });
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Auto-submit the form on input change
+            document.getElementById('searchInput').addEventListener('input', function() {
+                document.getElementById('searchForm').submit();
+            });
 
-        document.getElementById('typeFilter').addEventListener('change', function () {
-            document.getElementById('searchForm').submit();
-        });
+            document.getElementById('typeFilter').addEventListener('change', function() {
+                document.getElementById('searchForm').submit();
+            });
 
-        // Reset form
-        document.getElementById('resetButton').addEventListener('click', function () {
-            document.getElementById('searchForm').reset();
-            // Clear hidden fields to reset pagination and filters
-            document.getElementById('searchForm').querySelector('input[name="search"]').value = '';
-            document.getElementById('searchForm').querySelector('select[name="type"]').value = '';
-            document.getElementById('searchForm').submit();
+            // Reset form
+            document.getElementById('resetButton').addEventListener('click', function() {
+                document.getElementById('searchForm').reset();
+                // Clear hidden fields to reset pagination and filters
+                document.getElementById('searchForm').querySelector('input[name="search"]').value = '';
+                document.getElementById('searchForm').querySelector('select[name="type"]').value = '';
+                document.getElementById('searchForm').submit();
+            });
         });
-    });
-</script>
+    </script>
 @endsection

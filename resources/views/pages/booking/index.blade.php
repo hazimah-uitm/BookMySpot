@@ -36,19 +36,17 @@
         <div class="card-body">
             <div class="d-lg-flex align-items-center mb-4 gap-3">
                 <div class="position-relative">
-                    <form action="{{ route('booking.search') }}" method="GET">
+                    <form action="{{ route('booking.search') }}" method="GET" id="searchForm"
+                        class="d-lg-flex align-items-center gap-3">
                         <div class="input-group">
-                            <!-- Search Input Field -->
                             <input type="text" class="form-control rounded" placeholder="Carian..." name="search"
-                                value="{{ request('search') }}">
+                                value="{{ request('search') }}" id="searchInput">
 
-                            <!-- Search Button -->
-                            <button type="submit" class="btn btn-primary ms-1 rounded">
+                            <input type="hidden" name="perPage" value="{{ request('perPage', 10) }}">
+                            <button type="submit" class="btn btn-primary ms-1 rounded" id="searchButton">
                                 <i class="bx bx-search"></i>
                             </button>
-
-                            <!-- Reset Button -->
-                            <button type="reset" class="btn btn-secondary ms-1 rounded" onclick="resetForm()">
+                            <button type="button" class="btn btn-secondary ms-1 rounded" id="resetButton">
                                 Reset
                             </button>
                         </div>
@@ -133,7 +131,9 @@
                         {{ $bookingList->total() }} rekod
                     </span>
                     <div class="pagination-wrapper">
-                        {{ $bookingList->appends(['search' => request('search'), 'perPage' => $perPage])->links('pagination::bootstrap-4') }}
+                        {{ $bookingList->appends([
+                                'search' => request('search'),
+                            ])->links('pagination::bootstrap-4') }}
                     </div>
                 </div>
             </div>
@@ -175,9 +175,19 @@
     <!--end page wrapper -->
 
     <script>
-        document.querySelector('button[type="reset"]').addEventListener('click', function() {
-            // Redirect to another page or reload the page
-            window.location.href = "{{ route('booking') }}"; // Adjust the route as needed
+        document.addEventListener('DOMContentLoaded', function() {
+            // Auto-submit the form on input change
+            document.getElementById('searchInput').addEventListener('input', function() {
+                document.getElementById('searchForm').submit();
+            });
+
+            // Reset form
+            document.getElementById('resetButton').addEventListener('click', function() {
+                document.getElementById('searchForm').reset();
+                // Clear hidden fields to reset pagination and filters
+                document.getElementById('searchForm').querySelector('input[name="search"]').value = '';
+                document.getElementById('searchForm').submit();
+            });
         });
     </script>
 @endsection

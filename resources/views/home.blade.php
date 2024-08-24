@@ -9,19 +9,17 @@
                         <div class="table-responsive mt-2">
                             <h4 class="mb-3 text-center text-uppercase">Senarai Tempahan</h4>
                             <div class="position-relative">
-                                <form action="{{ route('home') }}" method="GET">
+                                <form action="{{ route('home') }}" method="GET" id="searchForm"
+                                    class="d-lg-flex align-items-center gap-3">
                                     <div class="input-group">
-                                        <!-- Search Input Field -->
                                         <input type="text" class="form-control rounded" placeholder="Carian..."
-                                            name="search" value="{{ request('search') }}">
+                                            name="search" value="{{ request('search') }}" id="searchInput">
 
-                                        <!-- Search Button -->
-                                        <button type="submit" class="btn btn-primary ms-1 rounded">
+                                        <input type="hidden" name="perPage" value="{{ request('perPage', 10) }}">
+                                        <button type="submit" class="btn btn-primary ms-1 rounded" id="searchButton">
                                             <i class="bx bx-search"></i>
                                         </button>
-
-                                        <!-- Reset Button -->
-                                        <button type="reset" class="btn btn-secondary ms-1 rounded" onclick="resetForm()">
+                                        <button type="button" class="btn btn-secondary ms-1 rounded" id="resetButton">
                                             Reset
                                         </button>
                                     </div>
@@ -61,10 +59,10 @@
 
                                                     @if ($bookingCount > 1)
                                                         @foreach ($table->booking as $index => $book)
-                                                            <p>{{ $index + 1 }}. {{ $book->staff->name }}</p>
+                                                            <p>{{ $index + 1 }}. {{ $book->staff->name }} ({{ $book->staff->no_pekerja }}) </p>
                                                         @endforeach
                                                     @elseif ($bookingCount === 1)
-                                                        <p>{{ $table->booking->first()->staff->name }}</p>
+                                                        <p>{{ $table->booking->first()->staff->name }} ({{ $table->booking->first()->staff->no_pekerja }})</p>
                                                     @else
                                                         <p>Tiada tempahan.</p>
                                                     @endif
@@ -100,15 +98,16 @@
                                 </div>
 
                                 <div class="d-flex justify-content-end align-items-center">
-                                    <span class="mx-2 small text-muted">
-                                        Menunjukkan {{ $tables->firstItem() }} hingga {{ $tables->lastItem() }} daripada
+                                    <span class="mx-2 mt-2 small text-muted">
+                                        Menunjukkan {{ $tables->firstItem() }} hingga {{ $tables->lastItem() }}
+                                        daripada
                                         {{ $tables->total() }} rekod
                                     </span>
-                                    <nav aria-label="Page navigation">
-                                        <ul class="pagination">
-                                            {{ $tables->appends(['search' => request('search'), 'perPage' => request('perPage')])->links('pagination::bootstrap-4') }}
-                                        </ul>
-                                    </nav>
+                                    <div class="pagination-wrapper">
+                                        {{ $tables->appends([
+                                                'search' => request('search'),
+                                            ])->links('pagination::bootstrap-4') }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -170,9 +169,19 @@
     </div>
 
     <script>
-        document.querySelector('button[type="reset"]').addEventListener('click', function() {
-            // Redirect to another page or reload the page
-            window.location.href = "{{ route('home') }}"; // Adjust the route as needed
+        document.addEventListener('DOMContentLoaded', function() {
+            // Auto-submit the form on input change
+            document.getElementById('searchInput').addEventListener('input', function() {
+                document.getElementById('searchForm').submit();
+            });
+
+            // Reset form
+            document.getElementById('resetButton').addEventListener('click', function() {
+                document.getElementById('searchForm').reset();
+                // Clear hidden fields to reset pagination and filters
+                document.getElementById('searchForm').querySelector('input[name="search"]').value = '';
+                document.getElementById('searchForm').submit();
+            });
         });
     </script>
 @endsection
