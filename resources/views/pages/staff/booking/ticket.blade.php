@@ -60,9 +60,8 @@
                             </div>
                         </div>
 
-                        <div class="text-center mt-4">
-                            <a href="{{ route('staff.booking.print', $booking->id) }}" class="btn btn-primary w-100"
-                                target="_blank">
+                        <div class="text-center mt-3">
+                            <a href="{{ route('staff.booking.print', $booking->id) }}" class="btn btn-primary w-100">
                                 <i class="fas fa-download"></i> Muat Turun Tiket
                             </a>
                         </div>
