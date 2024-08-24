@@ -27,14 +27,38 @@
                     </form>
 
                     @if ($errors->any())
-                    <div class="alert alert-danger mt-3">
-                        {{ $errors->first('no_pekerja') }}
-                    </div>
-                    @endif
+                            <div id="error-alert" class="alert alert-danger mt-3 fade-out">
+                                {{ $errors->first('no_pekerja') }}
+                            </div>
+                        @endif
+
+                        @if (session('success'))
+                            <div id="success-alert" class="alert alert-success mt-3 fade-out">
+                                {{ session('success') }}
+                            </div>
+                        @endif
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        function fadeOut(elementId) {
+            var element = document.getElementById(elementId);
+            if (element) {
+                setTimeout(function() {
+                    element.style.opacity = '0';
+                    setTimeout(function() {
+                        element.style.display = 'none';
+                    }, 1000); // Adjust to match the fade-out duration
+                }, 3000); // Time before fading out (3 seconds)
+            }
+        }
+
+        fadeOut('error-alert');
+        fadeOut('success-alert');
+    });
+</script>
 <!--end wrapper-->
 @endsection
