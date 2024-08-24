@@ -78,23 +78,12 @@ class StaffBookingController extends Controller
         $dompdf->setPaper([0, 0, 650, 690]);
         $dompdf->render();
     
-        // Output the PDF to the browser for inline viewing
-        $pdf = $dompdf->output();
-    
-        // Create and return the response
-        return new SymfonyResponse
-        (
-            $pdf,
-            200,
-            [
-                'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename="Tiket-' . $booking->staff->no_pekerja . '.pdf"'
-            ]
-        );
+        // Force a download of the PDF
+        return $dompdf->stream('Tiket-' . $booking->staff->no_pekerja . '.pdf', [
+            'Attachment' => 1 
+        ]);
     }
-    
-    
-    
+
     protected function imageToBase64($imagePath)
     {
         $imageData = file_get_contents($imagePath);
