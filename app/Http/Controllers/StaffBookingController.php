@@ -78,7 +78,7 @@ class StaffBookingController extends Controller
         $dompdf->render();
     
         // Stream the PDF to the browser
-        return $dompdf->stream('Tiket-' . $booking->no_pekerja . '.pdf', [
+        return $dompdf->stream('Tiket-' . $booking->staff->no_pekerja . '.pdf', [
             'Attachment' => 0
         ]);
     }  
