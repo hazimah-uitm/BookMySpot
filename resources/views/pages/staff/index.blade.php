@@ -11,11 +11,13 @@
             </ol>
         </nav>
     </div>
+    @role('Superadmin')
     <div class="ms-auto">
         <a href="{{ route('staff.trash') }}">
             <button type="button" class="btn btn-primary mt-2 mt-lg-0">Senarai Rekod Dipadam</button>
         </a>
     </div>
+    @endrole
 </div>
 <!--end breadcrumb-->
 <h6 class="mb-0 text-uppercase">Senarai Staf</h6>
