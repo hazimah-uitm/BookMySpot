@@ -141,7 +141,6 @@ class BookingController extends Controller
         if ($booking->table_id) {
             $currentTable = Table::where('id', $booking->table_id)
                 ->whereNull('deleted_at')
-                ->where('status', 'Tersedia')
                 ->first();
 
             // Add the current Table to the list if they are not already included

@@ -60,8 +60,7 @@
 
                 <div class="mb-3">
                     <label for="table_id" class="form-label">Pilih No. Meja</label>
-                    <select class="form-select select2 {{ $errors->has('table_id') ? 'is-invalid' : '' }}" id="table_id"
-                        name="table_id">
+                    <select class="form-select select2 {{ $errors->has('table_id') ? 'is-invalid' : '' }}" id="table_id" name="table_id">
                         <option value="">Sila pilih No. Meja</option>
                         @foreach ($tables as $table)
                             <option value="{{ $table->id }}"
@@ -74,6 +73,7 @@
                         <div class="invalid-feedback">Sila pilih No. Meja</div>
                     @endif
                 </div>
+
 
                 <button type="submit" class="btn btn-primary">Kemas Kini</button>
             </form>
