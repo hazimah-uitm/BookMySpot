@@ -217,12 +217,12 @@
                     <label class="form-label">Status</label>
                     <div class="form-check">
                         <input type="radio" id="BelumTempah" name="status" value="Belum Tempah"
-                            {{ old('status', $staff->$status) === 'Belum Tempah' ? 'checked' : '' }}>
+                            {{ old('status', $staff->status) === 'Belum Tempah' ? 'checked' : '' }}>
                         <label class="form-check-label" for="BelumTempah">Belum Tempah</label>
                     </div>
                     <div class="form-check">
                         <input type="radio" id="SelesaiTempah" name="status" value="Selesai Tempah"
-                            {{ old('status', $staff->$status) === 'Selesai Tempah' ? 'checked' : '' }}>
+                            {{ old('status', $staff->status) === 'Selesai Tempah' ? 'checked' : '' }}>
                         <label class="form-check-label" for="SelesaiTempah">Selesai Tempah</label>
                     </div>
                     @if ($errors->has('status'))
