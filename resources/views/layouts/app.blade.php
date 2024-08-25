@@ -24,10 +24,10 @@
                         </form>
                     </li>
                     @guest
-                    <li class="nav-item">
-                        <a class="nav-link text-uppercase" href="{{ route('login') }}">Log Masuk Admin</a>
-                    </li>
-                    @endguess
+                        <li class="nav-item">
+                            <a class="nav-link text-uppercase" href="{{ route('login') }}">Log Masuk Admin</a>
+                        </li>
+                    @endguest
                     @role('Superadmin|Admin')
                         <li class="nav-item">
                             <form action="{{ route('attendance.create') }}" method="get" class="d-inline">
