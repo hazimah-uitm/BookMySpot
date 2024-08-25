@@ -139,44 +139,54 @@ class StaffBookingController extends Controller
             'table_id.required' => 'Sila pilih meja untuk tempahan.',
             'table_id.exists' => 'Meja yang dipilih tidak wujud.',
         ]);
-    
+        
         $table = Table::findOrFail($request->input('table_id'));
-    
+        
         if ($table->available_seat <= 0) {
             return redirect()->back()->withErrors(['table_id' => 'Tiada kekosongan bagi meja ini'])->withInput();
         }
-
+    
         $existingBooking = Booking::where('staff_id', $request->input('staff_id'))->whereNull('deleted_at')->first();
-
+    
         if ($existingBooking) {
             return redirect()->back()->withErrors(['staff_id' => 'Anda sudah mempunyai tempahan.'])->withInput();
         }
     
         $booking = new Booking();
-        $booking->booking_no = $this->generateBookingNumber(); // Use unique generator
+        $booking->booking_no = $this->generateBookingNumber();
         $booking->staff_id = $request->input('staff_id');
         $booking->table_id = $request->input('table_id');
+        $booking->version = 1; // Initialize version
     
-        $booking->save();
+        try {
+            $booking->save();
     
-        $table->available_seat -= 1;
-        $table->status = $table->available_seat > 0 ? 'Tersedia' : 'Penuh';
-        $table->save();
+            $table->available_seat -= 1;
+            $table->status = $table->available_seat > 0 ? 'Tersedia' : 'Penuh';
+            $table->save();
     
-        $staff = Staff::findOrFail($request->input('staff_id'));
-        $staff->status = 'Selesai Tempah';
-        $staff->save();
+            $staff = Staff::findOrFail($request->input('staff_id'));
+            $staff->status = 'Selesai Tempah';
+            $staff->save();
     
-        $qrCode = QrCode::format('png')
-            ->size(250)
-            ->margin(0)
-            ->generate($staff->no_pekerja);
-        $qrCodeDataUri = 'data:image/png;base64,' . base64_encode($qrCode);
-        $booking->qr_code = $qrCodeDataUri;
-        $booking->save();
+            $qrCode = QrCode::format('png')
+                ->size(250)
+                ->margin(0)
+                ->generate($staff->no_pekerja);
+            $qrCodeDataUri = 'data:image/png;base64,' . base64_encode($qrCode);
+            $booking->qr_code = $qrCodeDataUri;
+            $booking->save();
     
-        return redirect()->route('staff.booking.view', ['id' => $booking->id])->with('success', 'Tempahan berjaya dihantar!');
+            return redirect()->route('staff.booking.view', ['id' => $booking->id])->with('success', 'Tempahan berjaya dihantar!');
+        } catch (\Illuminate\Database\QueryException $e) {
+            if ($e->getCode() == '23505') { // Unique constraint violation (PostgreSQL specific)
+                return redirect()->back()->withErrors(['table_id' => 'Meja yang dipilih telah ditempah oleh pengguna lain. Sila pilih meja lain.'])->withInput();
+            } else {
+                throw $e;
+            }
+        }
     }
+    
 
     public function show($id)
     {

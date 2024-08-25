@@ -18,7 +18,10 @@ class Booking extends Model
         'booking_no',
         'staff_id',
         'table_id',
+        'version'
     ];
+
+    protected $version = 'version';
 
     public function staff()
     {
