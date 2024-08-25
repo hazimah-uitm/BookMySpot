@@ -50,7 +50,7 @@
                     @endif
                 </div>
 
-                
+
                 <div class="mb-3">
                     <label class="form-label">Jenis Pengguna</label>
                     <div class="form-check">
@@ -216,11 +216,13 @@
                 <div class="mb-3">
                     <label class="form-label">Status</label>
                     <div class="form-check">
-                        <input type="radio" id="BelumTempah" name="status" value="Belum Tempah" checked>
+                        <input type="radio" id="BelumTempah" name="status" value="Belum Tempah"
+                            {{ old('status', $status) === 'Belum Tempah' ? 'checked' : '' }}>
                         <label class="form-check-label" for="BelumTempah">Belum Tempah</label>
                     </div>
                     <div class="form-check">
-                        <input type="radio" id="SelesaiTempah" name="status" value="Selesai Tempah">
+                        <input type="radio" id="SelesaiTempah" name="status" value="Selesai Tempah"
+                            {{ old('status', $status) === 'Selesai Tempah' ? 'checked' : '' }}>
                         <label class="form-check-label" for="SelesaiTempah">Selesai Tempah</label>
                     </div>
                     @if ($errors->has('status'))
