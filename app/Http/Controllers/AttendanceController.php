@@ -47,27 +47,27 @@ class AttendanceController extends Controller
             'no_pekerja.required' => 'Sila isi No. Pekerja',
             'no_pekerja.exists' => 'No. Pekerja tiada padanan dalam sistem',
         ]);
-    
+
         $staff = Staff::where('no_pekerja', $request->input('no_pekerja'))->firstOrFail();
-    
-        $existingAttendance = Attendance::whereNull('deleted_at') 
-            ->where('no_pekerja', $staff->no_pekerja)
+
+        $existingAttendance = Attendance::where('no_pekerja', $staff->no_pekerja)
+            ->whereNull('deleted_at')
             ->first();
-    
-        if ($existingAttendance && !$existingAttendance->trashed()) {
+
+        if ($existingAttendance) {
             return redirect()->back()->withErrors(['no_pekerja' => 'Rekod kehadiran untuk No. Pekerja ini sudah wujud']);
         }
-    
+
         $attendance = new Attendance();
         $attendance->no_pekerja = $staff->no_pekerja;
         $attendance->name = $staff->name;
         $attendance->check_in = now();
         $attendance->type = $staff->type;
         $attendance->save();
-    
+
         return redirect()->back()->with('success', 'Kehadiran berjaya direkod!');
     }
-    
+
 
     public function search(Request $request)
     {
@@ -138,9 +138,9 @@ class AttendanceController extends Controller
     public function export(Request $request)
     {
         $type = $request->input('type');
-        
+
         $filename = 'Kehadiran-Malam-Gala-2024.xlsx';
-    
+
         return Excel::download(new AttendanceExport($type), $filename);
     }
 }

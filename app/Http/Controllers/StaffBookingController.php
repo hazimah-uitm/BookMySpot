@@ -25,15 +25,6 @@ class StaffBookingController extends Controller
             'no_pekerja.required' => 'Mohon isi No. Pekerja.',
         ]);
 
-        // Check if the staff exists but is soft deleted
-        $staffDeleted = Staff::onlyTrashed()
-            ->where('no_pekerja', $request->input('no_pekerja'))
-            ->exists();
-
-        if ($staffDeleted) {
-            return redirect()->back()->withErrors(['no_pekerja' => 'Harap maaf. Anda tiada dalam senarai pengesahan RSVP.'])->withInput();
-        }
-
         // Check if the staff exists and is not deleted
         $staff = Staff::whereNull('deleted_at')
             ->where('no_pekerja', $request->input('no_pekerja'))
