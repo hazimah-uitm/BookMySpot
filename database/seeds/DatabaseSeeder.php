@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(RefreshSuperAdminPermissionSeeder::class);
         $this->call(UserSeeder::class);
         // $this->call(StaffSeeder::class);
-        $this->call(TableSeeder::class);
+        // $this->call(TableSeeder::class);
         $this->call(CampusSeeder::class);
     }
 }
