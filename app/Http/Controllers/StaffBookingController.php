@@ -143,7 +143,7 @@ class StaffBookingController extends Controller
         $table = Table::findOrFail($request->input('table_id'));
 
         if ($table->available_seat <= 0) {
-            return redirect()->back()->withErrors(['table_id' => 'Tiada kekosongan bagi meja ini'])->withInput();
+            return redirect()->back()->withErrors(['table_id' => 'Tiada kekosongan bagi meja ini. Sila pilih no. meja lain'])->withInput();
         }
 
         $existingBooking = Booking::where('staff_id', $request->input('staff_id'))->whereNull('deleted_at')->first();
