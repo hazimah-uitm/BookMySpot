@@ -137,6 +137,7 @@
                                         data-bs-toggle="tooltip" data-bs-placement="bottom" title="Papar">
                                         <i class="bx bx-show"></i>
                                     </a>
+                                    
                                     <a type="button" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Padam">
                                         <span class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                             data-bs-target="#deleteModal{{ $staff->id }}"><i class="bx bx-trash"></i></span>
