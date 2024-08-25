@@ -52,7 +52,7 @@ class StaffController extends Controller
         try {
             Excel::import(new StaffImport, $request->file('file'));
 
-            return redirect()->back()->with('success', 'Staff data imported successfully.');
+            return redirect()->back()->with('success', 'Data telah berjaya di import');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Error importing data: ' . $e->getMessage());
         }
