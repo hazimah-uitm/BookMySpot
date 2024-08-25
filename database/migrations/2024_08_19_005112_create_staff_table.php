@@ -16,7 +16,7 @@ class CreateStaffTable extends Migration
         Schema::create('staff', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('no_pekerja')->unique();
+            $table->string('no_pekerja');
             $table->string('email')->nullable();
             $table->enum('attendance', ['Hadir', 'Tidak Hadir']);
             $table->enum('category', ['Staf Akademik', 'Staf Pentadbiran'])->nullable();

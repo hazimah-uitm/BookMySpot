@@ -15,7 +15,7 @@ class CreateTablesTable extends Migration
     {
         Schema::create('tables', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('table_no')->unique();
+            $table->string('table_no');
             $table->integer('total_seat');
             $table->integer('available_seat');
             $table->enum('type', ['Ditempah', 'Terbuka'])->default('Terbuka');

@@ -50,7 +50,7 @@ class AttendanceController extends Controller
     
         $staff = Staff::where('no_pekerja', $request->input('no_pekerja'))->firstOrFail();
     
-        $existingAttendance = Attendance::withTrashed() 
+        $existingAttendance = Attendance::whereNull('deleted_at') 
             ->where('no_pekerja', $staff->no_pekerja)
             ->first();
     

@@ -123,13 +123,20 @@ class StaffBookingController extends Controller
         return 'data:' . $mimeType . ';base64,' . $base64;
     }
 
-    protected function generateUniqueBookingNumber()
+    protected function generateBookingNumber()
     {
-        do {
-            $number = $this->generateBookingNumber();
-        } while (Booking::where('booking_no', $number)->exists());
+        $latestBooking = Booking::withTrashed()
+            ->orderBy('id', 'desc')
+            ->first();
 
-        return $number;
+        $number = 1;
+
+        if ($latestBooking) {
+            $latestNumber = (int) str_replace('MG-', '', $latestBooking->booking_no);
+            $number = $latestNumber + 1;
+        }
+
+        return 'MG-' . str_pad($number, 4, '0', STR_PAD_LEFT);
     }
 
     public function store(Request $request)
@@ -155,23 +162,20 @@ class StaffBookingController extends Controller
         }
     
         $booking = new Booking();
-        $booking->booking_no = $this->generateUniqueBookingNumber(); // Use unique generator
+        $booking->booking_no = $this->generateBookingNumber(); // Use unique generator
         $booking->staff_id = $request->input('staff_id');
         $booking->table_id = $request->input('table_id');
     
         $booking->save();
     
-        // Update table availability
         $table->available_seat -= 1;
         $table->status = $table->available_seat > 0 ? 'Tersedia' : 'Penuh';
         $table->save();
     
-        // Update staff booking status
         $staff = Staff::findOrFail($request->input('staff_id'));
         $staff->status = 'Selesai Tempah';
         $staff->save();
     
-        // Generate QR Code and store it as Base64
         $qrCode = QrCode::format('png')
             ->size(250)
             ->margin(0)
@@ -181,22 +185,6 @@ class StaffBookingController extends Controller
         $booking->save();
     
         return redirect()->route('staff.booking.view', ['id' => $booking->id])->with('success', 'Tempahan berjaya dihantar!');
-    }
-
-    protected function generateBookingNumber()
-    {
-        $latestBooking = Booking::withTrashed()
-            ->orderBy('id', 'desc')
-            ->first();
-
-        $number = 1;
-
-        if ($latestBooking) {
-            $latestNumber = (int) str_replace('MG-', '', $latestBooking->booking_no);
-            $number = $latestNumber + 1;
-        }
-
-        return 'MG-' . str_pad($number, 4, '0', STR_PAD_LEFT);
     }
 
     public function show($id)

@@ -16,23 +16,23 @@ class StaffController extends Controller
         $type = $request->input('type');
         $attendance = $request->input('attendance');
         $status = $request->input('status');
-    
+
         $query = Staff::query();
-    
+
         if ($type) {
             $query->where('type', $type);
         }
-    
+
         if ($attendance) {
             $query->where('attendance', $attendance);
         }
-    
+
         if ($status) {
             $query->where('status', $status);
         }
-    
+
         $staffList = $query->orderBy('name', 'asc')->paginate($perPage);
-    
+
         return view('pages.staff.index', [
             'staffList' => $staffList,
             'perPage' => $perPage,
@@ -41,7 +41,7 @@ class StaffController extends Controller
             'status' => $status,
         ]);
     }
-    
+
 
     public function import(Request $request)
     {
@@ -72,7 +72,7 @@ class StaffController extends Controller
         $request->validate([
             'email' => 'nullable',
             'name' => 'required',
-            'no_pekerja' => 'required|unique:staff,no_pekerja',
+            'no_pekerja' => 'required',
             'attendance' => 'required|in:Hadir,Tidak Hadir',
             'category' => 'nullable|in:Staf Akademik,Staf Pentadbiran',
             'department' => 'nullable',
@@ -81,14 +81,21 @@ class StaffController extends Controller
             'payment' => 'nullable',
             'type' => 'required|in:Staf,Bukan Staf',
             'status' => 'required|in:Belum Tempah,Selesai Tempah',
-        ],[
+        ], [
             'name.required' => 'Sila isi Nama',
-            'no_pekerja.unique' => 'No. Pekerja telah wujud',
             'no_pekerja.required' => 'Sila isi No. Pekerja',
             'attendance.required' => 'Sila sahkan kehadiran',
             'type.required' => 'Sila isi jenis pengguna',
             'status.required' => 'Sila pilih Status',
         ]);
+
+        $existingStaff = Staff::where('no_pekerja', strtoupper($request->input('no_pekerja')))
+            ->whereNull('deleted_at') 
+            ->first();
+
+        if ($existingStaff) {
+            return redirect()->back()->withErrors(['no_pekerja' => 'No. Pekerja telah wujud'])->withInput();
+        }
 
         $staff = new Staff();
 
@@ -112,21 +119,21 @@ class StaffController extends Controller
     public function edit($id)
     {
         $staff = Staff::findOrFail($id);
-    
+
         return view('pages.staff.edit', [
             'staff' => $staff,
             'save_route' => route('staff.update', $id),
             'str_mode' => 'Kemaskini',
         ]);
     }
-    
+
 
     public function update(Request $request, $id)
     {
         $request->validate([
             'email' => 'nullable',
             'name' => 'required',
-            'no_pekerja' => ['required', Rule::unique('staff', 'no_pekerja')->ignore($id)],
+            'no_pekerja' => 'required',
             'attendance' => 'required|in:Hadir,Tidak Hadir',
             'category' => 'nullable|in:Staf Akademik,Staf Pentadbiran',
             'department' => 'nullable',
@@ -135,26 +142,36 @@ class StaffController extends Controller
             'payment' => 'nullable',
             'type' => 'required|in:Staf,Bukan Staf',
             'status' => 'required|in:Belum Tempah,Selesai Tempah',
-        ],[
+        ], [
             'name.required' => 'Sila isi Nama',
-            'no_pekerja.unique' => 'No. Pekerja telah wujud',
             'no_pekerja.required' => 'Sila isi No. Pekerja',
             'attendance.required' => 'Sila sahkan kehadiran',
             'type.required' => 'Sila isi jenis pengguna',
             'status.required' => 'Sila pilih Status',
         ]);
-    
+
+        // Check if a staff with the same no_pekerja exists (excluding the current record)
+        $existingStaff = Staff::whereNull('deleted_at') 
+            ->where('no_pekerja', strtoupper($request->input('no_pekerja')))
+            ->where('id', '<>', $id)
+            ->first();
+
+        if ($existingStaff) {
+            // If the staff exists, handle the logic accordingly
+            return redirect()->back()->with('error', 'No. Pekerja telah wujud');
+        }
+
         // Find the staff record by ID
         $staff = Staff::findOrFail($id);
-    
+
         $staff->fill($request->except(['name', 'no_pekerja']));
         $staff->name = strtoupper($request->input('name'));
         $staff->no_pekerja = strtoupper($request->input('no_pekerja'));
         $staff->save();
-    
+
         return redirect()->route('staff')->with('success', 'Maklumat berjaya dikemas kini');
     }
-    
+
 
     public function search(Request $request)
     {
@@ -163,32 +180,32 @@ class StaffController extends Controller
         $type = $request->input('type');
         $attendance = $request->input('attendance');
         $status = $request->input('status');
-    
+
         $query = Staff::query();
-    
+
         if ($search) {
             $query->where('name', 'LIKE', "%$search%")
-                  ->orWhere('no_pekerja', 'LIKE', "%$search%")
-                  ->orWhere('attendance', 'LIKE', "%$search%")
-                  ->orWhere('status', 'LIKE', "%$search%")
-                  ->orWhere('type', 'LIKE', "%$search%")
-                  ->orWhere('campus', 'LIKE', "%$search%");
+                ->orWhere('no_pekerja', 'LIKE', "%$search%")
+                ->orWhere('attendance', 'LIKE', "%$search%")
+                ->orWhere('status', 'LIKE', "%$search%")
+                ->orWhere('type', 'LIKE', "%$search%")
+                ->orWhere('campus', 'LIKE', "%$search%");
         }
-    
+
         if ($type) {
             $query->where('type', $type);
         }
-    
+
         if ($attendance) {
             $query->where('attendance', $attendance);
         }
-    
+
         if ($status) {
             $query->where('status', $status);
         }
-    
+
         $staffList = $query->latest()->paginate($perPage);
-    
+
         return view('pages.staff.index', [
             'staffList' => $staffList,
             'perPage' => $perPage,

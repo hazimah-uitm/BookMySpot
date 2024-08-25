@@ -30,41 +30,36 @@ class TableController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'table_no' => 'required|unique:tables,table_no',
+            'table_no' => 'required',
             'total_seat' => 'required|integer',
             'available_seat' => 'required|integer',
             'type' => 'required|in:Ditempah,Terbuka',
             'status' => 'required|in:Tersedia,Penuh',
         ], [
             'table_no.required' => 'Sila isi No. Meja',
-            'table_no.unique' => 'No. Meja telah wujud',
             'total_seat.required' => 'Sila isi Jumlah Tempat Duduk',
             'available_seat.required' => 'Sila isi Jumlah Tempat Duduk Kosong',
             'type.required' => 'Sila pilih Jenis Meja',
             'status.required' => 'Sila pilih Status Meja',
         ]);
     
-
-        $table = new Table();
-
-        // Normalize the table_no
         $table_no = strtoupper(str_replace(' ', '', $request->input('table_no')));
-
-        // Check if table_no already exists
-        if (Table::where('table_no',  $table_no)->exists()) {
+    
+        if (Table::where('table_no', $table_no)->exists()) {
             return redirect()->back()->withErrors(['table_no' => 'No. Meja telah wujud'])->withInput();
         }
+    
+        $table = new Table();
         $table->table_no = $table_no;
         $table->total_seat = $request->input('total_seat');
         $table->available_seat = $request->input('available_seat');
         $table->type = $request->input('type');
         $table->status = $request->input('status');
-
         $table->save();
-
+    
         return redirect()->route('table')->with('success', 'Maklumat berjaya disimpan');
     }
-
+    
 
     public function show($id)
     {
@@ -87,35 +82,26 @@ class TableController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'table_no' => 'required|unique:tables,table_no,' . $id,
+            'table_no' => 'required',
             'total_seat' => 'required|integer',
             'available_seat' => 'required|integer',
             'type' => 'required|in:Ditempah,Terbuka',
             'status' => 'required|in:Tersedia,Penuh',
         ], [
             'table_no.required' => 'Sila isi No. Meja',
-            'table_no.unique' => 'No. Meja telah wujud',
             'total_seat.required' => 'Sila isi Jumlah Tempat Duduk',
             'available_seat.required' => 'Sila isi Jumlah Tempat Duduk Kosong',
-            'type.required' => 'Sila pilih Status Meja',
+            'type.required' => 'Sila pilih Jenis Meja',
             'status.required' => 'Sila pilih Status Meja',
         ]);
     
-        $table = Table::findOrFail($id);
-
-        // Normalize the table_no
         $table_no = strtoupper(str_replace(' ', '', $request->input('table_no')));
-
-        // Check if table_no already exists, excluding the current record
-        if (Table::where('table_no', $table_no)
-            ->where('id', '!=', $id)
-            ->exists()
-        ) {
-            return redirect()->back()
-                ->withErrors(['table_no' => 'No. Meja telah wujud'])
-                ->withInput();
+    
+        if (Table::where('table_no', $table_no)->where('id', '!=', $id)->exists()) {
+            return redirect()->back()->withErrors(['table_no' => 'No. Meja telah wujud'])->withInput();
         }
-
+    
+        $table = Table::findOrFail($id);
         $table->table_no = $table_no;
         $table->total_seat = $request->input('total_seat');
         $table->available_seat = $request->input('available_seat');

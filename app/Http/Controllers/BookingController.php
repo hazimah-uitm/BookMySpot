@@ -41,16 +41,6 @@ class BookingController extends Controller
         ]);
     }
     
-    protected function generateUniqueBookingNumber()
-    {
-        do {
-            $number = $this->generateBookingNumber();
-        } while (Booking::where('booking_no', $number)->exists());
-
-        return $number;
-    }
-    
-
     public function store(Request $request)
     {
         $request->validate([
@@ -66,18 +56,25 @@ class BookingController extends Controller
         if ($table->available_seat <= 0) {
             return redirect()->back()->withErrors(['table_id' => 'Tiada kekosongan bagi meja ini'])->withInput();
         }
-
+    
         $existingBooking = Booking::where('staff_id', $request->input('staff_id'))->whereNull('deleted_at')->first();
-
+    
         if ($existingBooking) {
             return redirect()->back()->withErrors(['staff_id' => 'Anda sudah mempunyai tempahan.'])->withInput();
         }
     
+        // Generate booking number
+        $bookingNumber = $this->generateBookingNumber();
+    
+        // Check for existing booking_no
+        while (Booking::where('booking_no', $bookingNumber)->exists()) {
+            $bookingNumber = $this->generateBookingNumber();
+        }
+    
         $booking = new Booking();
-        $booking->booking_no = $this->generateUniqueBookingNumber(); // Use unique generator
+        $booking->booking_no = $bookingNumber;
         $booking->staff_id = $request->input('staff_id');
         $booking->table_id = $request->input('table_id');
-    
         $booking->save();
     
         // Update table availability
@@ -98,9 +95,10 @@ class BookingController extends Controller
         $qrCodeDataUri = 'data:image/png;base64,' . base64_encode($qrCode);
         $booking->qr_code = $qrCodeDataUri;
         $booking->save();
-
+    
         return redirect()->route('booking')->with('success', 'Tempahan berjaya disimpan');
     }
+    
 
     public function show($id)
     {
@@ -183,7 +181,6 @@ class BookingController extends Controller
         return redirect()->route('booking')->with('success', 'Tempahan berjaya dikemaskini');
     }
     
-
 
     public function search(Request $request)
     {
