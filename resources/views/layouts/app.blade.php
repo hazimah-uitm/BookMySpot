@@ -28,7 +28,7 @@
                             <a class="nav-link text-uppercase" href="{{ route('login') }}">Log Masuk Admin</a>
                         </li>
                     @endguest
-                    @role('Superadmin|Admin')
+                    @hasanyrole('Superadmin|Admin')
                         <li class="nav-item">
                             <form action="{{ route('attendance.create') }}" method="get" class="d-inline">
                                 <button type="submit" class="nav-link btn btn-link text-uppercase">Kehadiran</button>
@@ -45,7 +45,7 @@
                                 <button type="submit" class="nav-link btn btn-link text-uppercase">Log Keluar</button>
                             </form>
                         </li>
-                    @endrole
+                    @endhasanyrole
                 </ul>
             </div>
         </div>
