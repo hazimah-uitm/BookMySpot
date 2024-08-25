@@ -43,7 +43,7 @@
                                         <!-- Footer: Notes and Download Button -->
                                         <div class="ticket-footer mt-4">
                                             <div class="text-center mt-2">
-                                                <em>Sila imbas kod QR ini kepada urusetia semasa hadir ke Malam Gala 25 Tahun UiTM</em>
+                                                <em>Sila imbas kod QR ini di meja pendaftaran semasa hadir ke Malam Gala 25 Tahun UiTM sebagai rekod kehadiran dan peluang memenangi cabutan bertuah.</em>
                                             </div>
                                         </div>
                                     </div>

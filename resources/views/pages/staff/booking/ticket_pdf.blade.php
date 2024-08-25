@@ -83,7 +83,7 @@
         }
 
         .qr-code-container img {
-            width: 330px;
+            width: 300px;
             height: auto;
             display: block;
             margin: 0 auto;
@@ -129,7 +129,7 @@
 
         <div class="perforated-line"></div>
         <div class="ticket-footer">
-            <em>Sila imbas kod QR ini kepada urusetia semasa hadir ke Malam Gala 25 Tahun UiTM</em>
+            <em>Sila imbas kod QR ini di meja pendaftaran semasa hadir ke Malam Gala 25 Tahun UiTM sebagai rekod kehadiran dan peluang memenangi cabutan bertuah.</em>
         </div>
 
 
