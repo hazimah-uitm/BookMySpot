@@ -1,9 +1,9 @@
 "1","VVIP","8","8","Ditempah","Tersedia",NULL,NULL,NULL
-"2","D1","10","10","Ditempah","Tersedia",NULL,NULL,NULL
-"3","D2","10","9","Ditempah","Tersedia",NULL,NULL,"2024-08-25 11:41:49"
-"4","P1","10","10","Ditempah","Tersedia",NULL,NULL,NULL
+"2","D1","10","0","Ditempah","Penuh",NULL,NULL,"2024-08-25 12:30:09"
+"3","D2","10","0","Ditempah","Penuh",NULL,NULL,"2024-08-25 12:24:58"
+"4","P1","10","0","Ditempah","Penuh",NULL,NULL,"2024-08-25 12:27:31"
 "5","P2","10","1","Ditempah","Tersedia",NULL,NULL,"2024-08-25 11:32:04"
-"6","P3","10","1","Terbuka","Tersedia",NULL,NULL,"2024-08-25 12:00:40"
+"6","P3","10","2","Ditempah","Tersedia",NULL,NULL,"2024-08-25 14:54:36"
 "7","A1","10","10","Ditempah","Tersedia",NULL,NULL,NULL
 "8","A2","10","10","Ditempah","Tersedia",NULL,NULL,NULL
 "9","A3","10","7","Ditempah","Tersedia",NULL,NULL,"2024-08-25 11:36:17"
@@ -11,18 +11,18 @@
 "11","J1","10","0","Ditempah","Penuh",NULL,NULL,"2024-08-25 11:30:31"
 "12","J2","10","0","Ditempah","Penuh",NULL,NULL,"2024-08-25 11:26:55"
 "13","J3","10","0","Ditempah","Penuh",NULL,NULL,"2024-08-25 12:09:44"
-"14","G1","10","10","Ditempah","Tersedia",NULL,NULL,NULL
-"15","G2","10","10","Ditempah","Tersedia",NULL,NULL,NULL
-"16","G3","10","10","Ditempah","Tersedia",NULL,NULL,NULL
-"17","G4","10","10","Ditempah","Tersedia",NULL,NULL,NULL
+"14","G1","10","0","Ditempah","Penuh",NULL,NULL,"2024-08-25 12:34:56"
+"15","G2","10","0","Ditempah","Penuh",NULL,NULL,"2024-08-25 12:36:37"
+"16","G3","10","0","Ditempah","Penuh",NULL,NULL,"2024-08-25 14:27:57"
+"17","G4","10","0","Ditempah","Penuh",NULL,NULL,"2024-08-25 14:29:27"
 "18","G5","10","0","Ditempah","Penuh",NULL,NULL,"2024-08-25 11:35:42"
-"19","G6","10","10","Ditempah","Tersedia",NULL,NULL,NULL
-"20","G7","10","10","Ditempah","Tersedia",NULL,NULL,NULL
-"21","G8","10","10","Ditempah","Tersedia",NULL,NULL,NULL
-"22","G9","10","10","Ditempah","Tersedia",NULL,NULL,NULL
-"23","G10","10","10","Ditempah","Tersedia",NULL,NULL,NULL
-"24","PS1","10","10","Ditempah","Tersedia",NULL,NULL,NULL
-"25","PS2","10","10","Ditempah","Tersedia",NULL,NULL,NULL
+"19","G6","10","0","Ditempah","Penuh",NULL,NULL,"2024-08-25 14:31:31"
+"20","G7","10","0","Ditempah","Penuh",NULL,NULL,"2024-08-25 14:34:18"
+"21","G8","10","0","Ditempah","Penuh",NULL,NULL,"2024-08-25 14:47:10"
+"22","G9","10","0","Ditempah","Penuh",NULL,NULL,"2024-08-25 14:49:14"
+"23","G10","10","0","Ditempah","Penuh",NULL,NULL,"2024-08-25 15:23:54"
+"24","PS1","10","0","Ditempah","Penuh",NULL,NULL,"2024-08-25 15:25:54"
+"25","PS2","10","0","Ditempah","Penuh",NULL,NULL,"2024-08-25 15:27:38"
 "26","S1","10","10","Terbuka","Tersedia",NULL,NULL,NULL
 "27","S2","10","0","Terbuka","Penuh",NULL,NULL,"2024-08-25 11:37:59"
 "28","S3","10","10","Terbuka","Tersedia",NULL,NULL,NULL
