@@ -25,7 +25,7 @@
         </a>
     </li>
 
-    @role('Superadmin')
+    @hasanyrole('Superadmin|admin')
     <li>
         <a href="{{ route('activity-log') }}">
             <div class="parent-icon"><i class='bx bx-history'></i></div>
