@@ -129,7 +129,11 @@
 
         <div class="perforated-line"></div>
         <div class="ticket-footer">
+            @if($booking->staff->type == "Staf")
             <em>Sila imbas kod QR ini di meja pendaftaran semasa hadir ke Malam Gala 25 Tahun UiTM sebagai rekod kehadiran dan peluang memenangi cabutan bertuah.</em>
+            @else
+            <em>Sila imbas kod QR ini di meja pendaftaran semasa hadir ke Malam Gala 25 Tahun UiTM sebagai rekod kehadiran.</em>
+            @endif
         </div>
 
 
