@@ -97,7 +97,7 @@ class StaffBookingController extends Controller
         // Initialize Dompdf
         $dompdf = new Dompdf();
         $dompdf->loadHtml($view);
-        $dompdf->setPaper([0, 0, 650, 690]);
+        $dompdf->setPaper([0, 0, 650, 720]);
         $dompdf->render();
 
         // Force a download of the PDF
