@@ -15,7 +15,7 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-12 col-md-8 col-lg-6">
-                <h3 class="text-center text-uppercase mb-4">SEMAK NO. PEKERJA</h3>
+                    <h3 class="text-center text-uppercase mb-4">SEMAK NO. PEKERJA</h3>
                     <form action="{{ route('staff.booking.check') }}" method="POST" class="d-flex">
                         {{ csrf_field() }}
                         <div class="form-group flex-grow-1 me-2">
@@ -27,17 +27,17 @@
                     </form>
 
                     @if ($errors->any())
-                            <div id="error-alert" class="alert alert-danger mt-3 fade-out">
-                                {{ $errors->first('no_pekerja') }}
-                            </div>
-                        @endif
+                    <div id="error-alert" class="alert alert-danger mt-3 fade-out">
+                        {{ $errors->first('no_pekerja') }}
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
 </div>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function() {
         function fadeOut(elementId) {
             var element = document.getElementById(elementId);
             if (element) {

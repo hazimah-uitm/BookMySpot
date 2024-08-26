@@ -94,6 +94,10 @@
     @endif
 
     @yield('content')
+
+    <footer class="main-footer">
+        @include('includes.footer')
+    </footer>
     <!--end wrapper-->
     <!-- Bootstrap JS -->
     <script src="{{ asset('public/assets/js/bootstrap.bundle.min.js') }}"></script>
