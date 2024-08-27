@@ -179,6 +179,7 @@
     'search' => request('search'),
     'perPage' => request('perPage'),
     'type' => request('type'),
+    'status' => request('status'),
     'attendance' => request('attendance'),
 ])->links('pagination::bootstrap-4') }}
                 </div>

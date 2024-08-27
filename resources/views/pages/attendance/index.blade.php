@@ -77,8 +77,9 @@
                                 <tr>
                                     <td>{{ ($attendanceList->currentPage() - 1) * $attendanceList->perPage() + $loop->iteration }}
                                     </td>
-                                    <td>{{ $attendance->staff->no_pekerja }}</td>
                                     <td>{{ $attendance->staff->name }}</td>
+                                    <td>{{ $attendance->staff->no_pekerja }}</td>
+                                    <td>{{ $attendance->staff->booking->booking_no }}</td>
                                     <td>{{ $attendance->staff->type }}</td>
                                     <td>{{ $attendance->check_in }}</td>
                                     <td>
