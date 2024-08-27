@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\StaffExport;
 use App\Imports\StaffImport;
 use App\Models\Staff;
 use Illuminate\Http\Request;
@@ -58,6 +59,14 @@ class StaffController extends Controller
         }
     }
 
+    public function export(Request $request)
+    {
+        return Excel::download(new StaffExport(
+            $request->input('type'),
+            $request->input('attendance'),
+            $request->input('status')
+        ), 'Rekod-RSVP-Malam-Gala.xlsx');
+    }
 
     public function create()
     {

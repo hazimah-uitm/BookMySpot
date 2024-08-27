@@ -93,6 +93,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/staff/trash', 'StaffController@trashList')->name('staff.trash');
     Route::get('/staff/{id}/restore', 'StaffController@restore')->name('staff.restore');
     Route::delete('/staff/{id}/force-delete', 'StaffController@forceDelete')->name('staff.forceDelete');
+    Route::get('staff/export', 'StaffController@export')->name('staff.export');
 
     // Booking Management
     Route::get('booking', 'BookingController@index')->name('booking');
