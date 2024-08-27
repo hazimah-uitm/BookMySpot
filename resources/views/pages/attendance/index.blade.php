@@ -66,6 +66,7 @@
                             <th>#</th>
                             <th>Nama</th>
                             <th>No. Pekerja</th>
+                            <th>No. Tempahan</th>
                             <th>Jenis Pengguna</th>
                             <th>Tarikh Imbas</th>
                             <th>Tindakan</th>
@@ -93,7 +94,7 @@
                                 </tr>
                             @endforeach
                         @else
-                            <td colspan="6">Tiada rekod</td>
+                            <td colspan="7">Tiada rekod</td>
                         @endif
                     </tbody>
                 </table>
