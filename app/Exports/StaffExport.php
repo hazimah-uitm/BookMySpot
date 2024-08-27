@@ -36,35 +36,8 @@ class StaffExport implements FromCollection, WithHeadings, WithMapping
             $query->where('status', $this->status);
         }
 
-        $staffList = $query->get();
-
-        // Count totals for each filter
-        $totalStaff = Staff::count();
-        $totalStaf = Staff::where('type', 'Staf')->count();
-        $totalBukanStaf = Staff::where('type', 'Bukan Staf')->count();
-        $totalHadir = Staff::where('attendance', 'Hadir')->count();
-        $totalTidakHadir = Staff::where('attendance', 'Tidak Hadir')->count();
-        $totalSelesaiTempah = Staff::where('status', 'Selesai Tempah')->count();
-        $totalBelumTempah = Staff::where('status', 'Belum Tempah')->count();
-
-        // Ensure keys match what map() expects
-        $summary = (object)[
-            'name' => 'SUMMARY',
-            'total_staff' => $totalStaff,
-            'total_staf' => $totalStaf,
-            'total_bukan_staf' => $totalBukanStaf,
-            'total_hadir' => $totalHadir,
-            'total_tidak_hadir' => $totalTidakHadir,
-            'total_selesai_tempah' => $totalSelesaiTempah,
-            'total_belum_tempah' => $totalBelumTempah,
-        ];
-
-        // Add summary as the last row
-        $staffList->push($summary);
-
-        return $staffList;
+        return $query->get();
     }
-
 
     public function headings(): array
     {
@@ -79,22 +52,6 @@ class StaffExport implements FromCollection, WithHeadings, WithMapping
 
     public function map($staff): array
     {
-        // Check if the object is the summary row
-        if (isset($staff->name) && $staff->name === 'SUMMARY') {
-            return [
-                'Ringkasan',
-                '',
-                'Jumlah Pengguna: ' . ($staff->total_staff ?? ''),
-                'Jumlah Staf: ' . ($staff->total_staf ?? ''),
-                'Jumlah Bukan Staf: ' . ($staff->total_bukan_staf ?? ''),
-                'Jumlah Hadir: ' . ($staff->total_hadir ?? ''),
-                'Jumlah Tidak Hadir: ' . ($staff->total_tidak_hadir ?? ''),
-                'Jumlah Selesai Tempah: ' . ($staff->total_selesai_tempah ?? ''),
-                'Jumlah Belum Tempah: ' . ($staff->total_belum_tempah ?? ''),
-            ];
-        }
-
-        // Map the regular staff row
         return [
             $staff->name,
             $staff->no_pekerja,
