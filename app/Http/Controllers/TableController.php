@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\TableExport;
 use App\Models\Table;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class TableController extends Controller
 {
@@ -42,13 +44,13 @@ class TableController extends Controller
             'type.required' => 'Sila pilih Jenis Meja',
             'status.required' => 'Sila pilih Status Meja',
         ]);
-    
+
         $table_no = strtoupper(str_replace(' ', '', $request->input('table_no')));
-    
+
         if (Table::where('table_no', $table_no)->exists()) {
             return redirect()->back()->withErrors(['table_no' => 'No. Meja telah wujud'])->withInput();
         }
-    
+
         $table = new Table();
         $table->table_no = $table_no;
         $table->total_seat = $request->input('total_seat');
@@ -56,10 +58,10 @@ class TableController extends Controller
         $table->type = $request->input('type');
         $table->status = $request->input('status');
         $table->save();
-    
+
         return redirect()->route('table')->with('success', 'Maklumat berjaya disimpan');
     }
-    
+
 
     public function show($id)
     {
@@ -94,13 +96,13 @@ class TableController extends Controller
             'type.required' => 'Sila pilih Jenis Meja',
             'status.required' => 'Sila pilih Status Meja',
         ]);
-    
+
         $table_no = strtoupper(str_replace(' ', '', $request->input('table_no')));
-    
+
         if (Table::where('table_no', $table_no)->where('id', '!=', $id)->exists()) {
             return redirect()->back()->withErrors(['table_no' => 'No. Meja telah wujud'])->withInput();
         }
-    
+
         $table = Table::findOrFail($id);
         $table->table_no = $table_no;
         $table->total_seat = $request->input('total_seat');
@@ -108,7 +110,7 @@ class TableController extends Controller
         $table->type = $request->input('type');
         $table->status = $request->input('status');
         $table->save();
-    
+
         return redirect()->route('table')->with('success', 'Maklumat berjaya dikemaskini');
     }
 
@@ -166,5 +168,10 @@ class TableController extends Controller
         $table->forceDelete();
 
         return redirect()->route('table.trash')->with('success', 'Maklumat berjaya dihapuskan sepenuhnya');
+    }
+
+    public function export()
+    {
+        return Excel::download(new TableExport, 'Senarai-Meja-Malam-Gala.xlsx');
     }
 }

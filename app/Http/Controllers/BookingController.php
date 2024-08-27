@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\BookingExport;
 use App\Models\Booking;
 use App\Models\Staff;
 use App\Models\Table;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class BookingController extends Controller
@@ -14,7 +16,7 @@ class BookingController extends Controller
     {
         $perPage = $request->input('perPage', 10);
 
-        $bookingList = Booking::orderBy('booking_no', 'asc')->paginate($perPage);
+        $bookingList = Booking::orderBy('table_id', 'asc')->paginate($perPage);
 
         return view('pages.booking.index', [
             'bookingList' => $bookingList,
@@ -314,5 +316,10 @@ class BookingController extends Controller
         }
 
         return 'MG-' . str_pad($number, 4, '0', STR_PAD_LEFT);
+    }
+
+    public function export()
+    {
+        return Excel::download(new BookingExport, 'Tempahan-Meja-Malam-Gala.xlsx');
     }
 }

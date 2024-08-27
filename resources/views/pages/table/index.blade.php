@@ -13,11 +13,12 @@
             </nav>
         </div>
         @role('Superadmin')
-        <div class="ms-auto">
-            <a href="{{ route('table.trash') }}">
-                <button type="button" class="btn btn-primary mt-2 mt-lg-0">Senarai Rekod Dipadam</button>
-            </a>
-        </div>
+            <div class="ms-auto">
+                <a href="{{ route('table.trash') }}">
+                    <button type="button" class="btn btn-primary mt-2 mt-lg-0">Senarai Rekod Dipadam</button>
+                </a>
+                <a href="{{ route('table.export') }}" class="btn btn-success">Export to Excel</a>
+            </div>
         @endrole
     </div>
     <!--end breadcrumb-->

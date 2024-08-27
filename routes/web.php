@@ -107,6 +107,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/booking/trash', 'BookingController@trashList')->name('booking.trash');
     Route::get('/booking/{id}/restore', 'BookingController@restore')->name('booking.restore');
     Route::delete('/booking/{id}/force-delete', 'BookingController@forceDelete')->name('booking.forceDelete');
+    Route::get('/bookings/export', 'BookingController@export')->name('booking.export');
 
     // Table Management
     Route::get('table', 'TableController@index')->name('table');
@@ -120,6 +121,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/table/trash', 'TableController@trashList')->name('table.trash');
     Route::get('/table/{id}/restore', 'TableController@restore')->name('table.restore');
     Route::delete('/table/{id}/force-delete', 'TableController@forceDelete')->name('table.forceDelete');
+    Route::get('/tables/export', 'TableController@export')->name('table.export');
 
     // Campus
     Route::get('campus', 'CampusController@index')->name('campus');
