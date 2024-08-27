@@ -50,6 +50,11 @@ class AttendanceController extends Controller
 
         $staff = Staff::where('no_pekerja', $request->input('no_pekerja'))->firstOrFail();
 
+        // Check if the staff's attendance status is 'Tidak Hadir'
+        if ($staff->attendance === 'Tidak Hadir') {
+            return redirect()->back()->withErrors(['no_pekerja' => 'Rekod kehadiran untuk No. Pekerja ini adalah Tidak Hadir']);
+        }
+
         $existingAttendance = Attendance::where('no_pekerja', $staff->no_pekerja)
             ->whereNull('deleted_at')
             ->first();

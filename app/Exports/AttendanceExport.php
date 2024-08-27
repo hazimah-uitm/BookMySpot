@@ -12,6 +12,7 @@ class AttendanceExport implements FromQuery, WithHeadings, WithMapping
     protected $type;
     protected $rowNumber = 0; // To keep track of the row number
 
+    // untuk tambah filter
     public function __construct($type = null)
     {
         $this->type = $type;
@@ -28,13 +29,17 @@ class AttendanceExport implements FromQuery, WithHeadings, WithMapping
         return $query->orderBy('check_in', 'asc');
     }
 
+    // tambah data
     public function map($attendance): array
     {
         $this->rowNumber++; // Increment the row number
 
         return [
             $this->rowNumber,
-            $attendance->name,
+            $attendance->staff->name,
+            $attendance->staff->no_pekerja,
+            $attendance->staff->booking->booking_no ?? 'N/A', // Using 'N/A' if booking_no is not available
+            $attendance->check_in, 
         ];
     }
 
@@ -43,6 +48,9 @@ class AttendanceExport implements FromQuery, WithHeadings, WithMapping
         return [
             'No',
             'Name',
+            'No. Pekerja',
+            'Booking No',
+            'Check In',
         ];
     }
 }
