@@ -49,7 +49,7 @@ class AttendanceExport implements FromQuery, WithHeadings, WithMapping
             'No',
             'Name',
             'No. Pekerja',
-            'Booking No',
+            'No. Tempahan',
             'Check In',
         ];
     }
