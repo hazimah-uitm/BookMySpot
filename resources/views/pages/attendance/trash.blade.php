@@ -36,26 +36,25 @@
                 <tbody>
                     @if (count($trashList) > 0)
                         @foreach ($trashList as $attendance)
-                        <tr>
-                                    <td>{{ ($trashList->currentPage() - 1) * $trashList->perPage() + $loop->iteration }}
-                                    </td>
-                                    <td>{{ $attendance->staff->name }}</td>
-                                    <td>{{ $attendance->staff->no_pekerja }}</td>
-                                    <td>{{ $attendance->staff->booking->booking_no }}</td>
-                                    <td>{{ $attendance->staff->type }}</td>
-                                    <td>{{ $attendance->check_in }}</td>
-                                    <td>
-                                        <a type="button" data-bs-toggle="tooltip" data-bs-placement="bottom"
-                                            data-bs-title="Padam">
-                                            <span class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                                data-bs-target="#deleteModal{{ $attendance->id }}"><i
-                                                    class="bx bx-trash"></i></span>
-                                        </a>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td>{{ ($trashList->currentPage() - 1) * $trashList->perPage() + $loop->iteration }}
+                                </td>
+                                <td>{{ $attendance->staff->name }}</td>
+                                <td>{{ $attendance->staff->no_pekerja }}</td>
+                                <td>{{ $attendance->staff->booking->booking_no }}</td>
+                                <td>{{ $attendance->staff->type }}</td>
+                                <td>{{ $attendance->check_in }}</td>
+                                <td>
+                                    <a type="button" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Padam">
+                                        <span class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                            data-bs-target="#deleteModal{{ $attendance->id }}"><i
+                                                class="bx bx-trash"></i></span>
+                                    </a>
+                                </td>
+                            </tr>
                         @endforeach
                     @else
-                        <td colspan="4">Tiada rekod</td>
+                        <td colspan="7">Tiada rekod</td>
                     @endif
                 </tbody>
             </table>

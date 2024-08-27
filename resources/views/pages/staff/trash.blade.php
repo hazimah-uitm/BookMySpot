@@ -2,21 +2,21 @@
 @section('content')
 <!--breadcrumb-->
 <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-    <div class="breadcrumb-title pe-3">Pengurusan Pengguna</div>
+    <div class="breadcrumb-title pe-3">Pengurusan Staf</div>
     <div class="ps-3">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb mb-0 p-0">
                 <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="bx bx-home-alt"></i></a>
                 </li>
-                <li class="breadcrumb-item"><a href="{{ route('staff') }}"></i>Senarai Pengguna</a>
+                <li class="breadcrumb-item"><a href="{{ route('staff') }}"></i>Senarai Staf</a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">Senarai Pengguna Dipadam</li>
+                <li class="breadcrumb-item active" aria-current="page">Senarai Staf Dipadam</li>
             </ol>
         </nav>
     </div>
 </div>
 <!--end breadcrumb-->
-<h6 class="mb-0 text-uppercase">Senarai Pengguna Dipadam</h6>
+<h6 class="mb-0 text-uppercase">Senarai Staf Dipadam</h6>
 <hr />
 <div class="card">
     <div class="card-body">
