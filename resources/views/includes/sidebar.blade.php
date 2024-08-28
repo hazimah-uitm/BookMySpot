@@ -11,17 +11,24 @@
 <!--navigation-->
 <ul class="metismenu" id="menu">
     <li>
-        <a href="{{ url('/') }}" target="_blank">
-            <div class="parent-icon"><i class='bx bx-home'></i>
-            </div>
-            <div class="menu-title">Laman Utama</div>
-        </a>
-    </li>
-    <li>
         <a href="{{ route('home') }}">
             <div class="parent-icon"><i class='bx bxs-dashboard' ></i>
             </div>
             <div class="menu-title">Dashboard</div>
+        </a>
+    </li>
+    <li>
+        <a href="{{ url('/') }}" target="_blank">
+            <div class="parent-icon"><i class='bx bx-calendar-edit'></i>
+            </div>
+            <div class="menu-title">Tempah Meja</div>
+        </a>
+    </li>
+    <li>
+        <a href="{{ route('attendance.create') }}" target="_blank">
+            <div class="parent-icon"><i class='bx bx-user-check'></i>
+            </div>
+            <div class="menu-title">Kehadiran</div>
         </a>
     </li>
 
